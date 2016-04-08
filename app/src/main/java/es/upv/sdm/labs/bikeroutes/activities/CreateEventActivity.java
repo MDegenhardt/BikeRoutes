@@ -1,0 +1,53 @@
+package es.upv.sdm.labs.bikeroutes.activities;
+
+import android.content.Intent;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+import es.upv.sdm.labs.bikeroutes.R;
+import es.upv.sdm.labs.bikeroutes.other.DatePickerFragment;
+import es.upv.sdm.labs.bikeroutes.other.TimePickerFragment;
+import es.upv.sdm.labs.bikeroutes.pojo.Event;
+
+public class CreateEventActivity extends AppCompatActivity {
+
+    Event currentEvent;
+    static int id = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create_event);
+
+        currentEvent = new Event(id);
+        id++;
+
+    }
+
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    /*
+This method is executed when the activity is created to populate the ActionBar with actions
+*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.create_event_menu, menu);
+        menu.findItem(R.id.menuInviteFriend).setVisible(true);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+}

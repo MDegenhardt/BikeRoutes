@@ -8,4 +8,25 @@
         <item name="colorAccent">@color/colorAccent1</item>
     </style>
 
+    <style name="event_dateTime">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorAccent3</item>
+    </style>
+
+    <style name="event_startEnd">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="date_time_button" parent="Base.Widget.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimaryLight1</item>
+    </style>
+
 </resources>

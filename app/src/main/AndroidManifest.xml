@@ -8,12 +8,63 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.SearchEventActivity"
+            android:label="@string/searchEventsActivityLabel"
+            android:parentActivityName=".activities.DashboardActivity">
+
+            <!-- Enable up navigation for backwards compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activities.DashboardActivity"
+            android:label="@string/dashBoardActivityLabel"></activity>
+        <activity
+            android:name=".activities.CreateEventActivity"
+            android:label="@string/createEventsActivityLabel"
+            android:parentActivityName=".activities.DashboardActivity">
+
+            <!-- Enable up navigation for backwards compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activities.EventDescriptionActivity"
+            android:label="@string/eventDescriptionActivityLabel"
+            android:parentActivityName=".activities.DashboardActivity">
+
+            <!-- Enable up navigation for backwards compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activities.MyEventsActivity"
+            android:label="@string/myEventsActivityLabel"
+            android:parentActivityName=".activities.DashboardActivity">
+
+            <!-- Enable up navigation for backwards compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".activities.DashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.upv.sdm.labs.bikeroutes.activities.DashboardActivity" />
         </activity>
     </application>
 
