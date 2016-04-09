@@ -3,7 +3,9 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@color/colorPrimaryLight1">
+    android:background="@color/colorPrimaryLight1"
+    android:descendantFocusability="blocksDescendants"
+    >
 
     <LinearLayout
         android:orientation="vertical"

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorPrimaryLight1"
+    android:descendantFocusability="blocksDescendants"
+    >
+
+    <TextView
+        android:id="@+id/tvPersonFirstName"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="First"
+        style="@style/event_startEnd"
+        />
+
+    <TextView
+        android:id="@+id/tvPersonLastName"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Person"
+        style="@style/event_startEnd"
+        />
+
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/imgOrg"
+        android:src="@drawable/organise"
+        android:scaleType="fitCenter"
+        android:background="@color/colorPrimaryLight1"
+        android:layout_margin="5dp"
+        android:padding="4dp" />
+</LinearLayout>

@@ -66,5 +66,10 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="km_from">km from:</string>
     <string name="btn_search_event">Search Event</string>
-    <string name="invite_friend">Invite Friend</string>
+    <string name="invite_friend">Invite a Friend</string>
+    <string name="these_people_are_participating">These people are participating:</string>
+    <string name="tabUpcomingEvents">Upcoming Events</string>
+    <string name="tabRecentEvents">Recent Events</string>
+    <string name="show_route">Show Route</string>
+    <string name="participate_in_this_event">Participate in this Event</string>
 </resources>

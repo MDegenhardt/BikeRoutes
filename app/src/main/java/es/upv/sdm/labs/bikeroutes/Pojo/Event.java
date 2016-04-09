@@ -17,10 +17,11 @@ public class Event {
     public String endName;
     public String description;
     public boolean isSecret;
+    public int organizingPersonID;
 
     public Event(int ID, int type, String date, String time,
                  Location startLocation, String startName, Location endLocation, String endName,
-                 String description, boolean isSecret) {
+                 String description, boolean isSecret, int organizingPersonID) {
         this.ID = ID;
         //Type: 0 = bike, 1 = hiking, 2 = running
         this.type = type;
@@ -32,6 +33,7 @@ public class Event {
         this.endName = endName;
         this.description = description;
         this.isSecret = isSecret;
+        this.organizingPersonID = organizingPersonID;
     }
 
     public Event(int ID) {
@@ -50,11 +52,11 @@ public class Event {
         exampleLocation2.setLatitude(100.0d);//your coords
         exampleLocation2.setLongitude(0.0d);
 
-        events.add(new Event(0, 0, "05.03.16", "12:00", exampleLocation1, "Valencia", exampleLocation2, "Gandía", "Some description text...", false ));
-        events.add(new Event(1, 1, "15.05.16", "12:45", exampleLocation2, "Gandía", exampleLocation1, "Valencia", "Some description text...", false ));
-        events.add(new Event(2, 2, "12.06.16", "11:06", exampleLocation1, "Valencia", exampleLocation2, "Gandía", "Some description text...", true ));
-        events.add(new Event(3, 1, "15.05.16", "12:45", exampleLocation2, "Gandía", exampleLocation1, "Valencia", "Some description text...", false ));
-        events.add(new Event(4, 2, "12.06.16", "11:06", exampleLocation1, "Valencia", exampleLocation2, "Gandía", "Some description text...", true ));
+        events.add(new Event(0, 0, "05.03.16", "12:00", exampleLocation1, "Valencia", exampleLocation2, "Gandía", "Some description text...", false, 0 ));
+        events.add(new Event(1, 1, "15.05.16", "12:45", exampleLocation2, "Gandía", exampleLocation1, "Valencia", "Some description text...", false, 0 ));
+        events.add(new Event(2, 2, "12.06.16", "11:06", exampleLocation1, "Valencia", exampleLocation2, "Gandía", "Some description text...", true, 0 ));
+        events.add(new Event(3, 1, "15.05.16", "12:45", exampleLocation2, "Gandía", exampleLocation1, "Valencia", "Some description text...", false, 0 ));
+        events.add(new Event(4, 2, "12.06.16", "11:06", exampleLocation1, "Valencia", exampleLocation2, "Gandía", "Some description text...", true, 0 ));
 
         return events;
     }

@@ -225,6 +225,8 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark1"
         android:textSize="20sp"
-        android:textColor="@color/colorAccent1" />
+        android:textColor="@color/colorAccent1"
+        android:onClick="createEventButtonPressed"
+        />
 
 </LinearLayout>

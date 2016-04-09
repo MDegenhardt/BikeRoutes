@@ -1,10 +1,13 @@
 package es.upv.sdm.labs.bikeroutes.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,13 +21,25 @@ import es.upv.sdm.labs.bikeroutes.pojo.Event;
 public class SearchEventActivity extends AppCompatActivity {
 
     ListView searchResultListView;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_event);
 
+        context = this;
         searchResultListView = (ListView) findViewById(R.id.lvSearchResults);
+
+        searchResultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("SearchEventActivity", "Item " + position + " clicked");
+                startActivity(new Intent(context,EventDescriptionActivity.class));
+
+
+            }
+        });
 
     }
 
@@ -52,5 +67,7 @@ public class SearchEventActivity extends AppCompatActivity {
         populateEventsList();
 
     }
+
+
 
 }
