@@ -1,4 +1,4 @@
-package es.upv.sdm.labs.bikeroutes.pojo;
+package es.upv.sdm.labs.bikeroutes.model;
 
 import android.content.Context;
 import android.location.Address;
@@ -13,13 +13,15 @@ import es.upv.sdm.labs.bikeroutes.interfaces.Enviable;
 /**
  * Created by Anderson on 12/04/2016.
  */
-public class Location implements Enviable {
+public class Location {
 
     private double latitude;
     private double longitude;
     private String address;
 
-    public Location(){}
+    public Location(){
+        this(0,0,"");
+    }
 
     public Location(String address, Context context){
         this(Location.getLocationFromAddress(address, context));
@@ -106,10 +108,5 @@ public class Location implements Enviable {
         }
         if(l==null) address = "";
         return new Location(latitude, longitude, address);
-    }
-
-    @Override
-    public String toJson() {
-        return null;
     }
 }

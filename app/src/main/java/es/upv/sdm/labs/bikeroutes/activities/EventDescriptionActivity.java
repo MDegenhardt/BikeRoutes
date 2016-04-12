@@ -14,8 +14,7 @@ import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.adapters.PersonAdapter;
-import es.upv.sdm.labs.bikeroutes.pojo.Event;
-import es.upv.sdm.labs.bikeroutes.pojo.User;
+import es.upv.sdm.labs.bikeroutes.model.User;
 
 public class EventDescriptionActivity extends AppCompatActivity {
 

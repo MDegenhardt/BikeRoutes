@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.adapters.EventAdapter;
-import es.upv.sdm.labs.bikeroutes.pojo.Event;
+import es.upv.sdm.labs.bikeroutes.model.Event;
 
 public class MyEventsActivity extends AppCompatActivity {
 

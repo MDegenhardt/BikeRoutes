@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import es.upv.sdm.labs.bikeroutes.R;
-import es.upv.sdm.labs.bikeroutes.pojo.Event;
+import es.upv.sdm.labs.bikeroutes.model.Event;
 import es.upv.sdm.labs.bikeroutes.util.DatePickerFragment;
 import es.upv.sdm.labs.bikeroutes.util.TimePickerFragment;
 

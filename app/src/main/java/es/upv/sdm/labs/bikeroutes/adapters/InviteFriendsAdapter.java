@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import es.upv.sdm.labs.bikeroutes.pojo.User;
+import es.upv.sdm.labs.bikeroutes.model.User;
 
 /**
  * Created by Anderson on 11/04/2016.
