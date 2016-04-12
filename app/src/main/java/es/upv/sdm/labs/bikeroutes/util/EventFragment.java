@@ -1,4 +1,4 @@
-package es.upv.sdm.labs.bikeroutes.other;
+package es.upv.sdm.labs.bikeroutes.util;
 
 import android.app.Fragment;
 import android.os.Bundle;

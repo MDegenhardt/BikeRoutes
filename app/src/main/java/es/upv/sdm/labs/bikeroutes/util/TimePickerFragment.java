@@ -1,15 +1,11 @@
-package es.upv.sdm.labs.bikeroutes.other;
+package es.upv.sdm.labs.bikeroutes.util;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;

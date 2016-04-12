@@ -13,9 +13,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.R;
-import es.upv.sdm.labs.bikeroutes.other.DatePickerFragment;
-import es.upv.sdm.labs.bikeroutes.other.EventAdapter;
-import es.upv.sdm.labs.bikeroutes.other.TimePickerFragment;
+import es.upv.sdm.labs.bikeroutes.util.DatePickerFragment;
+import es.upv.sdm.labs.bikeroutes.adapters.EventAdapter;
+import es.upv.sdm.labs.bikeroutes.util.TimePickerFragment;
 import es.upv.sdm.labs.bikeroutes.pojo.Event;
 
 public class SearchEventActivity extends AppCompatActivity {

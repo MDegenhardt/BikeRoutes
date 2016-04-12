@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import es.upv.sdm.labs.bikeroutes.other.EventAdapter;
+import es.upv.sdm.labs.bikeroutes.adapters.EventAdapter;
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.pojo.Event;
 

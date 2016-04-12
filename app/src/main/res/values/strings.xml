@@ -72,4 +72,9 @@
     <string name="tabRecentEvents">Recent Events</string>
     <string name="show_route">Show Route</string>
     <string name="participate_in_this_event">Participate in this Event</string>
+
+    <!-- Strings for the enumeration TypeEvent -->
+    <string name="type_event_bike">Bike</string>
+    <string name="type_event_run">Bike</string>
+    <string name="type_event_walk">Bike</string>
 </resources>

@@ -1,43 +1,41 @@
-package es.upv.sdm.labs.bikeroutes.other;
+package es.upv.sdm.labs.bikeroutes.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.R;
-import es.upv.sdm.labs.bikeroutes.pojo.Person;
+import es.upv.sdm.labs.bikeroutes.pojo.User;
 
 
-public class PersonAdapter extends ArrayAdapter<Person> {
+public class PersonAdapter extends AbstractAdapter<User>{
 
-    public PersonAdapter(Context context, ArrayList<Person> persons) {
-        super(context, 0, persons);
+    public PersonAdapter(Context context, ArrayList<User> users) {
+        super(context, R.layout.list_item_person, users);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Person person = getItem(position);
+        User user = this.getData().get(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_person, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(getResource(), parent, false);
         }
 
         TextView tvFirstName = (TextView) convertView.findViewById(R.id.tvPersonFirstName);
         TextView tvLastName = (TextView) convertView.findViewById(R.id.tvPersonLastName);
         ImageView imgOrg = (ImageView) convertView.findViewById(R.id.imgOrg);
 
-        tvFirstName.setText(person.firstName);
-        tvLastName.setText(person.lastName);
+        tvFirstName.setText(user.getName());
+        //tvLastName.setText(user.lastName);
 
-        imgOrg.setImageResource(0);
+        imgOrg.setImageBitmap(user.getImage());
         //imgOrg.setImageResource(R.drawable.organise);
 
 

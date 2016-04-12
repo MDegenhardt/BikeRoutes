@@ -1,6 +1,5 @@
 package es.upv.sdm.labs.bikeroutes.activities;
 
-import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,9 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import es.upv.sdm.labs.bikeroutes.R;
-import es.upv.sdm.labs.bikeroutes.other.DatePickerFragment;
-import es.upv.sdm.labs.bikeroutes.other.TimePickerFragment;
 import es.upv.sdm.labs.bikeroutes.pojo.Event;
+import es.upv.sdm.labs.bikeroutes.util.DatePickerFragment;
+import es.upv.sdm.labs.bikeroutes.util.TimePickerFragment;
 
 public class CreateEventActivity extends AppCompatActivity {
 
@@ -24,7 +23,7 @@ public class CreateEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
 
-        currentEvent = new Event(id);
+        currentEvent = new Event();
         id++;
 
     }
