@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import es.upv.sdm.labs.bikeroutes.pojo.Event;
+import es.upv.sdm.labs.bikeroutes.model.Event;
 
 /**
  * Created by Anderson on 12/04/2016.

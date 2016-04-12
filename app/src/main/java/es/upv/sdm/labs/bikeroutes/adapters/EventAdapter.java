@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.enumerations.EventType;
-import es.upv.sdm.labs.bikeroutes.pojo.Event;
+import es.upv.sdm.labs.bikeroutes.model.Event;
 
 
 public class EventAdapter extends AbstractAdapter<Event> {

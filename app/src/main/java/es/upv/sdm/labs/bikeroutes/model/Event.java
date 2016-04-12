@@ -1,4 +1,7 @@
-package es.upv.sdm.labs.bikeroutes.pojo;
+package es.upv.sdm.labs.bikeroutes.model;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,7 +14,7 @@ import es.upv.sdm.labs.bikeroutes.enumerations.EventType;
 /**
  * Created by Anderson on 11/04/2016.
  */
-public class Event implements Enviable{
+public class Event{
 
     private int id;
     private EventType type;
@@ -24,10 +27,12 @@ public class Event implements Enviable{
     private ArrayList<User> guests;
     private ArrayList<User> users;
 
-    public Event(){}
+    public Event(){
+        this(EventType.OTHER, new Date(), new Location(), new Location(), "", false, new User());
+    }
 
     public Event(EventType type, Date date, Location departure, Location arrival, String description, boolean secret, User organizer) {
-        this(0, type, date, departure, arrival, description, secret, organizer, null, null);
+        this(0, type, date, departure, arrival, description, secret, organizer, new ArrayList<User>(), new ArrayList<User>());
     }
 
     public Event(int id, EventType type, Date date, Location departure, Location arrival, String description,
@@ -181,8 +186,4 @@ public class Event implements Enviable{
         return events;
     }
 
-    @Override
-    public String toJson() {
-        return null;
-    }
 }

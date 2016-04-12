@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import es.upv.sdm.labs.bikeroutes.pojo.User;
+import es.upv.sdm.labs.bikeroutes.model.User;
 
 /**
  * Created by Anderson on 12/04/2016.

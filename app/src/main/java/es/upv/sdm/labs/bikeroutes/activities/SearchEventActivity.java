@@ -16,7 +16,7 @@ import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.util.DatePickerFragment;
 import es.upv.sdm.labs.bikeroutes.adapters.EventAdapter;
 import es.upv.sdm.labs.bikeroutes.util.TimePickerFragment;
-import es.upv.sdm.labs.bikeroutes.pojo.Event;
+import es.upv.sdm.labs.bikeroutes.model.Event;
 
 public class SearchEventActivity extends AppCompatActivity {
 

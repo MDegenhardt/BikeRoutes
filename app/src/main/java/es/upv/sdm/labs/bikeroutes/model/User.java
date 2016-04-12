@@ -1,6 +1,8 @@
-package es.upv.sdm.labs.bikeroutes.pojo;
+package es.upv.sdm.labs.bikeroutes.model;
 
 import android.graphics.Bitmap;
+
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 
@@ -10,7 +12,7 @@ import es.upv.sdm.labs.bikeroutes.enumerations.Gender;
 /**
  * Created by Anderson on 11/04/2016.
  */
-public class User implements Enviable {
+public class User{
 
     private int id;
     private String name;
@@ -23,10 +25,12 @@ public class User implements Enviable {
     private ArrayList<Event> events;
     private ArrayList<Event> invited;
 
-    public User(){}
+    public User(){
+        this("", "", "", null);
+    }
 
     public User(String name, String mail, String password, Bitmap image) {
-        this(0, name, mail, password, null, null, image, null, null, null);
+        this(0, name, mail, password, "", Gender.UNINFORMED, image, new ArrayList<User>(), new ArrayList<Event>(), new ArrayList<Event>());
     }
 
     public User(int id, String name, String mail, String password, String description, Gender gender,
@@ -150,10 +154,5 @@ public class User implements Enviable {
         persons.add(new User("Lucas", "lucas@email.com", "123", null ));
 
         return persons;
-    }
-
-    @Override
-    public String toJson() {
-        return null;
     }
 }
