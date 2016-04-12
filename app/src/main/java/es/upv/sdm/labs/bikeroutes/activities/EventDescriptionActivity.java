@@ -10,15 +10,12 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.R;
-import es.upv.sdm.labs.bikeroutes.other.EventAdapter;
-import es.upv.sdm.labs.bikeroutes.other.PersonAdapter;
+import es.upv.sdm.labs.bikeroutes.adapters.PersonAdapter;
 import es.upv.sdm.labs.bikeroutes.pojo.Event;
-import es.upv.sdm.labs.bikeroutes.pojo.Person;
+import es.upv.sdm.labs.bikeroutes.pojo.User;
 
 public class EventDescriptionActivity extends AppCompatActivity {
 
@@ -40,7 +37,7 @@ public class EventDescriptionActivity extends AppCompatActivity {
 
     private void populatePersonsList(){
         //Construct data source
-        ArrayList<Person> arrayOfPersons = Person.getPersons();
+        ArrayList<User> arrayOfPersons = User.getUsers();
         //Create the adapter to convert the array to views
         PersonAdapter adapter = new PersonAdapter(this, arrayOfPersons);
         //attach the adapter to the listview

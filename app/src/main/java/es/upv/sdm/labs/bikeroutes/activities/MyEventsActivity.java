@@ -5,13 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TabHost;
 
 import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.R;
-import es.upv.sdm.labs.bikeroutes.other.EventAdapter;
+import es.upv.sdm.labs.bikeroutes.adapters.EventAdapter;
 import es.upv.sdm.labs.bikeroutes.pojo.Event;
 
 public class MyEventsActivity extends AppCompatActivity {
