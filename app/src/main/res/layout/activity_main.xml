@@ -9,8 +9,62 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:id="@+id/linearLayout3">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText6"
+        android:text=""
+        android:hint="@string/mail"
+        android:layout_marginTop="28dp"
+        android:textAlignment="center"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editText7"
+        android:hint="@string/password"
+        android:layout_below="@+id/editText6"
+        android:textAlignment="center" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/log_in"
+            android:id="@+id/btnLogin"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark1"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent1"
+            android:onClick="loginButtonClicked"
+            android:layout_below="@+id/linearLayout3"
+            android:layout_alignLeft="@+id/btnStartLocation"
+            android:layout_alignStart="@+id/btnStartLocation" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_weight="0.7"
+        android:id="@+id/btnFb"
+        android:src="@drawable/fb_icon"
+        android:scaleType="centerInside"
+        android:background="@color/colorPrimaryLight1"
+        android:layout_gravity="center"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_centerHorizontal="true" />
+
+
 </RelativeLayout>
