@@ -27,10 +27,17 @@
         </activity>
         <activity
             android:name=".activities.DashboardActivity"
-            android:label="@string/dashBoardActivityLabel"></activity>
+            android:label="@string/dashBoardActivityLabel"
+            android:parentActivityName=".activities.DashboardActivity">
+
+            <!-- Enable up navigation for backwards compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.DashboardActivity" />
+        </activity>
         <activity
             android:name=".activities.CreateEventActivity"
-            android:label="@string/createEventsActivityLabel"
+            android:label="@string/createEventActivityLabel"
             android:parentActivityName=".activities.DashboardActivity">
 
             <!-- Enable up navigation for backwards compatibility -->
@@ -61,10 +68,42 @@
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".activities.DashboardActivity">
+            android:parentActivityName="es.upv.sdm.labs.bikeroutes.activities.DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.upv.sdm.labs.bikeroutes.activities.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activities.UserDerscriptionActivity"
+            android:label="@string/UserDescriptionActivityLabel"
+            android:parentActivityName="es.upv.sdm.labs.bikeroutes.activities.DashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.upv.sdm.labs.bikeroutes.activities.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activities.EditAccountActivity"
+            android:label="@string/UserDescriptionActivityLabel"
+            android:parentActivityName="es.upv.sdm.labs.bikeroutes.activities.UserDerscriptionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.upv.sdm.labs.bikeroutes.activities.UserDerscriptionActivity" />
+        </activity>
+        <activity
+            android:name=".activities.MyFriendsActivity"
+            android:label="@string/my_friends"
+            android:parentActivityName="es.upv.sdm.labs.bikeroutes.activities.UserDerscriptionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.UserDerscriptionActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AddFriendsActivity"
+            android:label="@string/add_friends"
+            android:parentActivityName="es.upv.sdm.labs.bikeroutes.activities.MyFriendsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MyFriendsActivity" />
         </activity>
     </application>
 

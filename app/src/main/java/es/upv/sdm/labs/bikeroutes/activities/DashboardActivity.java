@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -80,33 +81,40 @@ This method is executed when the activity is created to populate the ActionBar w
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.dashboard_menu, menu);
-        menu.findItem(R.id.menuItem1).setVisible(true);
+        menu.findItem(R.id.menuMyAccount).setVisible(true);
 
         return super.onCreateOptionsMenu(menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        Intent intent;
-//        switch (item.getItemId()) {
-//            case R.id.btn_create_route:
-//                // User chose the "Create" item, show the app CreateEvent...
-//                intent = new Intent(this, CreateEventActivity.class);
-//                startActivity(intent);
-//                return true;
-//
-//            case R.id.btn_search_route:
-//                // User chose the "Search" item, show the app SearchEvent...
-//                intent = new Intent(this, SearchEventActivity.class);
-//                startActivity(intent);
-//                return true;
-//
-//
-//            default:
-//                // If we got here, the user's action was not recognized.
-//                // Invoke the superclass to handle it.
-//                return super.onOptionsItemSelected(item);
-//
-//        }
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            case R.id.menuMyAccount:
+                intent = new Intent(this, UserDerscriptionActivity.class);
+                startActivity(intent);
+                break;
+            /*case R.id.btn_create_route:
+                // User chose the "Create" item, show the app CreateEvent...
+                intent = new Intent(this, CreateEventActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.btn_search_route:
+                // User chose the "Search" item, show the app SearchEvent...
+                intent = new Intent(this, SearchEventActivity.class);
+                startActivity(intent);
+                return true;
+                */
+
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                //return super.onOptionsItemSelected(item);
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
