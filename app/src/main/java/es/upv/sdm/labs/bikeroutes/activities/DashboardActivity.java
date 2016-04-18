@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.adapters.EventAdapter;
 import es.upv.sdm.labs.bikeroutes.R;
+import es.upv.sdm.labs.bikeroutes.adapters.EventAdapter2;
 import es.upv.sdm.labs.bikeroutes.model.Event;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -51,8 +52,11 @@ public class DashboardActivity extends AppCompatActivity {
     private void populateEventsList(){
         //Construct data source
         ArrayList<Event> arrayOfEvents = Event.getEvents();
+
+        Log.d("DashboardActivity", arrayOfEvents.get(0).toString());
+
         //Create the adapter to convert the array to views
-        EventAdapter adapter = new EventAdapter(this, arrayOfEvents);
+        EventAdapter2 adapter = new EventAdapter2(this, arrayOfEvents);
         //recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
         //attach the adapter to the listview
         recentEventsListView.setAdapter(adapter);
@@ -94,7 +98,7 @@ This method is executed when the activity is created to populate the ActionBar w
                 intent = new Intent(this, UserDerscriptionActivity.class);
                 startActivity(intent);
                 break;
-            /*case R.id.btn_create_route:
+            case R.id.btn_create_route:
                 // User chose the "Create" item, show the app CreateEvent...
                 intent = new Intent(this, CreateEventActivity.class);
                 startActivity(intent);
@@ -105,7 +109,7 @@ This method is executed when the activity is created to populate the ActionBar w
                 intent = new Intent(this, SearchEventActivity.class);
                 startActivity(intent);
                 return true;
-                */
+
 
 
             default:
