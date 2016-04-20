@@ -123,6 +123,7 @@
                     android:layout_weight="2"
                     android:text="Some Address"
                     style="@style/event_startEnd"
+                    android:onClick="selectLocationButtonPressed"
                     />
 
 
@@ -139,7 +140,9 @@
             android:src="@drawable/map_marker"
             android:scaleType="centerInside"
             android:background="@color/colorPrimaryLight1"
-            android:layout_margin="2dp" />
+            android:layout_margin="2dp"
+            android:onClick="selectLocationButtonPressed"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -181,6 +184,7 @@
                     android:layout_weight="2"
                     android:text="Some other Address"
                     style="@style/event_startEnd"
+                    android:onClick="selectLocationButtonPressed"
                     />
 
 
@@ -197,7 +201,9 @@
             android:src="@drawable/map_marker"
             android:scaleType="centerInside"
             android:background="@color/colorPrimaryLight1"
-            android:layout_margin="2dp" />
+            android:layout_margin="2dp"
+            android:onClick="selectLocationButtonPressed"
+            />
     </LinearLayout>
 
     <EditText

@@ -1,11 +1,14 @@
 package es.upv.sdm.labs.bikeroutes.model;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import es.upv.sdm.labs.bikeroutes.interfaces.Enviable;
@@ -158,8 +161,8 @@ public class Event{
         exampleLocation2.setLatitude(100.0d);//your coords
         exampleLocation2.setLongitude(0.0d);*/
 
-        Location exampleLocation1 = new Location(0,0,"");
-        Location exampleLocation2 = new Location(100,0,"");
+        Location exampleLocation1 = new Location(39.4666667,-0.3666667,"Valencia");
+        Location exampleLocation2 = new Location(38.9666667,-0.1833333,"Gandía");
 
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/hh:mm:ss");
@@ -174,6 +177,15 @@ public class Event{
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        Log.d("Event", "Date: " +  d1.getDate());
+        Log.d("Event", "day: " +  d1.getDay());
+        Log.d("Event", "month: " +  d1.getMonth());
+        Log.d("Event", "year: " +  d1.getYear());
+        Log.d("Event", "hour: " +  d1.getHours());
+        Log.d("Event", "minute: " +  d1.getMinutes());
+
+        //Calendar.get(Calendar.DAY_OF_MONTH)
 
         User user = new User("Anderson", "anderson@email.com", "234", null);
 

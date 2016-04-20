@@ -46,7 +46,7 @@ public class EventAdapter2 extends ArrayAdapter<Event> {
         ivEventType.setImageResource(img);
 
 
-        Log.d("EventAdapter", "StartName: " + event.getDeparture());
+        Log.d("EventAdapter", "StartName: " + event.getDeparture().getAddress());
         tvStart.setText(event.getDeparture().getAddress());
         tvEnd.setText(event.getArrival().getAddress());
 
