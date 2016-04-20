@@ -8,19 +8,18 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import es.upv.sdm.labs.bikeroutes.interfaces.Enviable;
-
 /**
  * Created by Anderson on 12/04/2016.
  */
 public class Location {
 
+    int id;
     private double latitude;
     private double longitude;
     private String address;
 
     public Location(){
-        this(0,0,"");
+        this(0,0,0,"");
     }
 
     public Location(String address, Context context){
@@ -31,17 +30,39 @@ public class Location {
         this(Location.getLocationFromCoordinates(latitude, longitude, context));
     }
 
+    public Location(int id, String address, Context context){
+        this(Location.getLocationFromAddress(address, context));
+        this.id = id;
+    }
+
+    public Location(int id, double latitude, double longitude, Context context){
+        this(Location.getLocationFromCoordinates(latitude, longitude, context));
+        this.id = id;
+    }
+
 
     public Location(Location location){
         this(location.getLatitude(), location.getLongitude(), location.getAddress());
     }
 
     public Location(double latitude, double longitude, String address) {
+        this(0, latitude, longitude, address);
+    }
+
+    public Location(int id, double latitude, double longitude, String address) {
+        this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
     }
 
+    public int getId(){
+        return this.id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
 
     public double getLatitude() {
         return latitude;
@@ -70,7 +91,8 @@ public class Location {
     @Override
     public String toString() {
         return "Location{" +
-                "latitude=" + latitude +
+                "id="+id+
+                ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", address='" + address + '\'' +
                 '}';
@@ -85,6 +107,7 @@ public class Location {
             if(l.size()>0){
                 latitude = l.get(0).getLatitude();
                 longitude = l.get(0).getLongitude();
+                address = l.get(0).getAddressLine(0)+", "+l.get(0).getAddressLine(1)+", "+l.get(0).getCountryName();
             }
         } catch (IOException  e) {
             e.printStackTrace();
@@ -101,7 +124,7 @@ public class Location {
             l = new Geocoder(context, Locale.getDefault()).getFromLocation(latitude, longitude, 1);
             if(l.size()>0){
                 Address a = l.get(0);
-                address += a.getAddressLine(0)+", "+a.getAddressLine(1)+", "+a.getAddressLine(2);
+                address += a.getAddressLine(0)+", "+a.getAddressLine(1)+", "+a.getCountryName();
             }
         } catch (IOException  e) {
             e.printStackTrace();

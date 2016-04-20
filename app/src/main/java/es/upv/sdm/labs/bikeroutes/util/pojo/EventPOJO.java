@@ -1,10 +1,12 @@
 package es.upv.sdm.labs.bikeroutes.util.pojo;
 
+import java.util.ArrayList;
 import java.util.Date;
 
-import es.upv.sdm.labs.bikeroutes.enumerations.EventType;
+import es.upv.sdm.labs.bikeroutes.model.EventType;
 import es.upv.sdm.labs.bikeroutes.model.Event;
 import es.upv.sdm.labs.bikeroutes.model.Location;
+import es.upv.sdm.labs.bikeroutes.util.DateHelper;
 
 /**
  * Created by Anderson on 12/04/2016.
@@ -17,31 +19,19 @@ public class EventPOJO extends AbstractPOJO{
 
     public EventPOJO(Event event){
         this.events = new Events[1];
-        Events e = this.events[0] = new Events();
-        e.setId(event.getId());
-        e.setType(event.getType().toString());
-        e.setEspecificationType(event.getType().getEspecification());
-        e.setDate(event.getDate());
-        e.setDeparture(event.getDeparture());
-        e.setArrival(event.getArrival());
-        e.setDescription(event.getDescription());
-        e.setSecret(event.isSecret());
-        e.setIdOrganizer(event.getOrganizer().getId());
+        this.events[0] = new Events(event);
     }
 
     public Event getEvent(){
         if(this.events==null || this.events.length==0) return null;
-        Events e = this.events[0];
-        Event res = new Event();
-        res.setId(e.getId());
-        res.setType(EventType.getType(e.getType()));
-        res.getType().setEspecification(e.getEspecificationType());
-        res.setDate(e.getDate());
-        res.setDeparture(e.getDeparture());
-        res.setArrival(e.getArrival());
-        res.setDescription(e.getDescription());
-        res.setSecret(e.isSecret());
-        res.getOrganizer().setId(e.getIdOrganizer());
+        return this.events[0].getEvent();
+    }
+
+    public ArrayList<Event> toEvents(){
+        ArrayList<Event> res = new ArrayList<Event>();
+        for (Events e:this.events) {
+            res.add(e.getEvent());
+        }
         return res;
     }
 
@@ -55,15 +45,29 @@ public class EventPOJO extends AbstractPOJO{
 
     private class Events{
 
+        public Events(){}
+
+        public Events(Event event){
+            this.setId(event.getId());
+            this.setType(event.getType());
+            this.setDate(DateHelper.toFormatString(event.getDate()));
+            this.setDeparture(event.getDeparture());
+            this.setArrival(event.getArrival());
+            this.setDescription(event.getDescription());
+            this.setSecret(event.isSecret());
+            this.setOrganizer(new UserPOJO().new Users(event.getOrganizer()));
+            this.setOver(event.isOver());
+        }
+
         private int id;
-        private String type;
-        private String especificationType;
-        private Date date;
+        private EventType type;
+        private String date;
         private Location departure;
         private Location arrival;
         private String description;
         private boolean secret;
-        private int idOrganizer;
+        private UserPOJO.Users organizer;
+        private boolean over;
 
         public int getId() {
             return id;
@@ -73,27 +77,20 @@ public class EventPOJO extends AbstractPOJO{
             this.id = id;
         }
 
-        public String getType() {
+        public EventType getType() {
             return type;
         }
 
-        public void setType(String type) {
+        public void setType(EventType type) {
             this.type = type;
         }
 
-        public String getEspecificationType() {
-            return especificationType;
-        }
 
-        public void setEspecificationType(String especificationType) {
-            this.especificationType = especificationType;
-        }
-
-        public Date getDate() {
+        public String getDate() {
             return date;
         }
 
-        public void setDate(Date date) {
+        public void setDate(String date) {
             this.date = date;
         }
 
@@ -129,12 +126,34 @@ public class EventPOJO extends AbstractPOJO{
             this.secret = secret;
         }
 
-        public int getIdOrganizer() {
-            return idOrganizer;
+        public UserPOJO.Users getOrganizer() {
+            return organizer;
         }
 
-        public void setIdOrganizer(int idOrganizer) {
-            this.idOrganizer = idOrganizer;
+        public void setOrganizer(UserPOJO.Users organizer) {
+            this.organizer = organizer;
+        }
+
+        public boolean isOver() {
+            return over;
+        }
+
+        public void setOver(boolean over) {
+            this.over = over;
+        }
+
+        public Event getEvent(){
+            Event res = new Event();
+            res.setId(this.getId());
+            res.setType(this.getType());
+            res.setDate(DateHelper.toDate(this.getDate()));
+            res.setDeparture(this.getDeparture());
+            res.setArrival(this.getArrival());
+            res.setDescription(this.getDescription());
+            res.setSecret(this.isSecret());
+            res.setOrganizer((this.getOrganizer().getUser()));
+            res.setOver(this.isOver());
+            return res;
         }
     }
 }
