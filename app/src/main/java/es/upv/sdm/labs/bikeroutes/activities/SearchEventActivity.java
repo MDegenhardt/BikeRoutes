@@ -115,6 +115,16 @@ public class SearchEventActivity extends AppCompatActivity {
 
     }
 
+    public void dashDescMapButtonPressed(View view){
+        Log.d("EvenDescriptionActivity", "Map Button Pressed!");
+
+        int eventID = 1;
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("EventID", eventID );
+        startActivity(intent);
+
+    }
+
 
 
     public void searchButtonClicked(View view) {

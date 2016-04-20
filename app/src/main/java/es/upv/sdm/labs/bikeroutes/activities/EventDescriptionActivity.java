@@ -7,6 +7,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -81,6 +82,16 @@ This method is executed when the activity is created to populate the ActionBar w
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    public void eventDescMapButtonPressed(View view){
+        Log.d("EvenDescriptionActivity", "Map Button Pressed!");
+
+        int eventID = 1;
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("EventID", eventID );
+        startActivity(intent);
+
     }
 
 

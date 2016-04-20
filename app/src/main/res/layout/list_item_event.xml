@@ -108,5 +108,9 @@
         android:src="@drawable/map_marker"
         android:scaleType="centerCrop"
         android:background="@color/colorPrimaryLight1"
-        android:layout_margin="5dp" />
+        android:layout_margin="12dp"
+        android:onClick="dashDescMapButtonPressed"
+        android:backgroundTint="@color/colorPrimaryLight2"
+        android:baselineAlignBottom="false"
+        android:padding="5dp" />
 </LinearLayout>

@@ -127,4 +127,14 @@ This method is executed when the activity is created to populate the ActionBar w
         return super.onOptionsItemSelected(item);
     }
 
+    public void dashDescMapButtonPressed(View view){
+        Log.d("EvenDescriptionActivity", "Map Button Pressed!");
+
+        int eventID = 1;
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("EventID", eventID );
+        startActivity(intent);
+
+    }
+
 }
