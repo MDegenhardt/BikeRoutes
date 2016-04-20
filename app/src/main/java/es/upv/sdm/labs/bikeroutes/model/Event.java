@@ -23,8 +23,8 @@ public class Event implements Enviable{
     private boolean secret;
     private User organizer;
     private boolean over;
-    private ArrayList<User> guests;
-    private ArrayList<User> users;
+    private ArrayList<User> inviteds;
+    private ArrayList<User> confirmedUsers;
 
     public Event(){
         this(new EventType(), new Date(), new Location(), new Location(), "", false, new User());
@@ -47,7 +47,7 @@ public class Event implements Enviable{
     }
 
     public Event(int id, EventType type, Date date, Location departure, Location arrival, String description,
-                 boolean secret, User organizer, boolean over, ArrayList<User> guests, ArrayList<User> users) {
+                 boolean secret, User organizer, boolean over, ArrayList<User> inviteds, ArrayList<User> confirmedUsers) {
         this.id = id;
         this.type = type;
         this.date = date;
@@ -55,8 +55,8 @@ public class Event implements Enviable{
         this.arrival = arrival;
         this.description = description;
         this.secret = secret;
-        this.guests = guests;
-        this.users = users;
+        this.inviteds = inviteds;
+        this.confirmedUsers = confirmedUsers;
         this.organizer = organizer;
         this.over = over;
     }
@@ -133,20 +133,20 @@ public class Event implements Enviable{
         this.over = over;
     }
 
-    public ArrayList<User> getGuests() {
-        return guests;
+    public ArrayList<User> getInviteds() {
+        return inviteds;
     }
 
-    public void setGuests(ArrayList<User> guests) {
-        this.guests = guests;
+    public void setInviteds(ArrayList<User> inviteds) {
+        this.inviteds = inviteds;
     }
 
-    public ArrayList<User> getUsers() {
-        return users;
+    public ArrayList<User> getConfirmedUsers() {
+        return confirmedUsers;
     }
 
-    public void setUsers(ArrayList<User> users) {
-        this.users = users;
+    public void setConfirmedUsers(ArrayList<User> confirmedUsers) {
+        this.confirmedUsers = confirmedUsers;
     }
 
     @Override
@@ -161,8 +161,8 @@ public class Event implements Enviable{
                 ", secret=" + secret +
                 ", organizer=" + organizer +
                 ", over="+over+
-                ", guests=" + guests +
-                ", users=" + users +
+                ", invited=" + inviteds +
+                ", confirmedUsers=" + confirmedUsers +
                 '}';
     }
 
@@ -217,8 +217,8 @@ public class Event implements Enviable{
         this.secret = other.isSecret();
         this.organizer = other.getOrganizer();
         this.over = other.isOver();
-        this.guests = other.getGuests();
-        this.users = other.getUsers();
+        this.inviteds = other.getInviteds();
+        this.confirmedUsers = other.getConfirmedUsers();
     }
 
     public static String toJsonArray(ArrayList<Event> events){

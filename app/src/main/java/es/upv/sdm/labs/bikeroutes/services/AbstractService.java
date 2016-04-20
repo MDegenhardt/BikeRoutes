@@ -29,9 +29,9 @@ public abstract class AbstractService<T> {
         this.typeReceive = TypeReceive.UNDEFINED;
     }*/
 
-    protected Integer[] intData;
+    //protected Integer[] intData;
     protected T objData;
-    protected ArrayList<T> listaData;
+    protected ArrayList<T> listData;
     //protected Context context;
     //protected InputStream response;
 
@@ -86,21 +86,25 @@ public abstract class AbstractService<T> {
 
     //public abstract void preExecute(int option);
 
-    public abstract void onResponse(int option, InputStream in);
+    protected abstract void onResponse(int option, InputStream in);
 
-    public abstract void putParams(String[] params);
+    protected abstract void putParams(int option, String[] params);
 
-    public void onRequest(int option){}
+    protected void onRequest(int option){}
 
     /*public AbstractService(Context context){
         this.context = context;
     }*/
 
     protected void request(int option, String action, String[]params, /*String values[], T objReference, ArrayList<T> listReference, */AsyncExecutable exec){
-        new MyAsyncTask(TypeRequest.RECEIVE, option, action, params, /*values, objReference, listReference, */exec).execute();
+        request(option,action,params,null,exec);
     }
 
-    private InputStream request(String action, String[] params, String[] values){
+    protected void request(int option, String action, String[]params, String values[], /*T objReference, ArrayList<T> listReference, */AsyncExecutable exec){
+        new MyAsyncTask(TypeRequest.RECEIVE, option, action, params, values, /*objReference, listReference, */exec).execute();
+    }
+
+    private void request(String action, String[] params, String[] values, int option){
         Uri.Builder builder = new Uri.Builder();
         builder.scheme(ServerInfo.SERVER_SCHEME);
         builder.authority(ServerInfo.SERVER);
@@ -108,26 +112,27 @@ public abstract class AbstractService<T> {
         builder.appendQueryParameter("action", action);
         if(params!=null && params!=null)
             for(int k=0;k<params.length && k<values.length;k++) builder.appendQueryParameter(params[k], values[k]);
-        InputStream res = null;
         try {
             URL url = new URL(builder.build().toString());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setDoInput(true);
-            res = connection.getInputStream();
-
+            onResponse(option, connection.getInputStream());
             connection.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return res;
+    }
+
+    protected void send(int option, String action, String[]params, /*String values[], T objReference, ArrayList<T> listReference,*/ AsyncExecutable exec){
+        send(option,action,params,null,exec);
     }
 
     protected void send(int option, String action, String[]params, String values[],/* T objReference, ArrayList<T> listReference,*/ AsyncExecutable exec){
         new MyAsyncTask(TypeRequest.SEND, option, action, params, values, /*objReference, listReference, */exec).execute();
     }
 
-    private InputStream send(String action, String [] params, String[] values){
+    private void send(String action, String [] params, String[] values, int option){
         Uri.Builder builder = new Uri.Builder();
         builder.scheme(ServerInfo.SERVER_SCHEME);
         builder.authority(ServerInfo.SERVER);
@@ -135,7 +140,6 @@ public abstract class AbstractService<T> {
         String body = "action="+action;
         if(params!=null && params!=null)
             for(int k=0;k<params.length && k<values.length;k++) body += "&"+params[k]+"="+values[k];
-        InputStream res = null;
         try {
             URL url = new URL(builder.build().toString());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -146,12 +150,11 @@ public abstract class AbstractService<T> {
             osw.write(body);
             osw.flush();
             osw.close();
-            res = connection.getInputStream();
+            onResponse(option, connection.getInputStream());
             connection.disconnect();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return res;
     }
 
 
@@ -187,14 +190,12 @@ public abstract class AbstractService<T> {
         @Override
         protected Void doInBackground(Void... params) {
             onRequest(option);
-            if(values==null) {
+            if(values==null && this.params!=null) {
                 this.values = new String[this.params.length];
-                putParams(this.values);
+                putParams(option, this.values);
             }
-            InputStream is = null;
-            if(type.equals(TypeRequest.RECEIVE)) is = request(this.action, this.params, this.values);
-            else if(type.equals(TypeRequest.SEND)) is = send(this.action, this.params, this.values);
-            onResponse(option, is);
+            if(type.equals(TypeRequest.RECEIVE)) request(this.action, this.params, this.values, option);
+            else if(type.equals(TypeRequest.SEND)) send(this.action, this.params, this.values, option);
             return null;
         }
 

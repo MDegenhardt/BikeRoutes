@@ -10,7 +10,7 @@ import java.util.Date;
 public class DateHelper {
 
     public static Date createDate(int day, int month, int year, int hour, int minutes){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/HH:mm:ss");
         Date d = new Date();
         try {
             d = formatter.parse(day+"/"+month+"/"+year+"/"+hour+":"+minutes+":00");

@@ -71,7 +71,14 @@ public class JsonParser {
     }
 
     public static ArrayList<Event> toEvents(InputStream in){
-        EventPOJO e =  new GsonBuilder().create().fromJson(new InputStreamReader(in), EventPOJO.class);
+        InputStreamReader is = new InputStreamReader(in);
+        /*BufferedReader br = new BufferedReader(is);
+        String s = "";
+        try{
+            while((s = br.readLine())!=null){Log.d("LOGG",s);}
+        } catch (IOException e){e.printStackTrace();}
+        return new ArrayList<>();*/
+        EventPOJO e =  new GsonBuilder().create().fromJson(is, EventPOJO.class);
         return e.toEvents();
     }
 

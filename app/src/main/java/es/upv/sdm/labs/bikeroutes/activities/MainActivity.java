@@ -6,15 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.util.ArrayList;
-import java.util.Date;
 
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.enumerations.Gender;
-import es.upv.sdm.labs.bikeroutes.interfaces.AsyncExecutable;
 import es.upv.sdm.labs.bikeroutes.model.Event;
 import es.upv.sdm.labs.bikeroutes.model.EventType;
 import es.upv.sdm.labs.bikeroutes.model.EventType.Type;
@@ -24,10 +19,7 @@ import es.upv.sdm.labs.bikeroutes.services.EventService;
 import es.upv.sdm.labs.bikeroutes.services.ServerInfo;
 import es.upv.sdm.labs.bikeroutes.services.UserService;
 import es.upv.sdm.labs.bikeroutes.util.DateHelper;
-import es.upv.sdm.labs.bikeroutes.util.JsonParser;
 import es.upv.sdm.labs.bikeroutes.util.async.PostExecute;
-import es.upv.sdm.labs.bikeroutes.util.pojo.IntPojo;
-import es.upv.sdm.labs.bikeroutes.util.pojo.UserPOJO;
 
 //login page
 public class MainActivity extends AppCompatActivity {
@@ -60,26 +52,33 @@ public class MainActivity extends AppCompatActivity {
         final Event valencia = new Event(14, new EventType(1,Type.BIKE, "Bike"), DateHelper.createDate(7,7,2017,19,7),new Location(51,60,-95,""),
                 new Location(52,0,0,"Valencia"),"valencia",true,anderson);
 
-        final User user = new User();
-        final Event event = new Event();
-        u.findById(1, user, new PostExecute() {
+        //1 6  9 16 20
+        final User jenni = new User(26, "Jenni", "jennifer@email.com", "12345", "jennifer", Gender.FEMALE, null);
+
+        Event china = new Event(18, new EventType(32, Type.OTHER, "other china"), DateHelper.createDate(31,1,2020,23,23),new Location(59,0,0,"Limoeiro Ceará"),
+                new Location(60,0,0,"Hong Kong"), "china", false, anderson);
+
+        Event china2 = new Event(19, new EventType(34, Type.OTHER, "other CHINA"), DateHelper.createDate(10,10,2010,12,12),new Location(61,12,12,"doze"),
+                new Location(62,10,10,"dez"), "CHINA", true, jenni);
+
+        Event china3 = new Event(20, new EventType(35, Type.OTHER, "other CHINA"), DateHelper.createDate(10,10,2010,12,12),new Location(63,12,12,"doze"),
+                new Location(64,10,10,"dez"), "CHINA", true, jenni);
+
+        china2.setOver(false);
+        final User user = saiane;
+        final Event event = alcoy;
+
+        u.findBlockHistoric(1, 10, user, new PostExecute() {
             @Override
             public void postExecute(int option) {
                 hey();
-                hey(user);
+                printList(user.getHistoric());
             }
         });
-        /*e.findBlock(1,2,m, new PostExecute() {
-            @Override
-            public void postExecute(int option) {
-                hey();
-                printList(m);
-            }
-        });*/
 
 
                 //for testing
-                startActivity(new Intent(this, DashboardActivity.class));
+        startActivity(new Intent(this, DashboardActivity.class));
         //startActivity(new Intent(this,MyEventsActivity.class));
         //startActivity(new Intent(this,EventDescriptionActivity.class));
     }
@@ -94,8 +93,10 @@ public class MainActivity extends AppCompatActivity {
         Log.i(s, x);
     }
 
-    private static void hey(Object s){
-        Log.i("ANDERSON", s.toString());
+    private static void hey(Object o){
+        if(o==null) Log.i("ANDERSON", "NULO");
+        else if (o instanceof ArrayList) printList((ArrayList)o);
+        else Log.i("ANDERSON", o.toString());
     }
 
     private static void hey(){

@@ -1,8 +1,5 @@
 package es.upv.sdm.labs.bikeroutes.services;
 
-import android.content.Context;
-import android.util.Log;
-
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -32,6 +29,8 @@ public class UserService extends AbstractService<User> {
     public static final int REMOVE_FRIEND                   = 14;
     public static final int FIND_FRIENDS                    = 15;
     public static final int FIND_BLOCK_FRIENDS              = 16;
+    public static final int FIND_ALL_EVENTS                 = 17;
+    public static final int FIND_BLOCK_EVENTS               = 18;
 
 
 
@@ -42,116 +41,165 @@ public class UserService extends AbstractService<User> {
     public static final int ERROR_ALREADY_FRIENDS   = 105;
     public static final int ERROR_USER_NOT_FOUND    = 106;
 
-    /*public UserService(Context context) {
-        super(context);
-    }*/
-
     @Override
     public void insert(User user, AsyncExecutable exec) {
-        //this.dato = user;
-        this.send(ADD_USER, "add_user", new String[]{"user"}, new String[]{user.toJson()}, user, null, exec);
+        this.objData = user;
+        this.send(ADD_USER, "add_user", new String[]{"user"}, exec);
     }
 
     @Override
     public void update(User user, AsyncExecutable exec) {
-        this.send(UPDATE_USER, "update_user", new String[]{"user"}, new String[]{user.toJson()}, null, null, exec);
+        this.objData = user;
+        this.send(UPDATE_USER, "update_user", new String[]{"user"},exec);
     }
 
     @Override
     public void remove(int id, AsyncExecutable exec) {
-        this.send(REMOVE_USER, "remove_user", new String[]{"id"}, new String[]{String.valueOf(id)}, null, null, exec);
+        this.send(REMOVE_USER, "remove_user", new String[]{"id"}, new String[]{String.valueOf(id)}, exec);
     }
 
     @Override
     public void findById(int id, User responseReference, AsyncExecutable exec) {
         this.objData = responseReference;
-        this.request(FIND_USER_BY_ID, "find_user_by_id", new String[]{"id"}, new String[]{String.valueOf(id)}, responseReference, null, exec);
+        this.request(FIND_USER_BY_ID, "find_user_by_id", new String[]{"id"}, new String[]{String.valueOf(id)}, exec);
     }
 
     @Override
     public void findAll(ArrayList<User> responseReference, AsyncExecutable exec) {
-        this.request(FIND_ALL_USERS, "find_all_users", null, null, null, responseReference, exec);
+        this.listData = responseReference;
+        this.request(FIND_ALL_USERS, "find_all_users", null, exec);
     }
 
     @Override
     public void findBlock(int position, int length, ArrayList<User> responseReference, AsyncExecutable exec) {
+        this.listData = responseReference;
         this.request(FIND_BLOCK_USERS, "find_block_users", new String[]{"position", "length"},
-                new String[]{String.valueOf(position), String.valueOf(length)}, null, responseReference, exec);
+                new String[]{String.valueOf(position), String.valueOf(length)}, exec);
+    }
+
+    public void findByLogin(String mail, String password){
+
+    }
+
+    public void retrievePassword(String mail){
+
+    }
+
+    public void findByMailAndName(String str){
+
     }
 
     public void findByMail(String mail, User responseReference, AsyncExecutable exec){
-        this.request(FIND_USER_BY_MAIL, "find_user_by_mail", new String[]{"mail"}, new String[]{mail}, responseReference, null, exec);
+        this.objData = responseReference;
+        this.request(FIND_USER_BY_MAIL, "find_user_by_mail", new String[]{"mail"}, new String[]{mail}, exec);
     }
 
-    public void findEvents(AsyncExecutable exex){
-        //COMPLETAR
+    public void findAllEvents(User user, AsyncExecutable exec){
+        this.objData = user;
+        this.request(FIND_ALL_EVENTS, "find_all_events_by_user", new String[]{"id"}, new String[]{String.valueOf(user.getId())}, exec);
     }
 
-    public void findEventsGuest(AsyncExecutable exex){
-        //COMPLETAR
+    public void findEventsConfirmed(User user, AsyncExecutable exec){
+        this.objData = user;
+        this.request(FIND_EVENTS_CONFIRMED, "find_events_confirmed_by_user",
+                new String[]{"id"}, new String[]{String.valueOf(user.getId())}, exec);
     }
 
-    public void findHistoric(AsyncExecutable exex){
-        //COMPLETAR
+    public void findEventsInvited(User user, AsyncExecutable exec){
+        this.objData = user;
+        this.request(FIND_EVENTS_INVITED, "find_events_invited_by_user",
+                new String[]{"id"}, new String[]{String.valueOf(user.getId())}, exec);
     }
 
-    public void findBlockEvents(int position, int length, AsyncExecutable exex){
-        //COMPLETAR
+    public void findHistoric(User user, AsyncExecutable exec){
+        this.objData = user;
+        this.request(FIND_EVENTS_HISTORIC, "find_events_historic_by_user",
+                new String[]{"id"}, new String[]{String.valueOf(user.getId())}, exec);
     }
 
-    public void findBlockEventsGuest(int position, int length, AsyncExecutable exex){
-        //COMPLETAR
+    public void findBlockEvents(int position, int length, User user, AsyncExecutable exec){
+        this.objData = user;
+        this.request(FIND_BLOCK_EVENTS, "find_block_events_by_user",new String[]{"id","position","length"},
+                new String[]{String.valueOf(user.getId()),String.valueOf(position),String.valueOf(length)}, exec);
     }
 
-    public void findBlockHistoric(int position, int length, AsyncExecutable exex){
-        //COMPLETAR
+    public void findBlockEventsConfirmed(int position, int length, User user, AsyncExecutable exec){
+        this.objData = user;
+        this.request(FIND_BLOCK_EVENTS_CONFIRMED, "find_block_events_confirmed_by_user",new String[]{"id","confirmed","position","length"},
+                new String[]{String.valueOf(user.getId()),String.valueOf(1),String.valueOf(position),String.valueOf(length)}, exec);
+    }
+
+    public void findBlockEventsInvited(int position, int length, User user, AsyncExecutable exec){
+        this.objData = user;
+        this.request(FIND_BLOCK_EVENTS_INVITED, "find_block_events_invited_by_user",new String[]{"id","confirmed","position","length"},
+                new String[]{String.valueOf(user.getId()),String.valueOf(0),String.valueOf(position),String.valueOf(length)}, exec);
+    }
+
+    public void findBlockHistoric(int position, int length, User user, AsyncExecutable exec){
+        this.objData = user;
+        this.request(FIND_BLOCK_EVENTS_HISTORIC, "find_block_events_historic_by_user",new String[]{"id","position","length"},
+                new String[]{String.valueOf(user.getId()),String.valueOf(position),String.valueOf(length)}, exec);
     }
 
     public void findFriends(User user, AsyncExecutable exec){
-        this.request(FIND_FRIENDS, "find_friends", new String[]{"user_id"}, new String[]{String.valueOf(user.getId())}, null, user.getFriends(), exec);
+        this.listData = user.getFriends();
+        this.request(FIND_FRIENDS, "find_friends", new String[]{"user_id"}, new String[]{String.valueOf(user.getId())}, exec);
     }
 
     public void findBlockFriends(User user, int position, int length, AsyncExecutable exec){
+        this.listData = user.getFriends();
         this.request(FIND_FRIENDS, "find_block_friends", new String[]{"user_id", "position", "length"},
-                new String[]{String.valueOf(user.getId()), String.valueOf(position), String.valueOf(length)}, null, user.getFriends(), exec);
+                new String[]{String.valueOf(user.getId()), String.valueOf(position), String.valueOf(length)}, exec);
     }
 
     public void removeFriend(User user, User oldFriend, AsyncExecutable exec){
-        this.send(ADD_FRIEND, "remove_friend", new String[]{"user_id", "friend_id"},
-                new String[]{String.valueOf(user.getId()), String.valueOf(oldFriend.getId())}, oldFriend, user.getFriends(), exec);
+        this.objData = oldFriend;
+        this.listData = user.getFriends();
+        this.send(REMOVE_FRIEND, "remove_friend", new String[]{"user_id", "friend_id"},
+                new String[]{String.valueOf(user.getId()), String.valueOf(oldFriend.getId())}, exec);
     }
 
     public void addFriend(User user, User newFriend, AsyncExecutable exec){
+        this.objData = newFriend;
+        this.listData = user.getFriends();
         this.send(ADD_FRIEND, "add_friend", new String[]{"user_id", "friend_id"},
-                new String[]{String.valueOf(user.getId()), String.valueOf(newFriend.getId())}, newFriend, user.getFriends(), exec);
+                new String[]{String.valueOf(user.getId()), String.valueOf(newFriend.getId())}, exec);
     }
 
-    public void findByMail(String mail, User responseReference){
+    public void findByMail(String mail, User responseReference) {
         findByMail(mail, responseReference, null);
     }
 
-    public void findEvents(){
-        findEvents(null);
+    public void findAllEvents(User user) {
+        findAllEvents(user, null);
     }
 
-    public void findEventsGuest(){
-        findEventsGuest(null);
+    public void findEventsConfirmed(User user){
+        findEventsConfirmed(user, null);
     }
 
-    public void findHistoric(){
-        findHistoric(null);
+    public void findEventsInvited(User user){
+        findEventsInvited(user, null);
     }
 
-    public void findBlockEvents(int position, int length){
-        findBlockEvents(position, length, null);
+    public void findHistoric(User user){
+        findHistoric(user, null);
     }
 
-    public void findBlockEventsGuest(int position, int length){
-        findBlockEventsGuest(position, length, null);
+    public void findBlockEventsConfirmed(int position, int length, User user){
+        findBlockEventsConfirmed(position, length, user, null);
     }
 
-    public void findBlockHistoric(int position, int length){
-        findBlockHistoric(position, length, null);
+    public void findBlockEvents(int position, int length, User user){
+        findBlockEvents(position, length, user, null);
+    }
+
+    public void findBlockEventsInvited(int position, int length, User user){
+        findBlockEventsInvited(position, length, user, null);
+    }
+
+    public void findBlockHistoric(int position, int length, User user){
+        findBlockHistoric(position, length, user, null);
     }
 
     public void findFriends(User user){
@@ -170,72 +218,79 @@ public class UserService extends AbstractService<User> {
         addFriend(user, newFriend, null);
     }
 
-     @Override
-     public void onResponse(int option, InputStream in) {
-        switch (option){
-            case FIND_USER_BY_ID:
-                Log.i("NUNCA AQUI", "ONRESPONSE");
-                User u = JsonParser.toUser(in);
-                if(u!=null) {
-                    objData.copy(u);
-                    ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
-                } else ServerInfo.RESPONSE_CODE = ERROR_USER_NOT_FOUND;
-                break;
-            default:
-                ServerInfo.RESPONSE_CODE = ServerInfo.ERROR_UNKNOWN;
-        }
-    }
-
     @Override
-    public void postExecute(int option, User objReference, ArrayList<User> listReference) {
+    public void putParams(int option, String[] params) {
         switch (option){
             case ADD_USER:
-                Integer res[] = JsonParser.toInts(response);
-                try {
-                    ServerInfo.RESPONSE_CODE = res[0];
-                    objReference.setId(res[1]);
-                } catch (NullPointerException | ArrayIndexOutOfBoundsException e){
-                    e.printStackTrace();
-                    ServerInfo.RESPONSE_CODE = ServerInfo.ERROR_UNKNOWN;
-                }
-                break;
-            //case FIND_USER_BY_ID: break;
-            case FIND_USER_BY_MAIL:
-                User u = JsonParser.toUser(response);
-                if(u!=null) {
-                    objReference.copy(u);
-                    ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
-                } else ServerInfo.RESPONSE_CODE = ERROR_USER_NOT_FOUND;
-                break;
-            case FIND_BLOCK_USERS:
-            case FIND_ALL_USERS:
-            case FIND_FRIENDS:
-            case FIND_BLOCK_FRIENDS:
-                listReference.addAll(JsonParser.toUsers(response));
-                ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
-                break;
             case UPDATE_USER:
-                ServerInfo.RESPONSE_CODE = JsonParser.toInt(response);
+                params[0] = objData.toJson();
                 break;
-            case ADD_FRIEND:
-                int aux = JsonParser.toInt(response);
-                ServerInfo.RESPONSE_CODE = (aux==0) ? ERROR_REMOVE_USER : aux;
-                if(ServerInfo.RESPONSE_CODE==ServerInfo.RESPONSE_OK) listReference.add(objReference);
-                break;
-            case REMOVE_FRIEND:
-                ServerInfo.RESPONSE_CODE = (JsonParser.toInt(response)==0) ? ERROR_REMOVE_USER : ServerInfo.RESPONSE_OK;
-                if(ServerInfo.RESPONSE_CODE==ServerInfo.RESPONSE_OK) listReference.remove(objReference);
-                break;
-            case REMOVE_USER:
-                ServerInfo.RESPONSE_CODE = (JsonParser.toInt(response)==0) ? ERROR_REMOVE_USER : ServerInfo.RESPONSE_OK;
-                break;
-            default:
-                ServerInfo.RESPONSE_CODE = ServerInfo.ERROR_UNKNOWN;
         }
     }
 
-    @Override
-    public void preExecute(int option) {
-
+     @Override
+     public void onResponse(int option, InputStream in) {
+         switch (option){
+             case ADD_USER:
+                 Integer res[] = JsonParser.toInts(in);
+                 try {
+                     ServerInfo.RESPONSE_CODE = res[0];
+                     objData.setId(res[1]);
+                 } catch (NullPointerException | ArrayIndexOutOfBoundsException e){
+                     e.printStackTrace();
+                     ServerInfo.RESPONSE_CODE = ServerInfo.ERROR_UNKNOWN;
+                 }
+                 break;
+             case FIND_USER_BY_ID:
+             case FIND_USER_BY_MAIL:
+                 User u = JsonParser.toUser(in);
+                 if(u!=null) {
+                     objData.copy(u);
+                     ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
+                 } else ServerInfo.RESPONSE_CODE = ERROR_USER_NOT_FOUND;
+                 break;
+             case FIND_BLOCK_USERS:
+             case FIND_ALL_USERS:
+             case FIND_FRIENDS:
+             case FIND_BLOCK_FRIENDS:
+                 listData.addAll(JsonParser.toUsers(in));
+                 ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
+                 break;
+             case FIND_EVENTS_CONFIRMED:
+             case FIND_BLOCK_EVENTS_CONFIRMED:
+                 this.objData.getEvents().clear();
+             case FIND_ALL_EVENTS:
+             case FIND_BLOCK_EVENTS:
+                 objData.getEvents().addAll(JsonParser.toEvents(in));
+                 ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
+                 break;
+             case FIND_BLOCK_EVENTS_INVITED:
+             case FIND_EVENTS_INVITED:
+                 objData.getInvited().addAll(JsonParser.toEvents(in));
+                 ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
+                 break;
+             case FIND_BLOCK_EVENTS_HISTORIC:
+             case FIND_EVENTS_HISTORIC:
+                 objData.getHistoric().addAll(JsonParser.toEvents(in));
+                 ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
+                 break;
+             case UPDATE_USER:
+                 ServerInfo.RESPONSE_CODE = JsonParser.toInt(in);
+                 break;
+             case ADD_FRIEND:
+                 int aux = JsonParser.toInt(in);
+                 ServerInfo.RESPONSE_CODE = (aux==0) ? ERROR_ALREADY_FRIENDS : aux;
+                 if(ServerInfo.RESPONSE_CODE==ServerInfo.RESPONSE_OK) listData.add(objData);
+                 break;
+             case REMOVE_FRIEND:
+                 ServerInfo.RESPONSE_CODE = (JsonParser.toInt(in)==0) ? ERROR_REMOVE_FRIEND : ServerInfo.RESPONSE_OK;
+                 if(ServerInfo.RESPONSE_CODE==ServerInfo.RESPONSE_OK) listData.remove(objData);
+                 break;
+             case REMOVE_USER:
+                 ServerInfo.RESPONSE_CODE = (JsonParser.toInt(in)==0) ? ERROR_REMOVE_USER : ServerInfo.RESPONSE_OK;
+                 break;
+             default:
+                 ServerInfo.RESPONSE_CODE = ServerInfo.ERROR_UNKNOWN;
+         }
     }
 }

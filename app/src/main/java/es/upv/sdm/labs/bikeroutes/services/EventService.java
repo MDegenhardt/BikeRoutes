@@ -1,12 +1,10 @@
 package es.upv.sdm.labs.bikeroutes.services;
 
-import android.content.Context;
-
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.interfaces.AsyncExecutable;
 import es.upv.sdm.labs.bikeroutes.model.Event;
-import es.upv.sdm.labs.bikeroutes.model.User;
 import es.upv.sdm.labs.bikeroutes.util.JsonParser;
 
 /**
@@ -24,104 +22,178 @@ public class EventService extends AbstractService<Event> {
     public static final int FIND_USERS_INVITED          = 7;
     public static final int FIND_BLOCK_USERS_CONFIRMED  = 8;
     public static final int FIND_BLOCK_INVITED          = 9;
+    public static final int CONFIRM_ATTENDANCE          = 10;
+    public static final int INVITE                      = 11;
+    public static final int CANCEL_ATTENDANCE           = 12;
 
     public static final int ERROR_REMOVE_EVENT          = 500;
     public static final int ERROR_EVENT_NOT_FOUND       = 501;
 
     @Override
     public void findBlock(int position, int length, ArrayList<Event> responseReference, AsyncExecutable exec) {
-        this.request(FIND_BLOCK_EVENTS, "find_block_events", new String[]{"position","length"},
-                new String[]{String.valueOf(position),String.valueOf(length)},null,responseReference,exec);
+        this.listData = responseReference;
+        this.request(FIND_BLOCK_EVENTS, "find_block_events", new String[]{"position", "length"},
+                new String[]{String.valueOf(position), String.valueOf(length)}, exec);
     }
 
     @Override
     public void insert(Event event, AsyncExecutable exec) {
-        this.send(ADD_EVENT,"add_event",new String[]{"event"},new String[]{event.toJson()},event,null,exec);
+        this.objData = event;
+        this.send(ADD_EVENT, "add_event", new String[]{"event"}, exec);
     }
 
     @Override
     public void update(Event event, AsyncExecutable exec) {
-        this.send(UPDATE_EVENT, "update_event", new String[]{"event"},new String[]{event.toJson()},event,null,exec);
+        this.objData = event;
+        this.send(UPDATE_EVENT, "update_event", new String[]{"event"}, exec);
     }
 
     @Override
     public void remove(int id, AsyncExecutable exec) {
-        this.send(REMOVE_EVENT, "remove_event", new String[]{"id"}, new String[]{String.valueOf(id)},null,null,exec);
+        this.send(REMOVE_EVENT, "remove_event", new String[]{"id"}, new String[]{String.valueOf(id)}, exec);
     }
+
+    public void eventosPertos(int longi, int lati){
+
+    }
+
+    public void convidarVariasPessoas(int ids[], int idE){
+
+    }
+
+    public void findByAllCaracteristicas(Event event, ArrayList<Event> resposta){
+
+    }
+    //EVETOS SECRETOS MIRAAAAAAAR
 
     @Override
     public void findById(int id, Event responseReference, AsyncExecutable exec) {
-        this.request(FIND_EVENT_BY_ID, "find_event_by_id",new String[]{"id"}, new String[]{String.valueOf(id)},responseReference,null,exec);
+        this.objData = responseReference;
+        this.request(FIND_EVENT_BY_ID, "find_event_by_id", new String[]{"id"}, new String[]{String.valueOf(id)}, exec);
     }
 
     @Override
     public void findAll(ArrayList<Event> responseReference, AsyncExecutable exec) {
-        this.request(FIND_ALL_EVENTS, "find_all_events", null, null, null, responseReference, exec);
+        this.listData = responseReference;
+        this.request(FIND_ALL_EVENTS, "find_all_events", null, exec);
     }
 
-    public void findUsers(AsyncExecutable exec){
-        //COMPLETAR
+    public void invite(int idEvent, int idUser, AsyncExecutable exec){
+        this.send(INVITE, "invite", new String[]{"event_id", "user_id", "confirmed"},
+                new String[]{String.valueOf(idEvent), String.valueOf(idUser), String.valueOf(0)}, exec);
     }
 
-    public void findGuests(AsyncExecutable exec){
-        //COMPLETAR
+    public void confirmAttendance(int idEvent, int idUser, AsyncExecutable exec){
+        this.send(CONFIRM_ATTENDANCE, "confirm_attendance", new String[]{"event_id", "user_id", "confirmed"},
+                new String[]{String.valueOf(idEvent), String.valueOf(idUser),String.valueOf(1)},exec);
     }
 
-    public void findBlockUsers(int position, int length, AsyncExecutable exec){
-        //COMPLETAR
+    public void cancelAttendance(int idEvent, int idUser, AsyncExecutable exec){
+        this.send(CANCEL_ATTENDANCE, "cancel_attendance", new String[]{"event_id", "user_id", "confirmed"},
+                new String[]{String.valueOf(idEvent), String.valueOf(idUser),String.valueOf(0)},exec);
     }
 
-    public void findBlockGuests(int position, int length, AsyncExecutable exec){
-        //COMPLETAR
+    public void findUsers(Event event, AsyncExecutable exec){
+        this.objData = event;
+        this.request(FIND_USERS_CONFIRMED, "find_users_confirmed", new String[]{"event_id", "confirmed"},
+                new String[]{String.valueOf(event.getId()), String.valueOf(1)}, exec);
     }
 
-    public void findUsers(){
-        findUsers(null);
+    public void findGuests(Event event, AsyncExecutable exec){
+        this.objData = event;
+        this.request(FIND_USERS_INVITED, "find_users_invited", new String[]{"event_id", "confirmed"},
+                new String[]{String.valueOf(event.getId()), String.valueOf(0)}, exec);
     }
 
-    public void findGuests(){
-        findGuests(null);
+    public void findBlockUsers(int position, int length, Event event, AsyncExecutable exec){
+        this.objData = event;
+        this.request(FIND_BLOCK_USERS_CONFIRMED, "find_block_users_confirmed", new String[]{"event_id", "confirmed","position","length"},
+                new String[]{String.valueOf(event.getId()), String.valueOf(1), String.valueOf(position),String.valueOf(length)}, exec);
     }
 
-    public void findBlockUsers(int position, int length){
-        findBlockUsers(position, length, null);
+    public void findBlockGuests(int position, int length, Event event, AsyncExecutable exec){
+        this.objData = event;
+        this.request(FIND_BLOCK_INVITED, "find_block_invited", new String[]{"event_id", "confirmed","position","length"},
+                new String[]{String.valueOf(event.getId()), String.valueOf(0), String.valueOf(position),String.valueOf(length)}, exec);
     }
 
-    public void findBlockGuests(int position, int length){
-        findBlockGuests(position, length, null);
+    public void findUsers(Event event){
+        findUsers(event, null);
+    }
+
+    public void findGuests(Event event){
+        findGuests(event, null);
+    }
+
+    public void findBlockUsers(int position, int length, Event event){
+        findBlockUsers(position, length, event, null);
+    }
+
+    public void findBlockGuests(int position, int length, Event event){
+        findBlockGuests(position, length, event, null);
+    }
+    public void invite(int idEvent, int idUser){
+        invite(idEvent, idUser, null);
+    }
+
+    public void confirmAttendance(int idEvent, int idUser){
+        confirmAttendance(idEvent, idUser, null);
+    }
+
+    public void cancelAttendance(int idEvent, int idUser){
+        cancelAttendance(idEvent, idUser, null);
     }
 
     @Override
-    public void postExecute(int option, Event objReference, ArrayList<Event> listReference) {
+    protected void putParams(int option, String[] params) {
         switch (option){
             case ADD_EVENT:
             case UPDATE_EVENT:
-                objReference.copy(JsonParser.toEvent(response));
-                ServerInfo.RESPONSE_CODE = (objReference.getId()!=0) ? ServerInfo.RESPONSE_OK : ServerInfo.ERROR_UNKNOWN;
+                params[0] = objData.toJson();
+                break;
+        }
+    }
+
+    @Override
+    protected void onResponse(int option, InputStream in) {
+        switch (option) {
+            case ADD_EVENT:
+            case UPDATE_EVENT:
+                objData.copy(JsonParser.toEvent(in));
+                ServerInfo.RESPONSE_CODE = (objData.getId() != 0) ? ServerInfo.RESPONSE_OK : ServerInfo.ERROR_UNKNOWN;
                 break;
             case REMOVE_EVENT:
-                ServerInfo.RESPONSE_CODE = (JsonParser.toInt(response)==0) ? ERROR_REMOVE_EVENT : ServerInfo.RESPONSE_OK;
+                ServerInfo.RESPONSE_CODE = (JsonParser.toInt(in) == 0) ? ERROR_REMOVE_EVENT : ServerInfo.RESPONSE_OK;
                 break;
             case FIND_EVENT_BY_ID:
-                Event e = JsonParser.toEvent(response);
-                if(e!=null) {
-                    objReference.copy(e);
+                Event e = JsonParser.toEvent(in);
+                if (e != null) {
+                    objData.copy(e);
                     ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
                 } else ServerInfo.RESPONSE_CODE = ERROR_EVENT_NOT_FOUND;
                 break;
             case FIND_BLOCK_EVENTS:
             case FIND_ALL_EVENTS:
-                listReference.addAll(JsonParser.toEvents(response));
+                listData.addAll(JsonParser.toEvents(in));
                 ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
                 break;
-            default: ServerInfo.RESPONSE_CODE = ServerInfo.ERROR_UNKNOWN;
+            case INVITE:
+            case CONFIRM_ATTENDANCE:
+            case CANCEL_ATTENDANCE:
+                ServerInfo.RESPONSE_CODE = (JsonParser.toInt(in) == 0) ? ServerInfo.ERROR_UNKNOWN: ServerInfo.RESPONSE_OK;
+                break;
+            case FIND_BLOCK_INVITED:
+            case FIND_USERS_INVITED:
+                this.objData.getInviteds().addAll(JsonParser.toUsers(in));
+                ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
+                break;
+            case FIND_USERS_CONFIRMED:
+            case FIND_BLOCK_USERS_CONFIRMED:
+                this.objData.getConfirmedUsers().addAll(JsonParser.toUsers(in));
+                ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
+                break;
+            default:
+                ServerInfo.RESPONSE_CODE = ServerInfo.ERROR_UNKNOWN;
         }
     }
-
-    @Override
-    public void preExecute(int option) {
-
-    }
-
-
 }
