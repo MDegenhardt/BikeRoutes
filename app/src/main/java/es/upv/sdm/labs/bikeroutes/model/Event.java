@@ -1,24 +1,21 @@
 package es.upv.sdm.labs.bikeroutes.model;
 
+
 import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-
 import es.upv.sdm.labs.bikeroutes.interfaces.Enviable;
-import es.upv.sdm.labs.bikeroutes.enumerations.EventType;
+import es.upv.sdm.labs.bikeroutes.model.EventType.Type;
+import es.upv.sdm.labs.bikeroutes.util.pojo.EventPOJO;
 import es.upv.sdm.labs.bikeroutes.util.DateHelper;
+
 
 /**
  * Created by Anderson on 11/04/2016.
  */
-public class Event{
+public class Event implements Enviable{
 
     private int id;
     private EventType type;
@@ -28,19 +25,32 @@ public class Event{
     private String description;
     private boolean secret;
     private User organizer;
-    private ArrayList<User> guests;
-    private ArrayList<User> users;
+    private boolean over;
+    private ArrayList<User> inviteds;
+    private ArrayList<User> confirmedUsers;
 
     public Event(){
-        this(EventType.OTHER, new Date(), new Location(), new Location(), "", false, new User());
+        this(new EventType(), new Date(), new Location(), new Location(), "", false, new User());
+    }
+
+    public Event(Type type, Date date, Location departure, Location arrival, String description, boolean secret, User organizer) {
+        this(0, type, date, departure, arrival, description, secret, organizer);
     }
 
     public Event(EventType type, Date date, Location departure, Location arrival, String description, boolean secret, User organizer) {
-        this(0, type, date, departure, arrival, description, secret, organizer, new ArrayList<User>(), new ArrayList<User>());
+        this(0, type, date, departure, arrival, description, secret, organizer);
+    }
+
+    public Event(int id, Type type, Date date, Location departure, Location arrival, String description, boolean secret, User organizer) {
+        this(id, new EventType(type,""), date, departure, arrival, description, secret, organizer, false, new ArrayList<User>(), new ArrayList<User>());
+    }
+
+    public Event(int id, EventType type, Date date, Location departure, Location arrival, String description, boolean secret, User organizer) {
+        this(id, type, date, departure, arrival, description, secret, organizer, false, new ArrayList<User>(), new ArrayList<User>());
     }
 
     public Event(int id, EventType type, Date date, Location departure, Location arrival, String description,
-                 boolean secret, User organizer, ArrayList<User> guests, ArrayList<User> users) {
+                 boolean secret, User organizer, boolean over, ArrayList<User> inviteds, ArrayList<User> confirmedUsers) {
         this.id = id;
         this.type = type;
         this.date = date;
@@ -48,9 +58,11 @@ public class Event{
         this.arrival = arrival;
         this.description = description;
         this.secret = secret;
-        this.guests = guests;
-        this.users = users;
+        this.inviteds = inviteds;
+        this.confirmedUsers = confirmedUsers;
         this.organizer = organizer;
+        this.over = over;
+        if(this.organizer!=null) this.confirmedUsers.add(0,this.organizer);
     }
 
     public int getId() {
@@ -117,20 +129,28 @@ public class Event{
         this.organizer = organizer;
     }
 
-    public ArrayList<User> getGuests() {
-        return guests;
+    public boolean isOver(){
+        return this.over;
     }
 
-    public void setGuests(ArrayList<User> guests) {
-        this.guests = guests;
+    public void setOver(boolean over){
+        this.over = over;
     }
 
-    public ArrayList<User> getUsers() {
-        return users;
+    public ArrayList<User> getInviteds() {
+        return inviteds;
     }
 
-    public void setUsers(ArrayList<User> users) {
-        this.users = users;
+    public void setInviteds(ArrayList<User> inviteds) {
+        this.inviteds = inviteds;
+    }
+
+    public ArrayList<User> getConfirmedUsers() {
+        return confirmedUsers;
+    }
+
+    public void setConfirmedUsers(ArrayList<User> confirmedUsers) {
+        this.confirmedUsers = confirmedUsers;
     }
 
     @Override
@@ -144,8 +164,9 @@ public class Event{
                 ", description='" + description + '\'' +
                 ", secret=" + secret +
                 ", organizer=" + organizer +
-                ", guests=" + guests +
-                ", users=" + users +
+                ", over="+over+
+                ", invited=" + inviteds +
+                ", confirmedUsers=" + confirmedUsers +
                 '}';
     }
 
@@ -153,17 +174,8 @@ public class Event{
     public static ArrayList<Event> getEvents() {
         ArrayList<Event> events = new ArrayList<Event>();
 
-        //some test data
-        /*android.location.Location exampleLocation1 = new android.location.Location("");//provider name is unecessary
-        exampleLocation1.setLatitude(0.0d);//your coords
-        exampleLocation1.setLongitude(0.0d);
-
-        android.location.Location exampleLocation2 = new android.location.Location("");//provider name is unecessary
-        exampleLocation2.setLatitude(100.0d);//your coords
-        exampleLocation2.setLongitude(0.0d);*/
-
-        Location exampleLocation1 = new Location(39.4666667,-0.3666667,"Valencia");
-        Location exampleLocation2 = new Location(38.9666667,-0.1833333,"Gandía");
+        Location exampleLocation1 = new Location(0,0,"");
+        Location exampleLocation2 = new Location(100,0,"");
 
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/hh:mm:ss");
@@ -186,13 +198,42 @@ public class Event{
 
         User user = new User("Anderson", "anderson@email.com", "234", null);
 
-        events.add(new Event(EventType.BIKE, d1, exampleLocation1, exampleLocation2, "Some description text...", false, user));
-        events.add(new Event(EventType.OTHER, d2, exampleLocation2, exampleLocation1, "Some description text...", false, user ));
-        events.add(new Event(EventType.HIKE, d3, exampleLocation1, exampleLocation2, "Some description text...", true, user ));
-        events.add(new Event(EventType.RUN, d4, exampleLocation2, exampleLocation1, "Some description text...", false, user ));
-        events.add(new Event(EventType.HIKE, d5, exampleLocation1, exampleLocation2, "Some description text...", true, user ));
+        events.add(new Event(new EventType(Type.BIKE), d1, exampleLocation1, exampleLocation2, "Some description text...", false, user));
+        events.add(new Event(new EventType(Type.OTHER), d2, exampleLocation2, exampleLocation1, "Some description text...", false, user ));
+        events.add(new Event(new EventType(Type.HIKE), d3, exampleLocation1, exampleLocation2, "Some description text...", true, user ));
+        events.add(new Event(new EventType(Type.RUN), d4, exampleLocation2, exampleLocation1, "Some description text...", false, user ));
+        events.add(new Event(new EventType(Type.HIKE), d5, exampleLocation1, exampleLocation2, "Some description text...", true, user ));
 
         return events;
     }
 
+    public void copy(Event other){
+        this.id = other.getId();
+        this.type = other.getType();
+        this.date = other.getDate();
+        this.departure = other.getDeparture();
+        this.arrival = other.getArrival();
+        this.description = other.getDescription();
+        this.secret = other.isSecret();
+        this.organizer = other.getOrganizer();
+        this.over = other.isOver();
+        this.inviteds = other.getInviteds();
+        this.confirmedUsers = other.getConfirmedUsers();
+    }
+
+    public static String toJsonArray(ArrayList<Event> events){
+        String json = "[";
+        boolean ok = false;
+        for(Event e : events) {json += e.toJson()+","; ok=true;}
+        if(ok) json = json.substring(0,json.length()-1);
+        json += "]";
+        return json;
+    }
+
+    @Override
+    public String toJson() {
+        String json = new EventPOJO(this).toJson();
+        json = json.substring(json.indexOf('[')+1, json.length()-2);
+        return json;
+    }
 }

@@ -2,17 +2,16 @@ package es.upv.sdm.labs.bikeroutes.model;
 
 import android.graphics.Bitmap;
 
-import com.google.gson.GsonBuilder;
-
 import java.util.ArrayList;
 
-import es.upv.sdm.labs.bikeroutes.interfaces.Enviable;
 import es.upv.sdm.labs.bikeroutes.enumerations.Gender;
+import es.upv.sdm.labs.bikeroutes.interfaces.Enviable;
+import es.upv.sdm.labs.bikeroutes.util.pojo.UserPOJO;
 
 /**
  * Created by Anderson on 11/04/2016.
  */
-public class User{
+public class User implements Enviable{
 
     private int id;
     private String name;
@@ -22,19 +21,24 @@ public class User{
     private Gender gender;
     private Bitmap image;
     private ArrayList<User> friends;
-    private ArrayList<Event> events;
+    private ArrayList<Event> confirmedEvents;
     private ArrayList<Event> invited;
+    private ArrayList<Event> historic;
 
     public User(){
         this("", "", "", null);
     }
 
     public User(String name, String mail, String password, Bitmap image) {
-        this(0, name, mail, password, "", Gender.UNINFORMED, image, new ArrayList<User>(), new ArrayList<Event>(), new ArrayList<Event>());
+        this(0, name, mail, password, "", Gender.UNINFORMED, image);
+    }
+
+    public User(int id, String name, String mail, String password, String description, Gender gender, Bitmap image){
+        this(id, name, mail, password, description, gender, image,  new ArrayList<User>(), new ArrayList<Event>(), new ArrayList<Event>(), new ArrayList<Event>());
     }
 
     public User(int id, String name, String mail, String password, String description, Gender gender,
-                Bitmap image, ArrayList<User> friends, ArrayList<Event> events, ArrayList<Event> invited) {
+                Bitmap image, ArrayList<User> friends, ArrayList<Event> confirmedEvents, ArrayList<Event> invited, ArrayList<Event> historic) {
         this.id = id;
         this.name = name;
         this.mail = mail;
@@ -43,8 +47,9 @@ public class User{
         this.gender = gender;
         this.image = image;
         this.friends = friends;
-        this.events = events;
+        this.confirmedEvents = confirmedEvents;
         this.invited = invited;
+        this.historic = historic;
     }
 
     public int getId() {
@@ -111,12 +116,12 @@ public class User{
         this.friends = friends;
     }
 
-    public ArrayList<Event> getEvents() {
-        return events;
+    public ArrayList<Event> getConfirmedEvents() {
+        return confirmedEvents;
     }
 
-    public void setEvents(ArrayList<Event> events) {
-        this.events = events;
+    public void setConfirmedEvents(ArrayList<Event> confirmedEvents) {
+        this.confirmedEvents = confirmedEvents;
     }
 
     public ArrayList<Event> getInvited() {
@@ -125,6 +130,19 @@ public class User{
 
     public void setInvited(ArrayList<Event> invited) {
         this.invited = invited;
+    }
+
+    public ArrayList<Event> getHistoric() {
+        return historic;
+    }
+
+    public void setHistoric(ArrayList<Event> historic) {
+        this.historic = historic;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return this.id == ((User)o).getId();
     }
 
     @Override
@@ -138,8 +156,9 @@ public class User{
                 ", gender=" + gender +
                 ", image=" + image +
                 ", friends=" + friends +
-                ", events=" + events +
+                ", confirmedEvents=" + confirmedEvents +
                 ", invited=" + invited +
+                ", historic=" + historic +
                 '}';
     }
 
@@ -154,5 +173,36 @@ public class User{
         persons.add(new User("Lucas", "lucas@email.com", "123", null ));
 
         return persons;
+    }
+
+    public static String toJsonArray(ArrayList<User> users){
+        String json = "[";
+        boolean ok = false;
+        for(User u : users) {json += u.toJson()+","; ok=true;}
+        if(ok) json = json.substring(0,json.length()-1);
+        json += "]";
+        return json;
+    }
+
+    @Override
+    public String toJson() {
+        String json = new UserPOJO(this).toJson();
+        json = json.substring(json.indexOf('[')+1, json.length()-2);
+        return json;
+    }
+
+    public void copy(User other){
+        if(other==null) return;
+        this.id = other.getId();
+        this.name = other.getName();
+        this.mail = other.getMail();
+        this.password = other.getPassword();
+        this.description = other.getDescription();
+        this.gender = other.getGender();
+        this.image = other.getImage();
+        this.friends = other.getFriends();
+        this.confirmedEvents = other.getConfirmedEvents();
+        this.invited = other.getInvited();
+        this.historic = other.getHistoric();
     }
 }

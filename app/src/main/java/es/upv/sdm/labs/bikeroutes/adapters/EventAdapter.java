@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.R;
-import es.upv.sdm.labs.bikeroutes.enumerations.EventType;
+import es.upv.sdm.labs.bikeroutes.model.EventType;
 import es.upv.sdm.labs.bikeroutes.model.Event;
 
 
@@ -41,7 +41,7 @@ public class EventAdapter extends AbstractAdapter<Event> {
         tvTime.setText(event.getDate().getTime()+"");
 
         EventType type = event.getType();
-        int img = (type==EventType.HIKE) ? R.drawable.hike : (type==EventType.RUN) ? R.drawable.running : R.drawable.bike;
+        int img = (type.getType()== EventType.Type.HIKE) ? R.drawable.hike : (type.getType()==EventType.Type.RUN) ? R.drawable.running : R.drawable.bike;
         ivEventType.setImageResource(img);
 
 

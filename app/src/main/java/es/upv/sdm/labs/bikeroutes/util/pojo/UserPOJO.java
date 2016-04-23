@@ -1,5 +1,7 @@
 package es.upv.sdm.labs.bikeroutes.util.pojo;
 
+import java.util.ArrayList;
+
 import es.upv.sdm.labs.bikeroutes.enumerations.Gender;
 import es.upv.sdm.labs.bikeroutes.model.User;
 import es.upv.sdm.labs.bikeroutes.util.ImgSerializer;
@@ -15,28 +17,19 @@ public class UserPOJO extends AbstractPOJO {
 
     public UserPOJO(User user){
         this.users = new Users[1];
-        Users u = users[0] = new Users();
-        u.setId(user.getId());
-        u.setName(user.getName());
-        u.setDescription(user.getDescription());
-        u.setGender(user.getGender().toString());
-        u.setPassword(user.getPassword());
-        u.setMail(user.getMail());
-        if(user.getImage()!=null) u.setImage(ImgSerializer.serialize(user.getImage()));
-        else u.setImage("");
+        users[0] = new Users(user);
     }
 
     public User getUser(){
         if(this.users==null || this.users.length==0) return null;
-        Users u = users[0];
-        User res = new User();
-        res.setId(u.getId());
-        res.setName(u.getName());
-        res.setMail(u.getMail());
-        res.setPassword(u.getPassword());
-        res.setDescription(u.getDescription());
-        res.setGender(Gender.getGender(u.getGender()));
-        if(!u.getImage().isEmpty())res.setImage(ImgSerializer.deserialize(u.getImage()));
+        return users[0].getUser();
+    }
+
+    public ArrayList<User> toUsers(){
+        ArrayList<User> res = new ArrayList<User>();
+        for (Users u:this.users) {
+            res.add(u.getUser());
+        }
         return res;
     }
 
@@ -49,6 +42,19 @@ public class UserPOJO extends AbstractPOJO {
     }
 
     public class Users{
+
+        public Users(){}
+
+        public Users(User user){
+            this.setId(user.getId());
+            this.setName(user.getName());
+            this.setDescription(user.getDescription());
+            this.setGender(user.getGender().toString());
+            this.setPassword(user.getPassword());
+            this.setMail(user.getMail());
+            if(user.getImage()!=null) this.setImage(ImgSerializer.serialize(user.getImage()));
+            else this.setImage("");
+        }
 
         private int id;
         private String name;
@@ -112,6 +118,18 @@ public class UserPOJO extends AbstractPOJO {
 
         public void setImage(String image) {
             this.image = image;
+        }
+
+        public User getUser(){
+            User res = new User();
+            res.setId(this.getId());
+            res.setName(this.getName());
+            res.setMail(this.getMail());
+            res.setPassword(this.getPassword());
+            res.setDescription(this.getDescription());
+            res.setGender(Gender.getGender(this.getGender()));
+            if(!this.getImage().isEmpty())res.setImage(ImgSerializer.deserialize(this.getImage()));
+            return res;
         }
     }
 }

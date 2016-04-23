@@ -10,7 +10,7 @@ import java.util.Date;
 public class DateHelper {
 
     public static Date createDate(int day, int month, int year, int hour, int minutes){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/HH:mm:ss");
         Date d = new Date();
         try {
             d = formatter.parse(day+"/"+month+"/"+year+"/"+hour+":"+minutes+":00");
@@ -20,11 +20,20 @@ public class DateHelper {
         return d;
     }
 
-    public static String toJson(Date date){
-        if(date==null) return "{}";
-        SimpleDateFormat s = new SimpleDateFormat("{\"day\":\"dd\", \"month\":\"MM\", " +
-                            "\"year\":\"yyyy\", \"hour\":\"hh\", \"minutes\":\"mm\"}");
+    public static String toFormatString(Date date){
+        if(date==null) return "";
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return s.format(date);
+    }
+
+
+    public static Date toDate(String str) {
+        SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            return s.parse(str);
+        } catch (ParseException e) {
+            return new Date();
+        }
     }
 
     public static String dateToString(Date date){
@@ -36,11 +45,5 @@ public class DateHelper {
     public static String timeToString(Date date){
         SimpleDateFormat s = new SimpleDateFormat("hh:mm:ss");
         return s.format(date);
-    }
-
-    public static Date fromJson(String json){
-//        String []data = json.substring(1, json.length()-1).split(",");
-//        int day = Integer.parseInt(data[0].split(":")[2].)
-        return null;
     }
 }
