@@ -3,27 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menuItem1"
-        android:icon="@mipmap/ic_launcher"
-        android:title="test"
+        android:id="@+id/menuMyAccount"
+        android:icon="@drawable/ic_action_my_profile"
+        android:title="My account"
         android:visible="true"
-
-        app:showAsAction="never"/>
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/menuItem2"
         android:icon="@mipmap/ic_launcher"
         android:title="test"
         android:visible="true"
-
         app:showAsAction="never"/>
 
     <item
-    android:id="@+id/menuItem3"
-    android:icon="@mipmap/ic_launcher"
-    android:title="test"
-    android:visible="true"
-
-    app:showAsAction="never"/>
+        android:id="@+id/menuItem3"
+        android:icon="@mipmap/ic_launcher"
+        android:title="test"
+        android:visible="true"
+        app:showAsAction="never"/>
 
 </menu>

@@ -38,7 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/rbRun"
-            android:drawableRight="@drawable/running_small" />
+            android:drawableRight="@drawable/running_small"
+            android:checked="false" />
     </RadioGroup>
 
     <TextView
@@ -48,7 +49,7 @@
         android:id="@+id/tvEventSpecify"
         android:layout_weight="0.5"
         android:textColor="@color/colorPrimaryDark2"
-        android:textSize="20sp" />
+        android:textSize="20dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -122,6 +123,7 @@
                     android:layout_weight="2"
                     android:text="Some Address"
                     style="@style/event_startEnd"
+                    android:onClick="selectLocationButtonPressed"
                     />
 
 
@@ -138,7 +140,9 @@
             android:src="@drawable/map_marker"
             android:scaleType="centerInside"
             android:background="@color/colorPrimaryLight1"
-            android:layout_margin="2dp" />
+            android:layout_margin="2dp"
+            android:onClick="selectLocationButtonPressed"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -180,6 +184,7 @@
                     android:layout_weight="2"
                     android:text="Some other Address"
                     style="@style/event_startEnd"
+                    android:onClick="selectLocationButtonPressed"
                     />
 
 
@@ -196,7 +201,9 @@
             android:src="@drawable/map_marker"
             android:scaleType="centerInside"
             android:background="@color/colorPrimaryLight1"
-            android:layout_margin="2dp" />
+            android:layout_margin="2dp"
+            android:onClick="selectLocationButtonPressed"
+            />
     </LinearLayout>
 
     <EditText
@@ -223,10 +230,8 @@
         android:text="Create Event"
         android:id="@+id/btnCreateEvent"
         android:layout_weight="1"
-        android:background="@color/colorPrimaryDark1"
-        android:textSize="20sp"
-        android:textColor="@color/colorAccent1"
         android:onClick="createEventButtonPressed"
+        style="@style/button"
         />
 
 </LinearLayout>

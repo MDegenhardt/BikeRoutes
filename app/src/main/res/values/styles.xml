@@ -29,4 +29,25 @@
         <item name="android:background">@color/colorPrimaryLight1</item>
     </style>
 
+    <style name="tvSettings">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorPrimaryDark2</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="etSettings">
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="button">
+        <item name="android:background">@color/colorPrimaryDark1</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/colorAccent1</item>
+    </style>
+
+
+    android:background="@color/colorPrimaryDark1"
+    android:textSize="20sp"
+    android:textColor="@color/colorAccent1"
+
 </resources>
