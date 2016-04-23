@@ -1,5 +1,7 @@
 package es.upv.sdm.labs.bikeroutes.activities;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -16,22 +22,23 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.model.Event;
 import es.upv.sdm.labs.bikeroutes.services.EventService;
 import es.upv.sdm.labs.bikeroutes.util.Constants;
+import es.upv.sdm.labs.bikeroutes.util.DateHelper;
 import es.upv.sdm.labs.bikeroutes.util.DatePickerFragment;
 import es.upv.sdm.labs.bikeroutes.util.TimePickerFragment;
 
-public class CreateEventActivity extends AppCompatActivity {
+
+public class CreateEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     Event currentEvent;
     static int id = 0;
-//    int PLACE_PICKER_START_REQUEST = 1;
-//    int PLACE_PICKER_END_REQUEST = 2;
-//    int PLACE_PICKER_SEARCH_REQUEST = 3;
 
 //    Event evento = new Event();
 //    new EventService().insert(evento);
@@ -44,6 +51,10 @@ public class CreateEventActivity extends AppCompatActivity {
 
     TextView tvStart;
     TextView tvEnd;
+    Button btnEventDate;
+    Button btnEventTime;
+
+    Date date = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +63,8 @@ public class CreateEventActivity extends AppCompatActivity {
 
         tvStart = (TextView) findViewById(R.id.tvEventStart);
         tvEnd = (TextView) findViewById(R.id.tvEventEnd);
+        btnEventDate = (Button) findViewById(R.id.btnEventDate);
+        btnEventTime = (Button) findViewById(R.id.btnEventTime);
 
         currentEvent = new Event();
 
@@ -67,6 +80,8 @@ public class CreateEventActivity extends AppCompatActivity {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
+
+
 
     /*
 This method is executed when the activity is created to populate the ActionBar with actions
@@ -163,6 +178,38 @@ This method is executed when the activity is created to populate the ActionBar w
     public void createEventButtonPressed(View view){
         Log.d("CreateEventActivity", "Create Button pressed");
 
+        String dateString = DateHelper.toFormatString(date);
+
+        Log.w("CreateEventActivity","Date = " + dateString);
+
+
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+//        Log.w("CreateEventActivity","Date = " + year + monthOfYear + dayOfMonth);
+
+        date.setDate(dayOfMonth);
+        date.setMonth(monthOfYear);
+        date.setYear(year);
+
+        Log.w("CreateEventActivity","Date = " + date.toString());
+
+        String dateString = DateHelper.dateToString(date);
+
+        btnEventDate.setText("DATE: " + dateString);
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        Log.w("CreateEventActivity","Time = " + hourOfDay + ":" + minute);
+
+        date.setHours(hourOfDay);
+        date.setMinutes(minute);
+
+        String timeString = DateHelper.timeToString(date);
+
+        btnEventTime.setText("TIME: " + timeString);
     }
 
 }

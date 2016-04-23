@@ -10,8 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import es.upv.sdm.labs.bikeroutes.activities.CreateEventActivity;
+import es.upv.sdm.labs.bikeroutes.activities.SearchEventActivity;
 
-public class DatePickerFragment extends DialogFragment
+public class SearchDatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     @Override
@@ -23,7 +24,7 @@ public class DatePickerFragment extends DialogFragment
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), (CreateEventActivity)getActivity(), year, month, day);
+        return new DatePickerDialog(getActivity(), (SearchEventActivity)getActivity(), year, month, day);
     }
 
     @Override

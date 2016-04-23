@@ -111,4 +111,10 @@
     <string name="normal_map">Normal map</string>
     <string name="terrain_map">Terrain map</string>
     <string name="satellite_map">Satellite map</string>
+    <string name="choose_a_time">Choose a time</string>
+    <string name="choose_a_date">Choose a date</string>
+    <string name="choose_end">Choose end</string>
+    <string name="choose_start">Choose start</string>
+    <string name="start">Start:</string>
+    <string name="end">End:</string>
 </resources>

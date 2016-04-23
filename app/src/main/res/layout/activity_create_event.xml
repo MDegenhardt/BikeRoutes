@@ -61,7 +61,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date: 01.02.2016"
+            android:text="@string/choose_a_date"
             android:id="@+id/btnEventDate"
             android:onClick="showDatePickerDialog"
             style="@style/date_time_button" />
@@ -76,7 +76,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Time: 12:34"
+            android:text="@string/choose_a_time"
             android:id="@+id/btnEventTime"
             android:onClick="showTimePickerDialog"
             style="@style/date_time_button"
@@ -111,7 +111,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="Start:"
+                    android:text="@string/start"
                     style="@style/event_startEnd"
                     />
 
@@ -121,7 +121,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:text="Some Address"
+                    android:text="@string/choose_start"
                     style="@style/event_startEnd"
                     android:onClick="selectLocationButtonPressed"
                     />
@@ -172,7 +172,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="End:"
+                    android:text="@string/end"
                     style="@style/event_startEnd"
                     />
 
@@ -182,7 +182,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:text="Some other Address"
+                    android:text="@string/choose_end"
                     style="@style/event_startEnd"
                     android:onClick="selectLocationButtonPressed"
                     />
