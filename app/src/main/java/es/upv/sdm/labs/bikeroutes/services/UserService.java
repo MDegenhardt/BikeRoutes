@@ -31,15 +31,20 @@ public class UserService extends AbstractService<User> {
     public static final int FIND_BLOCK_FRIENDS              = 16;
     public static final int FIND_ALL_EVENTS                 = 17;
     public static final int FIND_BLOCK_EVENTS               = 18;
+    public static final int FIND_BY_NAME_OR_MAIL            = 19;
+    public static final int FIND_BY_LOGIN                   = 20;
+    public static final int RETRIEVE_PASSWORD               = 21;
+    public static final int FIND_BLOCK_BY_NAME_OR_MAIL      = 22;
 
 
 
-    public static final int ERROR_ADD_USER_MAIL     = 101;
-    public static final int ERROR_REMOVE_USER       = 102;
-    public static final int ERROR_ADD_FRIEND        = 103;
-    public static final int ERROR_REMOVE_FRIEND     = 104;
-    public static final int ERROR_ALREADY_FRIENDS   = 105;
-    public static final int ERROR_USER_NOT_FOUND    = 106;
+    public static final int ERROR_ADD_USER_MAIL         = 101;
+    public static final int ERROR_REMOVE_USER           = 102;
+    public static final int ERROR_ADD_FRIEND            = 103;
+    public static final int ERROR_REMOVE_FRIEND         = 104;
+    public static final int ERROR_ALREADY_FRIENDS       = 105;
+    public static final int ERROR_USER_NOT_FOUND        = 106;
+    public static final int ERROR_INCORRECT_DATA        = 107;
 
     @Override
     public void insert(User user, AsyncExecutable exec) {
@@ -50,7 +55,7 @@ public class UserService extends AbstractService<User> {
     @Override
     public void update(User user, AsyncExecutable exec) {
         this.objData = user;
-        this.send(UPDATE_USER, "update_user", new String[]{"user"},exec);
+        this.send(UPDATE_USER, "update_user", new String[]{"user"}, exec);
     }
 
     @Override
@@ -77,16 +82,24 @@ public class UserService extends AbstractService<User> {
                 new String[]{String.valueOf(position), String.valueOf(length)}, exec);
     }
 
-    public void findByLogin(String mail, String password){
-
+    public void findByLogin(String mail, String password, User responseReference, AsyncExecutable exec){
+        this.objData = responseReference;
+        this.request(FIND_BY_LOGIN, "find_by_login",new String[]{"mail","password"},new String[]{mail, password}, exec);
     }
 
-    public void retrievePassword(String mail){
-
+    public void retrievePassword(String mail, String newPassword, AsyncExecutable exec){
+        this.send(RETRIEVE_PASSWORD, "retrieve_password",new String[]{"mail","password"},new String[]{mail,newPassword},exec);
     }
 
-    public void findByMailAndName(String str){
+    public void findByMailOrName(String mailOrName, ArrayList<User> responseReference, AsyncExecutable exec){
+        this.listData = responseReference;
+        this.request(FIND_BY_NAME_OR_MAIL, "find_by_mail_or_name",new String[]{"str"},new String[]{mailOrName},exec);
+    }
 
+    public void findBlockByMailOrName(int position, int length, String mailOrName, ArrayList<User> responseReference, AsyncExecutable exec){
+        this.listData = responseReference;
+        this.request(FIND_BLOCK_BY_NAME_OR_MAIL, "find_block_by_mail_or_name",new String[]{"str","position","length"},
+                new String[]{mailOrName,String.valueOf(position),String.valueOf(length)},exec);
     }
 
     public void findByMail(String mail, User responseReference, AsyncExecutable exec){
@@ -218,6 +231,22 @@ public class UserService extends AbstractService<User> {
         addFriend(user, newFriend, null);
     }
 
+    public void findByMailOrName(String mailOrName, ArrayList<User> responseReference){
+        findByMailOrName(mailOrName, responseReference, null);
+    }
+
+    public void findBlockByMailOrName(int position, int length, String mailOrName, ArrayList<User> responseReference){
+        findBlockByMailOrName(position, length, mailOrName, responseReference, null);
+    }
+
+    public void findByLogin(String mail, String password, User responseReference){
+        findByLogin(mail, password, responseReference, null);
+    }
+
+    public void retrievePassword(String mail,String newPassword){
+        retrievePassword(mail,newPassword, null);
+    }
+
     @Override
     public void putParams(int option, String[] params) {
         switch (option){
@@ -253,15 +282,17 @@ public class UserService extends AbstractService<User> {
              case FIND_ALL_USERS:
              case FIND_FRIENDS:
              case FIND_BLOCK_FRIENDS:
+             case FIND_BLOCK_BY_NAME_OR_MAIL:
+             case FIND_BY_NAME_OR_MAIL:
                  listData.addAll(JsonParser.toUsers(in));
                  ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
                  break;
              case FIND_EVENTS_CONFIRMED:
              case FIND_BLOCK_EVENTS_CONFIRMED:
-                 this.objData.getEvents().clear();
+                 this.objData.getConfirmedEvents().clear();
              case FIND_ALL_EVENTS:
              case FIND_BLOCK_EVENTS:
-                 objData.getEvents().addAll(JsonParser.toEvents(in));
+                 objData.getConfirmedEvents().addAll(JsonParser.toEvents(in));
                  ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
                  break;
              case FIND_BLOCK_EVENTS_INVITED:
@@ -277,6 +308,9 @@ public class UserService extends AbstractService<User> {
              case UPDATE_USER:
                  ServerInfo.RESPONSE_CODE = JsonParser.toInt(in);
                  break;
+             case RETRIEVE_PASSWORD:
+                 ServerInfo.RESPONSE_CODE = (JsonParser.toInt(in)==0) ? ServerInfo.ERROR_UNKNOWN : ServerInfo.RESPONSE_OK;
+                 break;
              case ADD_FRIEND:
                  int aux = JsonParser.toInt(in);
                  ServerInfo.RESPONSE_CODE = (aux==0) ? ERROR_ALREADY_FRIENDS : aux;
@@ -288,6 +322,14 @@ public class UserService extends AbstractService<User> {
                  break;
              case REMOVE_USER:
                  ServerInfo.RESPONSE_CODE = (JsonParser.toInt(in)==0) ? ERROR_REMOVE_USER : ServerInfo.RESPONSE_OK;
+                 break;
+             case FIND_BY_LOGIN:
+                 User uu = JsonParser.toUser(in);
+                 if(uu==null) ServerInfo.RESPONSE_CODE = ERROR_INCORRECT_DATA;
+                 else {
+                     this.objData.copy(uu);
+                     ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
+                 }
                  break;
              default:
                  ServerInfo.RESPONSE_CODE = ServerInfo.ERROR_UNKNOWN;

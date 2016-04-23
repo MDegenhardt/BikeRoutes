@@ -13,6 +13,8 @@ import java.util.Locale;
  */
 public class Location {
 
+    public static final int DEFAULT_DISTANCE = 10;
+
     int id;
     private double latitude;
     private double longitude;

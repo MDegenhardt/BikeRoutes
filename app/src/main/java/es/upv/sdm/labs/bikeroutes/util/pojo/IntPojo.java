@@ -7,6 +7,14 @@ public class IntPojo extends AbstractPOJO {
 
     private Integer[] ints;
 
+    public IntPojo(int tam){
+        this.ints = new Integer[tam];
+    }
+
+    public IntPojo(Integer ints[]){
+        this.ints = ints;
+    }
+
     public IntPojo(){}
 
     public IntPojo(Integer i){
@@ -26,4 +34,6 @@ public class IntPojo extends AbstractPOJO {
     public void setInts(Integer[] ints) {
         this.ints = ints;
     }
+
+
 }

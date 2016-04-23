@@ -5,41 +5,41 @@ package es.upv.sdm.labs.bikeroutes.model;
  */
 public class EventType {
 
-    public enum Type{BIKE, HIKE, RUN, OTHER}
+    public enum Type{BIKE, HIKE, RUN, OTHER,UNDEFINED}
 
     private int id;
-    private String especification;
+    private String specification;
     private Type type;
 
 
     public EventType(){
-        this(Type.OTHER);
+        this(Type.UNDEFINED);
     }
 
     public EventType(Type type){
         this(0, type, EventType.getType(type));
     }
 
-    public EventType(Type type, String especification){
-        this(0, type, especification);
+    public EventType(Type type, String specification){
+        this(0, type, specification);
     }
 
-    public EventType(int id, Type type, String especification){
+    public EventType(int id, Type type, String specification){
         this.id = id;
         this.type = type;
-        this.especification = especification;
+        this.specification = specification;
     }
 
 
-    public String getEspecification() {
-        return especification;
+    public String getSpecification() {
+        return specification;
     }
     public int getId(){
         return this.id;
     }
 
-    public void setEspecification(String especification) {
-        this.especification = especification;
+    public void setSpecification(String specification) {
+        this.specification = specification;
     }
     public void setId(int id){
         this.id = id;
@@ -57,7 +57,7 @@ public class EventType {
     public String toString() {
         return "EventType{" +
                 "id=" + id +
-                ", especification='" + especification + '\'' +
+                ", specification='" + specification + '\'' +
                 ", type=" + type +
                 '}';
     }
@@ -66,13 +66,15 @@ public class EventType {
         if(type.equals("BIKE")) return Type.BIKE;
         if(type.equals("HIKE")) return Type.HIKE;
         if(type.equals("RUN")) return Type.RUN;
-        return Type.OTHER;
+        if(type.equals("OTHER")) return Type.OTHER;
+        return Type.UNDEFINED;
     }
 
     public static String getType(EventType.Type type){
         if(type.equals(Type.BIKE)) return "BIKE";
         if(type.equals(Type.HIKE)) return "HIKE";
         if(type.equals(Type.RUN)) return "RUN";
-        return "OTHER";
+        if(type.equals(Type.OTHER)) return "OTHER";
+        return "UNDEFINED";
     }
 }

@@ -59,6 +59,7 @@ public class Event implements Enviable{
         this.confirmedUsers = confirmedUsers;
         this.organizer = organizer;
         this.over = over;
+        if(this.organizer!=null) this.confirmedUsers.add(0,this.organizer);
     }
 
     public int getId() {
@@ -169,15 +170,6 @@ public class Event implements Enviable{
 
     public static ArrayList<Event> getEvents() {
         ArrayList<Event> events = new ArrayList<Event>();
-
-        //some test data
-        /*android.location.Location exampleLocation1 = new android.location.Location("");//provider name is unecessary
-        exampleLocation1.setLatitude(0.0d);//your coords
-        exampleLocation1.setLongitude(0.0d);
-
-        android.location.Location exampleLocation2 = new android.location.Location("");//provider name is unecessary
-        exampleLocation2.setLatitude(100.0d);//your coords
-        exampleLocation2.setLongitude(0.0d);*/
 
         Location exampleLocation1 = new Location(0,0,"");
         Location exampleLocation2 = new Location(100,0,"");

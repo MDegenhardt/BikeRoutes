@@ -21,7 +21,7 @@ public class User implements Enviable{
     private Gender gender;
     private Bitmap image;
     private ArrayList<User> friends;
-    private ArrayList<Event> events;
+    private ArrayList<Event> confirmedEvents;
     private ArrayList<Event> invited;
     private ArrayList<Event> historic;
 
@@ -38,7 +38,7 @@ public class User implements Enviable{
     }
 
     public User(int id, String name, String mail, String password, String description, Gender gender,
-                Bitmap image, ArrayList<User> friends, ArrayList<Event> events, ArrayList<Event> invited, ArrayList<Event> historic) {
+                Bitmap image, ArrayList<User> friends, ArrayList<Event> confirmedEvents, ArrayList<Event> invited, ArrayList<Event> historic) {
         this.id = id;
         this.name = name;
         this.mail = mail;
@@ -47,7 +47,7 @@ public class User implements Enviable{
         this.gender = gender;
         this.image = image;
         this.friends = friends;
-        this.events = events;
+        this.confirmedEvents = confirmedEvents;
         this.invited = invited;
         this.historic = historic;
     }
@@ -116,12 +116,12 @@ public class User implements Enviable{
         this.friends = friends;
     }
 
-    public ArrayList<Event> getEvents() {
-        return events;
+    public ArrayList<Event> getConfirmedEvents() {
+        return confirmedEvents;
     }
 
-    public void setEvents(ArrayList<Event> events) {
-        this.events = events;
+    public void setConfirmedEvents(ArrayList<Event> confirmedEvents) {
+        this.confirmedEvents = confirmedEvents;
     }
 
     public ArrayList<Event> getInvited() {
@@ -156,7 +156,7 @@ public class User implements Enviable{
                 ", gender=" + gender +
                 ", image=" + image +
                 ", friends=" + friends +
-                ", events=" + events +
+                ", confirmedEvents=" + confirmedEvents +
                 ", invited=" + invited +
                 ", historic=" + historic +
                 '}';
@@ -192,6 +192,7 @@ public class User implements Enviable{
     }
 
     public void copy(User other){
+        if(other==null) return;
         this.id = other.getId();
         this.name = other.getName();
         this.mail = other.getMail();
@@ -200,7 +201,7 @@ public class User implements Enviable{
         this.gender = other.getGender();
         this.image = other.getImage();
         this.friends = other.getFriends();
-        this.events = other.getEvents();
+        this.confirmedEvents = other.getConfirmedEvents();
         this.invited = other.getInvited();
         this.historic = other.getHistoric();
     }

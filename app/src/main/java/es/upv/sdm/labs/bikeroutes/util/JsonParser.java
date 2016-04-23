@@ -1,12 +1,7 @@
 package es.upv.sdm.labs.bikeroutes.util;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -33,20 +28,15 @@ public class JsonParser {
     }
 
     public static int toInt(InputStream in){
-        IntPojo i = new GsonBuilder().create().fromJson(new InputStreamReader(in), IntPojo.class);
+        InputStreamReader is = new InputStreamReader(in);
+        IntPojo i = new GsonBuilder().create().fromJson(is, IntPojo.class);
         return i.getInt();
     }
 
     public static Integer[] toInts(InputStream in){
         InputStreamReader is = new InputStreamReader(in);
-        /*BufferedReader br = new BufferedReader(is);
-        String s = "";
-        try{
-            while((s = br.readLine())!=null){Log.d("LOGG",s);}
-        } catch (IOException e){e.printStackTrace();}*/
         IntPojo i = new GsonBuilder().create().fromJson(is, IntPojo.class);
         return i.getInts();
-        //return null;
     }
 
     public static User toUser(String json){
@@ -72,12 +62,6 @@ public class JsonParser {
 
     public static ArrayList<Event> toEvents(InputStream in){
         InputStreamReader is = new InputStreamReader(in);
-        /*BufferedReader br = new BufferedReader(is);
-        String s = "";
-        try{
-            while((s = br.readLine())!=null){Log.d("LOGG",s);}
-        } catch (IOException e){e.printStackTrace();}
-        return new ArrayList<>();*/
         EventPOJO e =  new GsonBuilder().create().fromJson(is, EventPOJO.class);
         return e.toEvents();
     }
