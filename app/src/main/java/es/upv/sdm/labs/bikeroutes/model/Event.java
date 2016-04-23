@@ -1,13 +1,16 @@
 package es.upv.sdm.labs.bikeroutes.model;
 
+
+import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import es.upv.sdm.labs.bikeroutes.interfaces.Enviable;
 import es.upv.sdm.labs.bikeroutes.model.EventType.Type;
 import es.upv.sdm.labs.bikeroutes.util.pojo.EventPOJO;
+import es.upv.sdm.labs.bikeroutes.util.DateHelper;
+
 
 /**
  * Created by Anderson on 11/04/2016.
@@ -187,6 +190,11 @@ public class Event implements Enviable{
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        DateHelper dateHelper = new DateHelper();
+
+        Log.d("Event", "Date: " + dateHelper.dateToString(d1) );
+        Log.d("Event", "Time: " + dateHelper.timeToString(d1) );
 
         User user = new User("Anderson", "anderson@email.com", "234", null);
 

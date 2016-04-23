@@ -9,12 +9,20 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 
 import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.R;
+import es.upv.sdm.labs.bikeroutes.adapters.EventAdapter2;
+import es.upv.sdm.labs.bikeroutes.util.Constants;
 import es.upv.sdm.labs.bikeroutes.util.DatePickerFragment;
-import es.upv.sdm.labs.bikeroutes.adapters.EventAdapter;
 import es.upv.sdm.labs.bikeroutes.util.TimePickerFragment;
 import es.upv.sdm.labs.bikeroutes.model.Event;
 
@@ -23,6 +31,8 @@ public class SearchEventActivity extends AppCompatActivity {
     ListView searchResultListView;
     Context context;
 
+    TextView tvAddress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +40,8 @@ public class SearchEventActivity extends AppCompatActivity {
 
         context = this;
         searchResultListView = (ListView) findViewById(R.id.lvSearchResults);
+
+        tvAddress = (TextView) findViewById(R.id.tvEventAddress);
 
         searchResultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -47,7 +59,7 @@ public class SearchEventActivity extends AppCompatActivity {
         //Construct data source
         ArrayList<Event> arrayOfEvents = Event.getEvents();
         //Create the adapter to convert the array to views
-        EventAdapter adapter = new EventAdapter(this, arrayOfEvents);
+        EventAdapter2 adapter = new EventAdapter2(this, arrayOfEvents);
         //attach the adapter to the listview
         searchResultListView.setAdapter(adapter);
     }
@@ -61,6 +73,59 @@ public class SearchEventActivity extends AppCompatActivity {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
+
+    public void selectLocationButtonPressed(View view){
+        Log.d("CreateEventActivity", "Location Button pressed");
+
+
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        try {
+            if(view.getId() == R.id.tvEventAddress || view.getId() == R.id.btnAddressLocation){
+                startActivityForResult(builder.build(this), Constants.PLACE_PICKER_SEARCH_REQUEST);
+            }
+
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            Toast.makeText(this, "Google Play Services is not available.",
+                    Toast.LENGTH_LONG)
+                    .show();
+        }
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.PLACE_PICKER_SEARCH_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                String toastMsg;
+                toastMsg = String.format("Place: %s", place.getName());
+
+//                toastMsg = String.format("LatLng: %s", place.getLatLng());
+
+//                toastMsg = String.format("Address: %s", place.getAddress());
+                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+
+                tvAddress.setText(place.getName());
+
+
+            }
+        }
+
+    }
+
+    public void dashDescMapButtonPressed(View view){
+        Log.d("EvenDescriptionActivity", "Map Button Pressed!");
+
+        int eventID = 1;
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("EventID", eventID );
+        startActivity(intent);
+
+    }
+
+
 
     public void searchButtonClicked(View view) {
 

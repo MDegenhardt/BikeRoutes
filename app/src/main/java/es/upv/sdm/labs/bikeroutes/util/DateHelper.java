@@ -26,12 +26,24 @@ public class DateHelper {
         return s.format(date);
     }
 
-    public static Date toDate(String str){
+
+    public static Date toDate(String str) {
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             return s.parse(str);
         } catch (ParseException e) {
             return new Date();
         }
+    }
+
+    public static String dateToString(Date date){
+        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+        return s.format(date);
+    }
+
+
+    public static String timeToString(Date date){
+        SimpleDateFormat s = new SimpleDateFormat("hh:mm:ss");
+        return s.format(date);
     }
 }

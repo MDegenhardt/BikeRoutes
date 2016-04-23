@@ -17,6 +17,6 @@ public class MainActivity extends AppCompatActivity {
         //for testing
         startActivity(new Intent(this, DashboardActivity.class));
         //startActivity(new Intent(this,MyEventsActivity.class));
-        //startActivity(new Intent(this,EventDescriptionActivity.class));
+//        startActivity(new Intent(this,MapsActivity.class));
     }
 }

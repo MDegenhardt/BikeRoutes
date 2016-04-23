@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Bike Routes</string>
     <string name="dashBoardActivityLabel">On My Way</string>
-    <string name="createEventsActivityLabel">Create Events</string>
+    <string name="createEventActivityLabel">Create Event</string>
     <string name="searchEventsActivityLabel">Search Events</string>
     <string name="eventDescriptionActivityLabel">Event Details</string>
     <string name="myEventsActivityLabel">My Events</string>
@@ -77,7 +77,7 @@
     <string name="type_event_bike">Bike</string>
     <string name="type_event_run">Bike</string>
     <string name="type_event_walk">Bike</string>
-    <string name="introduce_login">Introduce choosen login</string>
+    <string name="introduce_login">Introduce chosen login</string>
     <string name="password">Password</string>
     <string name="new_password">New password</string>
     <string name="repeat_password">Repeat your password</string>
@@ -86,4 +86,29 @@
     <string name="mail">Mail</string>
     <string name="name">Name</string>
     <string name="log_in">Log in</string>
+    <string name="etUserDescription">Add more information about yourself…</string>
+    <string name="tvUserDescription">Description</string>
+    <string name="tvUserBirth">Day of Birth</string>
+    <string name="UserDescriptionActivityLabel">My account</string>
+    <string name="edit_account">Edit account</string>
+    <string name="add_photo">Add photo</string>
+    <string name="add_friends">Add friends</string>
+    <string name="my_friends">My friends</string>
+
+
+    <string name="no_geocoder_available">No geocoder available</string>
+
+    <string name="fetch_address">Fetch address</string>
+
+    <string name="address_found">Address found</string>
+
+    <string name="no_address_found">Sorry, no address found</string>
+    <string name="no_location_data_provided">No location data provided</string>
+    <string name="service_not_available">Sorry, the service is not available</string>
+    <string name="invalid_lat_long_used">Invalid latitude or longitude used</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string name="normal_map">Normal map</string>
+    <string name="terrain_map">Terrain map</string>
+    <string name="satellite_map">Satellite map</string>
 </resources>

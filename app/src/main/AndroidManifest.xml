@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.upv.sdm.labs.bikeroutes">
 
+    <!-- permissions required to access location providers -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -30,10 +33,17 @@
         </activity>
         <activity
             android:name=".activities.DashboardActivity"
-            android:label="@string/dashBoardActivityLabel"></activity>
+            android:label="@string/dashBoardActivityLabel"
+            android:parentActivityName=".activities.DashboardActivity">
+
+            <!-- Enable up navigation for backwards compatibility -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.DashboardActivity" />
+        </activity>
         <activity
             android:name=".activities.CreateEventActivity"
-            android:label="@string/createEventsActivityLabel"
+            android:label="@string/createEventActivityLabel"
             android:parentActivityName=".activities.DashboardActivity">
 
             <!-- Enable up navigation for backwards compatibility -->
@@ -65,6 +75,57 @@
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activities.DashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.upv.sdm.labs.bikeroutes.activities.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activities.UserDerscriptionActivity"
+            android:label="@string/UserDescriptionActivityLabel"
+            android:parentActivityName=".activities.DashboardActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.upv.sdm.labs.bikeroutes.activities.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activities.EditAccountActivity"
+            android:label="@string/UserDescriptionActivityLabel"
+            android:parentActivityName=".activities.UserDerscriptionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.upv.sdm.labs.bikeroutes.activities.UserDerscriptionActivity" />
+        </activity>
+        <activity
+            android:name=".activities.MyFriendsActivity"
+            android:label="@string/my_friends"
+            android:parentActivityName=".activities.UserDerscriptionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.UserDerscriptionActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AddFriendsActivity"
+            android:label="@string/add_friends"
+            android:parentActivityName=".activities.MyFriendsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MyFriendsActivity" />
+        </activity>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".activities.MapsActivity"
+            android:label="@string/title_activity_maps">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.upv.sdm.labs.bikeroutes.activities.DashboardActivity" />

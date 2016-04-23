@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +7,90 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activities.EditAccountActivity">
+    android:orientation="vertical"
+    tools:context=".activities.UserDerscriptionActivity">
 
-</RelativeLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageUser"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center_horizontal" /> <!-- The user photo is visible if there is one -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:id="@+id/tvUserName"
+        android:padding="10dp"
+        android:layout_gravity="center_horizontal"
+        style="@style/tvSettings"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etName"
+        android:hint="@string/name"
+        android:layout_gravity="center_horizontal"
+        style="@style/etSettings"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tvUserBirth"
+        android:id="@+id/tvUserBirth"
+        android:padding="10dp"
+        android:layout_gravity="center_horizontal"
+        style="@style/tvSettings"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/btnUserBirth"
+        android:onClick="showDatePickerDialog"
+        style="@style/date_time_button" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:baselineAligned="false"
+        android:padding="20dp">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/female"
+            android:drawableRight="@drawable/female"
+            android:checked="true"
+            android:layout_marginRight="30dp" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/male"
+            android:drawableRight="@drawable/male" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tvUserDescription"
+        android:id="@+id/tvUserDescription"
+        android:padding="10dp"
+        android:layout_gravity="center_horizontal"
+        style="@style/tvSettings"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:hint="@string/etUserDescription"
+        android:id="@+id/etUserDescription"
+        android:layout_gravity="center_horizontal"
+        style="@style/etSettings"/>
+
+</LinearLayout>
