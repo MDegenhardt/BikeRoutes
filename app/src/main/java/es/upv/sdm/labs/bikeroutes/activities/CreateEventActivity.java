@@ -16,8 +16,11 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
+import java.util.ArrayList;
+
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.model.Event;
+import es.upv.sdm.labs.bikeroutes.services.EventService;
 import es.upv.sdm.labs.bikeroutes.util.Constants;
 import es.upv.sdm.labs.bikeroutes.util.DatePickerFragment;
 import es.upv.sdm.labs.bikeroutes.util.TimePickerFragment;
@@ -29,6 +32,15 @@ public class CreateEventActivity extends AppCompatActivity {
 //    int PLACE_PICKER_START_REQUEST = 1;
 //    int PLACE_PICKER_END_REQUEST = 2;
 //    int PLACE_PICKER_SEARCH_REQUEST = 3;
+
+//    Event evento = new Event();
+//    new EventService().insert(evento);
+
+
+//    new EventService.findById(2,evento);
+//
+//    ArrayList<Event> response = new ArrayList<>();
+//    new EventService.findAll(response, new AsynExecutable()... / new PostExecute());
 
     TextView tvStart;
     TextView tvEnd;

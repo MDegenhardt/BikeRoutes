@@ -13,6 +13,7 @@ import java.util.Date;
 
 import es.upv.sdm.labs.bikeroutes.interfaces.Enviable;
 import es.upv.sdm.labs.bikeroutes.enumerations.EventType;
+import es.upv.sdm.labs.bikeroutes.util.DateHelper;
 
 /**
  * Created by Anderson on 11/04/2016.
@@ -178,14 +179,10 @@ public class Event{
             e.printStackTrace();
         }
 
-        Log.d("Event", "Date: " +  d1.getDate());
-        Log.d("Event", "day: " +  d1.getDay());
-        Log.d("Event", "month: " +  d1.getMonth());
-        Log.d("Event", "year: " +  d1.getYear());
-        Log.d("Event", "hour: " +  d1.getHours());
-        Log.d("Event", "minute: " +  d1.getMinutes());
+        DateHelper dateHelper = new DateHelper();
 
-        //Calendar.get(Calendar.DAY_OF_MONTH)
+        Log.d("Event", "Date: " + dateHelper.dateToString(d1) );
+        Log.d("Event", "Time: " + dateHelper.timeToString(d1) );
 
         User user = new User("Anderson", "anderson@email.com", "234", null);
 

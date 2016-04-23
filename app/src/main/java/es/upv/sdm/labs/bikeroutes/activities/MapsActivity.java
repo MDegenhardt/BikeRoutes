@@ -60,6 +60,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     //test data
     LatLng pos1 = new LatLng(39.4666667, -0.3666667);
     LatLng pos2 = new LatLng(39.1666667, -0.25);
+//    LatLng pos2 = new LatLng(39.4666667, -0.3666667);
+
     String pos1Title = "StartName";
     String pos1Desc  = "StartDescription";
     String pos2Title = "FinishName";

@@ -27,6 +27,17 @@ public class DateHelper {
         return s.format(date);
     }
 
+    public static String dateToString(Date date){
+        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+        return s.format(date);
+    }
+
+
+    public static String timeToString(Date date){
+        SimpleDateFormat s = new SimpleDateFormat("hh:mm:ss");
+        return s.format(date);
+    }
+
     public static Date fromJson(String json){
 //        String []data = json.substring(1, json.length()-1).split(",");
 //        int day = Integer.parseInt(data[0].split(":")[2].)

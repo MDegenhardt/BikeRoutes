@@ -28,8 +28,8 @@
                 android:id="@+id/tvEventDate"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="01.01.16"
+                android:layout_weight="1.5"
+                android:text="01.01.2016"
                 style="@style/event_dateTime"
 
                 />

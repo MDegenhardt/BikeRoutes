@@ -11,10 +11,12 @@ package es.upv.sdm.labs.bikeroutes.adapters;
         import android.widget.TextView;
 
         import java.util.ArrayList;
+        import java.util.Date;
 
         import es.upv.sdm.labs.bikeroutes.R;
         import es.upv.sdm.labs.bikeroutes.enumerations.EventType;
         import es.upv.sdm.labs.bikeroutes.model.Event;
+        import es.upv.sdm.labs.bikeroutes.util.DateHelper;
 
 
 public class EventAdapter2 extends ArrayAdapter<Event> {
@@ -38,8 +40,12 @@ public class EventAdapter2 extends ArrayAdapter<Event> {
         TextView tvStart = (TextView) convertView.findViewById(R.id.tvEventStart);
         TextView tvEnd = (TextView) convertView.findViewById(R.id.tvEventEnd);
 
-        tvDate.setText(event.getDate().toString());
-        tvTime.setText(event.getDate().getTime()+"");
+        DateHelper dateHelper = new DateHelper();
+
+        Date date = event.getDate();
+
+        tvDate.setText(dateHelper.dateToString(date));
+        tvTime.setText(dateHelper.timeToString(date));
 
         EventType type = event.getType();
         int img = (type==EventType.HIKE) ? R.drawable.hike : (type==EventType.RUN) ? R.drawable.running : R.drawable.bike;
