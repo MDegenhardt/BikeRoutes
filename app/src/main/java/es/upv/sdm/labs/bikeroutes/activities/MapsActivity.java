@@ -44,7 +44,7 @@ import java.util.Locale;
 import javax.net.ssl.HttpsURLConnection;
 
 import es.upv.sdm.labs.bikeroutes.R;
-import es.upv.sdm.labs.bikeroutes.enumerations.EventType;
+import es.upv.sdm.labs.bikeroutes.model.EventType;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -66,7 +66,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     String pos1Desc  = "StartDescription";
     String pos2Title = "FinishName";
     String pos2Desc  = "FinishDescription";
-    EventType type = EventType.HIKE;
+    EventType.Type type = EventType.Type.HIKE;
 //    int img = (type==EventType.HIKE) ? R.drawable.hike : (type==EventType.RUN) ? R.drawable.running : R.drawable.bike;
 
 
@@ -187,7 +187,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             List<LatLng> pointsList = null;
 
-            String typeStr = (type==EventType.BIKE) ? "bicycling" : "walking";
+            String typeStr = (type==EventType.Type.BIKE) ? "bicycling" : "walking";
 
             String uri = String.format(Locale.US, "https://maps.googleapis.com/maps/api/directions/json?" +
                     "origin=%1$f,%2$f&destination=%3$f,%4$f&mode=" + typeStr + "&key="

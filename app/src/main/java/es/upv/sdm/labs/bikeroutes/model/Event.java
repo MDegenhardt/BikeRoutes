@@ -174,8 +174,8 @@ public class Event implements Enviable{
     public static ArrayList<Event> getEvents() {
         ArrayList<Event> events = new ArrayList<Event>();
 
-        Location exampleLocation1 = new Location(0,0,"");
-        Location exampleLocation2 = new Location(100,0,"");
+        Location exampleLocation1 = new Location(39.4666667,-0.3666667,"Valencia");
+        Location exampleLocation2 = new Location(38.9666667,-0.1833333,"Gandía");
 
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy/hh:mm:ss");

@@ -14,7 +14,7 @@ package es.upv.sdm.labs.bikeroutes.adapters;
         import java.util.Date;
 
         import es.upv.sdm.labs.bikeroutes.R;
-        import es.upv.sdm.labs.bikeroutes.enumerations.EventType;
+        import es.upv.sdm.labs.bikeroutes.model.EventType;
         import es.upv.sdm.labs.bikeroutes.model.Event;
         import es.upv.sdm.labs.bikeroutes.util.DateHelper;
 
@@ -47,8 +47,8 @@ public class EventAdapter2 extends ArrayAdapter<Event> {
         tvDate.setText(dateHelper.dateToString(date));
         tvTime.setText(dateHelper.timeToString(date));
 
-        EventType type = event.getType();
-        int img = (type==EventType.HIKE) ? R.drawable.hike : (type==EventType.RUN) ? R.drawable.running : R.drawable.bike;
+        EventType.Type type = event.getType().getType();
+        int img = (type==EventType.Type.HIKE) ? R.drawable.hike : (type==EventType.Type.RUN) ? R.drawable.running : R.drawable.bike;
         ivEventType.setImageResource(img);
 
 
