@@ -54,12 +54,20 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     EditText etKm;
     TextView tvlocation;
 
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+
+    String searchLocationStr;
+
     Date searchDate = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_event);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
 
         context = this;
         searchResultListView = (ListView) findViewById(R.id.lvSearchResults);
@@ -84,13 +92,12 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     }
 
     protected void onPause() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = prefs.edit();
+
         editor.putInt("eventType", eventType.getCheckedRadioButtonId());
         editor.putString("date", btnSEventDate.getText().toString());
         editor.putString("time", btnSEventTime.getText().toString());
         editor.putString("km", etKm.getText().toString());
-        editor.putString("location", tvlocation.getText().toString());
+        editor.putString("location", searchLocationStr);
         editor.apply();
         super.onPause();
     }
@@ -102,7 +109,8 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         btnSEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
         btnSEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
         etKm.setText(prefs.getString("km", "1"));
-        tvAddress.setText(prefs.getString("location", "Choose a location"));
+        searchLocationStr = prefs.getString("location", "Choose a location");
+        tvAddress.setText(searchLocationStr);
         super.onResume();
     }
 
@@ -150,15 +158,18 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         if (requestCode == Constants.PLACE_PICKER_SEARCH_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
-                String toastMsg;
-                toastMsg = String.format("Place: %s", place.getName());
+                searchLocationStr = place.getName().toString();
+
+
+                Toast.makeText(this, searchLocationStr, Toast.LENGTH_LONG).show();
+
+                tvAddress.setText(searchLocationStr);
+                editor.putString("location", searchLocationStr);
+                editor.apply();
 
 //                toastMsg = String.format("LatLng: %s", place.getLatLng());
 
 //                toastMsg = String.format("Address: %s", place.getAddress());
-                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
-
-                tvAddress.setText(place.getName());
 
 
             }
