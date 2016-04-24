@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +14,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -23,6 +28,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import es.upv.sdm.labs.bikeroutes.R;
@@ -43,6 +49,10 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     TextView tvAddress;
     Button btnSEventDate;
     Button btnSEventTime;
+    RadioGroup eventType;
+    RadioButton rbChecked;
+    EditText etKm;
+    TextView tvlocation;
 
     Date searchDate = new Date();
 
@@ -57,6 +67,9 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         tvAddress = (TextView) findViewById(R.id.tvEventAddress);
         btnSEventDate = (Button) findViewById(R.id.btnSEventDate);
         btnSEventTime = (Button) findViewById(R.id.btnSEventTime);
+        eventType = (RadioGroup) findViewById(R.id.rgEventType);
+        etKm = (EditText) findViewById(R.id.etKm);
+        tvlocation = (TextView) findViewById(R.id.tvEventAddress);
 
         searchResultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -68,6 +81,29 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
             }
         });
 
+    }
+
+    protected void onPause() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("eventType", eventType.getCheckedRadioButtonId());
+        editor.putString("date", btnSEventDate.getText().toString());
+        editor.putString("time", btnSEventTime.getText().toString());
+        editor.putString("km", etKm.getText().toString());
+        editor.putString("location", tvlocation.getText().toString());
+        editor.apply();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        rbChecked = (RadioButton) findViewById(prefs.getInt("eventType", R.id.rbBike));
+        btnSEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
+        btnSEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
+        etKm.setText(prefs.getString("km", "1"));
+        tvAddress.setText(prefs.getString("location", "Choose a location"));
+        super.onResume();
     }
 
     private void populateEventsList() {

@@ -3,16 +3,20 @@ package es.upv.sdm.labs.bikeroutes.activities;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
-import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -22,13 +26,11 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.model.Event;
-import es.upv.sdm.labs.bikeroutes.services.EventService;
 import es.upv.sdm.labs.bikeroutes.util.Constants;
 import es.upv.sdm.labs.bikeroutes.util.DateHelper;
 import es.upv.sdm.labs.bikeroutes.util.DatePickerFragment;
@@ -53,6 +55,10 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     TextView tvEnd;
     Button btnEventDate;
     Button btnEventTime;
+    RadioGroup eventType;
+    RadioButton rbChecked;
+    TextView tvDescription;
+    CheckBox cbSecret;
 
     Date date = new Date();
 
@@ -65,11 +71,43 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         tvEnd = (TextView) findViewById(R.id.tvEventEnd);
         btnEventDate = (Button) findViewById(R.id.btnEventDate);
         btnEventTime = (Button) findViewById(R.id.btnEventTime);
+        eventType = (RadioGroup) findViewById(R.id.rgEventType);
+        tvDescription = (TextView) findViewById(R.id.etEventDescription);
+        cbSecret = (CheckBox) findViewById(R.id.cbSecretEvent);
 
         currentEvent = new Event();
 
 
     }
+
+    @Override
+    protected void onPause() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("eventType", eventType.getCheckedRadioButtonId());
+        editor.putString("date", btnEventDate.getText().toString());
+        editor.putString("time", btnEventTime.getText().toString());
+        editor.putString("start", tvStart.getText().toString());
+        editor.putString("end", tvEnd.getText().toString());
+        editor.putString("description", tvDescription.getText().toString());
+        editor.putBoolean("secret", cbSecret.isEnabled());
+        editor.apply();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        rbChecked = (RadioButton) findViewById(prefs.getInt("eventType", R.id.rbBike));
+        tvStart.setText(prefs.getString("start", "Choose a location"));
+        tvEnd.setText(prefs.getString("end", "Choose a location"));
+        btnEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
+        btnEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
+        tvDescription.setText(prefs.getString("description", ""));
+        cbSecret.setChecked(prefs.getBoolean("secret", false));
+        super.onResume();
+    }
+
 
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();

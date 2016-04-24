@@ -22,6 +22,7 @@
             android:layout_height="0dp"
             android:orientation="horizontal"
             android:layout_weight="1"
+            android:id="@+id/rgEventType"
             android:gravity="center"
             android:baselineAligned="false">
 
@@ -93,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:ems="10"
-                android:id="@+id/editText"
+                android:id="@+id/etKm"
                 android:layout_weight="0.5" />
 
             <TextView
@@ -110,12 +111,6 @@
                 android:layout_weight="2"></FrameLayout>
 
         </LinearLayout>
-
-
-
-
-
-
 
         <LinearLayout
             android:orientation="horizontal"
@@ -157,9 +152,7 @@
             android:text="@string/btn_search_event"
             android:id="@+id/btnSearchEvent"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark1"
-            android:textSize="20sp"
-            android:textColor="@color/colorAccent1"
+            style="@style/button"
             android:onClick="searchButtonClicked"
             android:layout_margin="5dp" />
 

@@ -1,5 +1,9 @@
 package es.upv.sdm.labs.bikeroutes.util;
 
+/**
+ * Created by ellinooralaaksonen on 24.4.16.
+ */
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -10,8 +14,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import es.upv.sdm.labs.bikeroutes.activities.CreateEventActivity;
+import es.upv.sdm.labs.bikeroutes.activities.EditAccountActivity;
 
-public class DatePickerFragment extends DialogFragment
+public class AccountDatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
     @Override
@@ -23,7 +28,7 @@ public class DatePickerFragment extends DialogFragment
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), (CreateEventActivity) getActivity(), year, month, day);
+        return new DatePickerDialog(getActivity(), (EditAccountActivity) getActivity(), year, month, day);
     }
 
     @Override
