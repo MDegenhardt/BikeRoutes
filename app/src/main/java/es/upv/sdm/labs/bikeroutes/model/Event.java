@@ -193,8 +193,8 @@ public class Event implements Enviable{
 
         DateHelper dateHelper = new DateHelper();
 
-        Log.d("Event", "Date: " + dateHelper.dateToString(d1) );
-        Log.d("Event", "Time: " + dateHelper.timeToString(d1) );
+//        Log.d("Event", "Date: " + dateHelper.dateToString(d1) );
+//        Log.d("Event", "Time: " + dateHelper.timeToString(d1) );
 
         User user = new User("Anderson", "anderson@email.com", "234", null);
 

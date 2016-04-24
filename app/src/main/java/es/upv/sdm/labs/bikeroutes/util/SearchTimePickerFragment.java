@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
+import android.view.SearchEvent;
 import android.widget.Button;
 import android.widget.TimePicker;
 
@@ -12,9 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import es.upv.sdm.labs.bikeroutes.activities.CreateEventActivity;
+import es.upv.sdm.labs.bikeroutes.activities.SearchEventActivity;
 
 
-public class TimePickerFragment extends DialogFragment
+public class SearchTimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
 
     Button btnEventTime;
@@ -29,7 +31,7 @@ public class TimePickerFragment extends DialogFragment
        // btnEventTime = (Button) getView().findViewById(R.id.btnEventTime);
 
         // Create a new instance of TimePickerDialog and return it
-        return new TimePickerDialog(getActivity(), (CreateEventActivity)getActivity(), hour, minute,
+        return new TimePickerDialog(getActivity(), (SearchEventActivity)getActivity(), hour, minute,
                 DateFormat.is24HourFormat(getActivity()));
     }
 

@@ -126,10 +126,12 @@
 
         <activity
             android:name=".activities.MapsActivity"
-            android:label="@string/title_activity_maps">
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".activities.DashboardActivity">
+            <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="es.upv.sdm.labs.bikeroutes.activities.DashboardActivity" />
+                android:value=".activities.DashboardActivity" />
         </activity>
     </application>
 

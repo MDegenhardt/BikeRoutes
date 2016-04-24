@@ -37,13 +37,13 @@ public class DateHelper {
     }
 
     public static String dateToString(Date date){
-        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yy");
         return s.format(date);
     }
 
 
     public static String timeToString(Date date){
-        SimpleDateFormat s = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat s = new SimpleDateFormat("hh:mm");
         return s.format(date);
     }
 }
