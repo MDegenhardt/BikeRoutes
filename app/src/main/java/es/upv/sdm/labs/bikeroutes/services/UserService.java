@@ -1,10 +1,13 @@
 package es.upv.sdm.labs.bikeroutes.services;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.interfaces.AsyncExecutable;
 import es.upv.sdm.labs.bikeroutes.model.User;
+import es.upv.sdm.labs.bikeroutes.util.ImgSerializer;
 import es.upv.sdm.labs.bikeroutes.util.JsonParser;
 
 /**
@@ -49,13 +52,13 @@ public class UserService extends AbstractService<User> {
     @Override
     public void insert(User user, AsyncExecutable exec) {
         this.objData = user;
-        this.send(ADD_USER, "add_user", new String[]{"user"}, exec);
+        this.send(ADD_USER, "add_user", new String[]{"user","img"}, exec);
     }
 
     @Override
     public void update(User user, AsyncExecutable exec) {
         this.objData = user;
-        this.send(UPDATE_USER, "update_user", new String[]{"user"}, exec);
+        this.send(UPDATE_USER, "update_user", new String[]{"user", "img"}, exec);
     }
 
     @Override
@@ -253,6 +256,12 @@ public class UserService extends AbstractService<User> {
             case ADD_USER:
             case UPDATE_USER:
                 params[0] = objData.toJson();
+                params[1] = ImgSerializer.serialize(objData.getImage());
+                try {
+                    params[1] = URLEncoder.encode(params[1], "utf-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }

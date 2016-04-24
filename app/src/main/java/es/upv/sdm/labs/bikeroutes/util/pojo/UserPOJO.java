@@ -52,8 +52,7 @@ public class UserPOJO extends AbstractPOJO {
             this.setGender(user.getGender().toString());
             this.setPassword(user.getPassword());
             this.setMail(user.getMail());
-            if(user.getImage()!=null) this.setImage(ImgSerializer.serialize(user.getImage()));
-            else this.setImage("");
+            this.setImage("");
         }
 
         private int id;
