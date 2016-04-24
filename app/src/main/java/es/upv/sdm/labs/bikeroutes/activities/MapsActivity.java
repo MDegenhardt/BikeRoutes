@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -32,6 +33,7 @@ import com.google.maps.android.PolyUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -53,7 +55,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     ProgressBar progressBar;
     UiSettings uiSettings;
 
+    TextView tvDistance;
+    TextView tvDuration;
+
     Intent intent;
+
+    String distValueStr;
+    String durValueStr;
 
 
 
@@ -79,6 +87,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        tvDistance = (TextView) findViewById(R.id.tvDistance);
+        tvDuration = (TextView) findViewById(R.id.tvDuration);
+
         intent = getIntent();
 
         int evID;
@@ -223,10 +235,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     JSONObject duration = legs.getJSONObject("duration");
 
                     int distValue = (int) distance.get("value");
-                    String distValueStr = (String) distance.get("text");
+                    distValueStr = (String) distance.get("text");
 
                     int durValue = (int) duration.get("value");
-                    String durValueStr = (String) duration.get("text");
+                    durValueStr = (String) duration.get("text");
 
 //                    Log.i("MapsActivity", Integer.toString(distValue));
                     Log.i("MapsActivity", distValueStr);
@@ -257,6 +269,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         .color(Color.parseColor("#FF0000"))
                         .width(12)
                         .geodesic(true));
+
+                tvDistance.setText(String.format(getString(R.string.distance_with_value), distValueStr));
+                tvDuration.setText(String.format(getString(R.string.duration_with_value), durValueStr));
+
             } else {
                 Toast.makeText(MapsActivity.this, "Could not display route", Toast.LENGTH_SHORT).show();
             }

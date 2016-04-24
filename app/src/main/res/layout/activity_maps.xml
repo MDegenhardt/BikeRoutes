@@ -10,6 +10,33 @@ android:paddingRight="5dp"
 android:paddingTop="5dp"
 tools:context="es.upv.sdm.labs.bikeroutes.activities.MapsActivity">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Distance: "
+            android:layout_weight="1"
+
+            style="@style/event_dateTime" />
+
+        <TextView
+            android:id="@+id/tvDuration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Duration: "
+            android:layout_weight="1"
+            style="@style/event_dateTime" />
+
+    </LinearLayout>
+
+
+
 
     <fragment
         xmlns:map="http://schemas.android.com/apk/res-auto"

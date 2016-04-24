@@ -117,4 +117,6 @@
     <string name="choose_start">Choose start</string>
     <string name="start">Start:</string>
     <string name="end">End:</string>
+    <string name="distance_with_value">"Distance: %1$s"</string>
+    <string name="duration_with_value">"Duration: %1$s"</string>
 </resources>
