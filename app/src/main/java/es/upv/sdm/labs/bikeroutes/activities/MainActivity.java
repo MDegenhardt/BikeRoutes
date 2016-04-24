@@ -1,11 +1,10 @@
 package es.upv.sdm.labs.bikeroutes.activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import es.upv.sdm.labs.bikeroutes.R;
 
+import es.upv.sdm.labs.bikeroutes.R;
 //login page
 public class MainActivity extends AppCompatActivity {
 
@@ -15,8 +14,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //for testing
-        startActivity(new Intent(this, DashboardActivity.class));
+        //startActivity(new Intent(this, DashboardActivity.class));
         //startActivity(new Intent(this,MyEventsActivity.class));
 //        startActivity(new Intent(this,MapsActivity.class));
     }
+
 }

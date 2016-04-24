@@ -29,5 +29,15 @@ public class ImgSerializer implements Serializable{
         }
     }
 
+    public static byte[] toByteArray(Bitmap bitmap){
+        if(bitmap==null) return new byte[0];
+        ByteArrayOutputStream ba = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, ba);
+        return ba.toByteArray();
+    }
+
+    public static Bitmap fromByteArray(byte[] b){
+        return BitmapFactory.decodeByteArray(b, 0, b.length);
+    }
 
 }

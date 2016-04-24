@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public abstract class AbstractDAO<T> {
 
     private Context context;
-    private MySQLiteOpenHelper mySQLiteOpenHelper;
+    protected MySQLiteOpenHelper mySQLiteOpenHelper;
 
     public abstract void insert(T t);
 
