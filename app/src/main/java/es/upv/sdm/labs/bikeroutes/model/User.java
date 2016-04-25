@@ -9,7 +9,7 @@ import es.upv.sdm.labs.bikeroutes.interfaces.Enviable;
 import es.upv.sdm.labs.bikeroutes.util.pojo.UserPOJO;
 
 /**
- * Created by Anderson on 11/04/2016.
+ * Created by anderson on 11/04/2016.
  */
 public class User implements Enviable{
 

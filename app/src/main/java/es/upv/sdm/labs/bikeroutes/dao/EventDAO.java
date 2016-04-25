@@ -12,7 +12,7 @@ import es.upv.sdm.labs.bikeroutes.model.User;
 import es.upv.sdm.labs.bikeroutes.util.DateHelper;
 
 /**
- * Created by Anderson on 12/04/2016.
+ * Created by anderson on 12/04/2016.
  */
 public class EventDAO extends AbstractDAO<Event> {
 

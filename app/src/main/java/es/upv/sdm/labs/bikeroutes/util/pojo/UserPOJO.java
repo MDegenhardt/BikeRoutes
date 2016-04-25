@@ -7,7 +7,7 @@ import es.upv.sdm.labs.bikeroutes.model.User;
 import es.upv.sdm.labs.bikeroutes.util.ImgSerializer;
 
 /**
- * Created by Anderson on 12/04/2016.
+ * Created by anderson on 12/04/2016.
  */
 public class UserPOJO extends AbstractPOJO {
 

@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by Anderson on 25/04/2016.
+ * Created by anderson on 25/04/2016.
  */
 public class PasswordHelper {
 
@@ -24,7 +24,7 @@ public class PasswordHelper {
 
     public static String generatePassword(){
         String s = "ABCDEFGHYJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789", res="";
-        for(int k=0;k<10;k++) res += s.charAt((int)(Math.random()*62));
+        for(int k=0;k<10;k++) res += s.charAt((int) (Math.random() * 62));
         return res;
     }
 }

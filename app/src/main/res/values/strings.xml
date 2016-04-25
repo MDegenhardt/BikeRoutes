@@ -130,6 +130,7 @@
     <string name="tv_repeat_password">Repeat password</string>
     <string name="my_account">My account</string>
     <string name="my_events">My events</string>
+
     <string name="error_empty_fields">Please fill in all fields</string>
     <string name="error_password_not_match">Passwords do not match</string>
     <string name="error_connection">There was a small problem. Check your internet connection.</string>
@@ -141,4 +142,11 @@
 
     <string name="facebook_error">Error connecting to facebook</string>
     <string name="facebook_app_id">1772595069622819</string>
+
+    <string name="anderson_lemos">Anderson Lemos</string>
+    <string name="ellinoora_laaksonen">Ellinoora Laaksonen</string>
+    <string name="magdalena_popinska">Magdalena Popinska</string>
+    <string name="markus_degenhardt">Markus Degenhardt</string>
+    <string name="title_activity_credit">Credits</string>
+
 </resources>

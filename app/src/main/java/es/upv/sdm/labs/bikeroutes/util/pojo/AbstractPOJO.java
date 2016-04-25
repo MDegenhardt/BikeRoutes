@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import es.upv.sdm.labs.bikeroutes.interfaces.Enviable;
 
 /**
- * Created by Anderson on 12/04/2016.
+ * Created by anderson on 12/04/2016.
  */
 public abstract class AbstractPOJO implements Enviable {
 

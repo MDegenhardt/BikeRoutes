@@ -9,4 +9,100 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".activities.CreditActivity">
 
+    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="4"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:padding="10dp">
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_anderson"
+        android:src="@drawable/anderson"
+        android:layout_above="@+id/imageView_magda"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:paddingRight="10dp"
+         />
+
+
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_elli"
+        android:src="@drawable/elli"
+        android:layout_alignTop="@+id/imageView_anderson"
+        android:layout_alignLeft="@+id/imageView_markus"
+        android:layout_alignStart="@+id/imageView_markus" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="@string/anderson_lemos"
+            android:id="@+id/tvAnderson"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            style="@style/creditSettings"
+            android:paddingBottom="20dp" />
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="@string/ellinoora_laaksonen"
+            android:id="@+id/tvElli"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            style="@style/creditSettings"/>
+
+        <ImageView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_magda"
+        android:src="@drawable/magda"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+            android:layout_marginRight="25dp" />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView_markus"
+        android:src="@drawable/markus"
+        android:layout_alignTop="@+id/imageView_magda"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="@string/magdalena_popinska"
+            android:id="@+id/tvMagda"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            style="@style/creditSettings"/>
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:text="@string/markus_degenhardt"
+            android:id="@+id/tvMarkus"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            style="@style/creditSettings"/>
+
+
+    </GridLayout>
 </RelativeLayout>

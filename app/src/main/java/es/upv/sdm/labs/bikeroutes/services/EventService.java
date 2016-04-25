@@ -12,7 +12,7 @@ import es.upv.sdm.labs.bikeroutes.util.JsonParser;
 import es.upv.sdm.labs.bikeroutes.util.pojo.IntPojo;
 
 /**
- * Created by Anderson on 12/04/2016.
+ * Created by anderson on 12/04/2016.
  */
 public class EventService extends AbstractService<Event> {
 
