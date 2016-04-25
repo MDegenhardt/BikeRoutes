@@ -70,17 +70,19 @@
         android:layout_height="wrap_content"
         android:text="Create an account"
         android:id="@+id/btnCreateAccount"
-        android:layout_above="@+id/btnRetrievePassword"
+        android:layout_above="@+id/btnResetPassword"
         android:layout_centerHorizontal="true"
+        android:onClick="createAccount"
         style="@style/noBorderButton"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Forgot your password?"
-        android:id="@+id/btnRetrievePassword"
+        android:id="@+id/btnResetPassword"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:onClick="resetPassword"
         style="@style/noBorderButton"/>
 
 

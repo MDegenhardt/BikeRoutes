@@ -61,10 +61,19 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
     Date date = new Date();
 
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+
+    String endLocationStr;
+    String startLocationStr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_event);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
 
         tvStart = (TextView) findViewById(R.id.tvEventStart);
         tvEnd = (TextView) findViewById(R.id.tvEventEnd);
@@ -81,13 +90,13 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
     @Override
     protected void onPause() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        SharedPreferences.Editor editor = prefs.edit();
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
         editor.putInt("eventType", eventType.getCheckedRadioButtonId());
         editor.putString("date", btnEventDate.getText().toString());
         editor.putString("time", btnEventTime.getText().toString());
-        //editor.putString("start", tvStart.getText().toString());
-        //editor.putString("end", tvEnd.getText().toString());
+        editor.putString("start", startLocationStr);
+        editor.putString("end", endLocationStr);
         editor.putString("description", tvDescription.getText().toString());
         editor.putBoolean("secret", cbSecret.isChecked());
         editor.apply();
@@ -96,10 +105,11 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
     @Override
     protected void onResume() {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         eventType.check(prefs.getInt("eventType", R.id.rbBike));
-        //tvStart.setText(prefs.getString("start", "Choose a location"));
-        //tvEnd.setText(prefs.getString("end", "Choose a location"));
+        startLocationStr = prefs.getString("start", "Choose a location");
+        tvStart.setText(startLocationStr);
+        endLocationStr = prefs.getString("end", "Choose a location");
+        tvEnd.setText(endLocationStr);
         btnEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
         btnEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
         tvDescription.setText(prefs.getString("description", ""));
@@ -179,15 +189,21 @@ This method is executed when the activity is created to populate the ActionBar w
         if (requestCode == Constants.PLACE_PICKER_START_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
-                String toastMsg;
-                toastMsg = String.format("Place: %s", place.getName());
+
+//                startLocationStr = String.format("Place: %s", place.getName());
+                startLocationStr = place.getName().toString();
 
 //                toastMsg = String.format("LatLng: %s", place.getLatLng());
 
 //                toastMsg = String.format("Address: %s", place.getAddress());
-                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, startLocationStr, Toast.LENGTH_LONG).show();
 
-                tvStart.setText(place.getName());
+
+
+                tvStart.setText(startLocationStr);
+                editor.putString("start", startLocationStr);
+                editor.apply();
+
 
 
             }
@@ -196,15 +212,16 @@ This method is executed when the activity is created to populate the ActionBar w
         else if (requestCode == Constants.PLACE_PICKER_END_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
-                String toastMsg;
-                toastMsg = String.format("Place: %s", place.getName());
+                endLocationStr = place.getName().toString();
 
 //                toastMsg = String.format("LatLng: %s", place.getLatLng());
 
 //                toastMsg = String.format("Address: %s", place.getAddress());
-                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, endLocationStr, Toast.LENGTH_LONG).show();
 
-                tvEnd.setText(place.getName());
+                tvEnd.setText(endLocationStr);
+                editor.putString("end", endLocationStr);
+                editor.apply();
 
 
             }

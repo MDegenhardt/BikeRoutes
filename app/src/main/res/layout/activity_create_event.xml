@@ -42,14 +42,14 @@
             android:checked="false" />
     </RadioGroup>
 
-    <TextView
+<!--    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:text="Specify:"
         android:id="@+id/tvEventSpecify"
         android:layout_weight="0.5"
         android:textColor="@color/colorPrimaryDark2"
-        android:textSize="20dp" />
+        android:textSize="20dp" />-->
 
     <LinearLayout
         android:orientation="horizontal"
