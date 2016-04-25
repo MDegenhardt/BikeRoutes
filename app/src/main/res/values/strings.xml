@@ -122,4 +122,8 @@
     <string name="tv_repeat_password">Repeat password</string>
     <string name="my_account">My account</string>
     <string name="my_events">My events</string>
+    <string name="anderson_lemos">Anderson Lemos</string>
+    <string name="ellinoora_laaksonen">Ellinoora Laaksonen</string>
+    <string name="magdalena_popinska">Magdalena Popinska</string>
+    <string name="markus_degenhardt">Markus Degenhardt</string>
 </resources>
