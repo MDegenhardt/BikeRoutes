@@ -23,7 +23,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText6"
+        android:id="@+id/etMail"
         android:text=""
         android:hint="@string/mail"
         android:layout_marginTop="28dp"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText7"
+        android:id="@+id/etPassword"
         android:hint="@string/password"
         android:layout_below="@+id/editText6"
         android:textAlignment="center" />
@@ -53,7 +53,7 @@
 
     </LinearLayout>
 
-    <ImageButton
+    <!-- <ImageButton
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_weight="0.7"
@@ -63,12 +63,20 @@
         android:background="@color/colorPrimaryLight1"
         android:layout_gravity="center"
         android:layout_below="@+id/linearLayout3"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" />-->
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/btnFb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_centerHorizontal="true"/>
+
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create an account"
+        android:text="@string/create_account"
         android:id="@+id/btnCreateAccount"
         android:layout_above="@+id/btnResetPassword"
         android:layout_centerHorizontal="true"
@@ -78,7 +86,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Forgot your password?"
+        android:text="@string/forgot_password"
         android:id="@+id/btnResetPassword"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

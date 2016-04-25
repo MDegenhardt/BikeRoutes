@@ -13,7 +13,7 @@ import es.upv.sdm.labs.bikeroutes.util.DateHelper;
 
 
 /**
- * Created by Anderson on 11/04/2016.
+ * Created by anderson on 11/04/2016.
  */
 public class Event implements Enviable{
 
@@ -196,7 +196,7 @@ public class Event implements Enviable{
 //        Log.d("Event", "Date: " + dateHelper.dateToString(d1) );
 //        Log.d("Event", "Time: " + dateHelper.timeToString(d1) );
 
-        User user = new User("Anderson", "anderson@email.com", "234", null);
+        User user = new User("anderson", "anderson@email.com", "234", null);
 
         events.add(new Event(new EventType(Type.BIKE), d1, exampleLocation1, exampleLocation2, "Some description text...", false, user));
         events.add(new Event(new EventType(Type.OTHER), d2, exampleLocation2, exampleLocation1, "Some description text...", false, user ));

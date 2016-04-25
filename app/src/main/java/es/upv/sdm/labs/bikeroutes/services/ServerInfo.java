@@ -1,7 +1,7 @@
 package es.upv.sdm.labs.bikeroutes.services;
 
 /**
- * Created by Anderson on 17/04/2016.
+ * Created by anderson on 17/04/2016.
  */
 public class ServerInfo {
 
