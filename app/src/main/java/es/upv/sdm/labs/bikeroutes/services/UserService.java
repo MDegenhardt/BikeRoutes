@@ -90,8 +90,8 @@ public class UserService extends AbstractService<User> {
         this.request(FIND_BY_LOGIN, "find_by_login",new String[]{"mail","password"},new String[]{mail, password}, exec);
     }
 
-    public void retrievePassword(String mail, String newPassword, AsyncExecutable exec){
-        this.send(RETRIEVE_PASSWORD, "retrieve_password",new String[]{"mail","password"},new String[]{mail,newPassword},exec);
+    public void retrievePassword(String mail, AsyncExecutable exec){
+        this.send(RETRIEVE_PASSWORD, "retrieve_password",new String[]{"mail"},new String[]{mail},exec);
     }
 
     public void findByMailOrName(String mailOrName, ArrayList<User> responseReference, AsyncExecutable exec){
@@ -246,8 +246,8 @@ public class UserService extends AbstractService<User> {
         findByLogin(mail, password, responseReference, null);
     }
 
-    public void retrievePassword(String mail,String newPassword){
-        retrievePassword(mail,newPassword, null);
+    public void retrievePassword(String mail){
+        retrievePassword(mail, null);
     }
 
     @Override
