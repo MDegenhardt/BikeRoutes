@@ -56,7 +56,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     Button btnEventDate;
     Button btnEventTime;
     RadioGroup eventType;
-    RadioButton rbChecked;
     TextView tvDescription;
     CheckBox cbSecret;
 
@@ -87,10 +86,10 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         editor.putInt("eventType", eventType.getCheckedRadioButtonId());
         editor.putString("date", btnEventDate.getText().toString());
         editor.putString("time", btnEventTime.getText().toString());
-        editor.putString("start", tvStart.getText().toString());
-        editor.putString("end", tvEnd.getText().toString());
+        //editor.putString("start", tvStart.getText().toString());
+        //editor.putString("end", tvEnd.getText().toString());
         editor.putString("description", tvDescription.getText().toString());
-        editor.putBoolean("secret", cbSecret.isEnabled());
+        editor.putBoolean("secret", cbSecret.isChecked());
         editor.apply();
         super.onPause();
     }
@@ -98,9 +97,9 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     @Override
     protected void onResume() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        rbChecked = (RadioButton) findViewById(prefs.getInt("eventType", R.id.rbBike));
-        tvStart.setText(prefs.getString("start", "Choose a location"));
-        tvEnd.setText(prefs.getString("end", "Choose a location"));
+        eventType.check(prefs.getInt("eventType", R.id.rbBike));
+        //tvStart.setText(prefs.getString("start", "Choose a location"));
+        //tvEnd.setText(prefs.getString("end", "Choose a location"));
         btnEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
         btnEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
         tvDescription.setText(prefs.getString("description", ""));

@@ -119,4 +119,7 @@
     <string name="end">End:</string>
     <string name="distance_with_value">"Distance: %1$s"</string>
     <string name="duration_with_value">"Duration: %1$s"</string>
+    <string name="tv_repeat_password">Repeat password</string>
+    <string name="my_account">My account</string>
+    <string name="my_events">My events</string>
 </resources>

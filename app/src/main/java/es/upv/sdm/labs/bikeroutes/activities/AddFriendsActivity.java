@@ -33,6 +33,10 @@ public class AddFriendsActivity extends AppCompatActivity {
 
     }
 
+    void searchFriends() {
+        // TODO search for friends
+    }
+
 
 
     /*

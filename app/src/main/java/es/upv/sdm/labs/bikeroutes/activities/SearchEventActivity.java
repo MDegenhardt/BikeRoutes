@@ -52,7 +52,6 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     RadioGroup eventType;
     RadioButton rbChecked;
     EditText etKm;
-    TextView tvlocation;
 
     Date searchDate = new Date();
 
@@ -67,9 +66,9 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         tvAddress = (TextView) findViewById(R.id.tvEventAddress);
         btnSEventDate = (Button) findViewById(R.id.btnSEventDate);
         btnSEventTime = (Button) findViewById(R.id.btnSEventTime);
-        eventType = (RadioGroup) findViewById(R.id.rgEventType);
+        eventType = (RadioGroup) findViewById(R.id.rgSEventType);
+        rbChecked = (RadioButton) findViewById(R.id.rbSBike);
         etKm = (EditText) findViewById(R.id.etKm);
-        tvlocation = (TextView) findViewById(R.id.tvEventAddress);
 
         searchResultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -90,15 +89,16 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         editor.putString("date", btnSEventDate.getText().toString());
         editor.putString("time", btnSEventTime.getText().toString());
         editor.putString("km", etKm.getText().toString());
-        editor.putString("location", tvlocation.getText().toString());
+        editor.putString("location", tvAddress.getText().toString());
         editor.apply();
         super.onPause();
     }
 
+
     @Override
     protected void onResume() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        rbChecked = (RadioButton) findViewById(prefs.getInt("eventType", R.id.rbBike));
+        eventType.check(prefs.getInt("eventType", R.id.rbSBike));
         btnSEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
         btnSEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
         etKm.setText(prefs.getString("km", "1"));

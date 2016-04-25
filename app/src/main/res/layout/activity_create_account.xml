@@ -10,59 +10,73 @@
     tools:context=".activities.CreateAccountActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/login"
-        android:id="@+id/textView"
+        android:id="@+id/tvCreateName"
         android:layout_marginTop="26dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        style="@style/tvSettings"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text=""
         android:hint="@string/introduce_login"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/etCreateName"
+        android:layout_below="@+id/tvCreateName"
+        android:layout_centerHorizontal="true"
+        style="@style/etSettings"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/password"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/editText2"
+        android:id="@+id/tvCreatePassword"
+        android:layout_below="@+id/etCreateName"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp" />
+        android:layout_marginTop="29dp"
+        style="@style/tvSettings"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="@string/new_password"
         android:ems="10"
-        android:id="@+id/editText3"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/etCreatePassword"
+        android:layout_below="@+id/tvCreatePassword"
+        android:layout_centerHorizontal="true"
+        style="@style/etSettings"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/tv_repeat_password"
+        android:id="@+id/tvRepeatPassword"
+        android:layout_below="@+id/etCreatePassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        style="@style/tvSettings"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="@string/repeat_password"
         android:ems="10"
-        android:id="@+id/editText4"
-        android:layout_below="@+id/editText3"
+        android:id="@+id/etRepeatPassword"
+        android:layout_below="@+id/tvRepeatPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="87dp" />
+        style="@style/etSettings"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Create account"
         android:id="@+id/button"

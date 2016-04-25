@@ -14,6 +14,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
+        android:focusableInTouchMode="true"
         >
 
 
@@ -22,29 +23,28 @@
             android:layout_height="0dp"
             android:orientation="horizontal"
             android:layout_weight="1"
-            android:id="@+id/rgEventType"
+            android:id="@+id/rgSEventType"
             android:gravity="center"
             android:baselineAligned="false">
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/rbBike"
+                android:id="@+id/rbSBike"
                 android:drawableRight="@drawable/bike_small"
-                android:checked="true"
                 android:layout_marginRight="30dp" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/rbHike"
+                android:id="@+id/rbSHike"
                 android:drawableRight="@drawable/hike_small"
                 android:layout_marginRight="30dp" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/rbRun"
+                android:id="@+id/rbSRun"
                 android:drawableRight="@drawable/running_small" />
         </RadioGroup>
 

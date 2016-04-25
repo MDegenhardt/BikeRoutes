@@ -55,7 +55,7 @@ This method is executed when the activity is created to populate the ActionBar w
         return super.onCreateOptionsMenu(menu);
     }
 
-        @Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         switch (item.getItemId()) {

@@ -25,7 +25,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/rbBike"
             android:drawableRight="@drawable/bike_small"
-            android:checked="true"
             android:layout_marginRight="30dp" />
 
         <RadioButton

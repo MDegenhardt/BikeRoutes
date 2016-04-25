@@ -3,11 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menuInvite"
-        android:icon="@drawable/ic_contact_mail_white_24dp"
-        android:title="@string/invite_friend"
+        android:id="@+id/menuParticipate"
+        android:icon="@drawable/ic_add_white_24dp"
+        android:title="@string/participate_in_this_event"
         android:visible="true"
-
         app:showAsAction="always"/>
 
     <item
@@ -15,15 +14,13 @@
         android:icon="@drawable/ic_room_white_24dp"
         android:title="@string/show_route"
         android:visible="true"
-
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/menuParticipate"
-        android:icon="@drawable/ic_add_white_24dp"
-        android:title="@string/participate_in_this_event"
+        android:id="@+id/menuInvite"
+        android:icon="@drawable/ic_contact_mail_white_24dp"
+        android:title="@string/invite_friend"
         android:visible="true"
-
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 
 </menu>
