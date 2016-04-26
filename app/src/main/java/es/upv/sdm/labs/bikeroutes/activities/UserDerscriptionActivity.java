@@ -1,23 +1,57 @@
 package es.upv.sdm.labs.bikeroutes.activities;
 
 import android.content.Intent;
-import android.support.v4.app.DialogFragment;
+import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import es.upv.sdm.labs.bikeroutes.R;
-import es.upv.sdm.labs.bikeroutes.util.DatePickerFragment;
+import es.upv.sdm.labs.bikeroutes.dao.UserDAO;
+import es.upv.sdm.labs.bikeroutes.enumerations.Gender;
+import es.upv.sdm.labs.bikeroutes.model.User;
 
 public class UserDerscriptionActivity extends AppCompatActivity {
+
+    ImageView ivUser, ivGender;
+    TextView tvName, tvDescription;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_derscription);
+        ivUser = (ImageView) findViewById(R.id.ivUser);
+        ivGender = (ImageView) findViewById(R.id.ivGender);
+        tvName = (TextView) findViewById(R.id.tvUserName);
+        tvDescription = (TextView) findViewById(R.id.tvUserDescription);
+        UserDAO dao = new UserDAO(this);
+        user = dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id",0));
+
+        if(user.hasImage()){
+            Bitmap b = user.getImage();
+            ivUser.setVisibility(View.VISIBLE);
+            ivUser.setMinimumHeight(b.getHeight());
+            ivUser.setMinimumWidth(b.getWidth());
+            ivUser.setImageBitmap(b);
+        } else {
+            ivUser.setVisibility(View.GONE);
+        }
+
+        if(user.getGender()== Gender.UNINFORMED) ivGender.setVisibility(View.GONE);
+        else {
+            ivGender.setVisibility(View.VISIBLE);
+            ivGender.setImageResource(user.getGender()==Gender.FEMALE ? R.drawable.female : R.drawable.male);
+        }
+        tvName.setText(user.getName());
+        tvDescription.setText(user.getDescription());
+
+        dao.close();
     }
 
     @Override
@@ -42,6 +76,7 @@ public class UserDerscriptionActivity extends AppCompatActivity {
             case R.id.menuMyFriends:
                 intent = new Intent(this, MyFriendsActivity.class);
                 startActivity(intent);
+                startActivityForResult(intent,48);
                 break;
             case R.id.menuAddPhoto:
                 // adding photo

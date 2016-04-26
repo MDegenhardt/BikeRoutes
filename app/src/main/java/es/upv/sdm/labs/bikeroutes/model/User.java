@@ -140,6 +140,10 @@ public class User implements Enviable{
         this.historic = historic;
     }
 
+    public boolean hasImage(){
+        return this.image!=null;
+    }
+
     @Override
     public boolean equals(Object o) {
         return this.id == ((User)o).getId();

@@ -43,13 +43,8 @@
         </activity>
         <activity
             android:name=".activities.DashboardActivity"
-            android:label="@string/dashBoardActivityLabel"
-            android:parentActivityName=".activities.DashboardActivity">
+            android:label="@string/dashBoardActivityLabel">
 
-            <!-- Enable up navigation for backwards compatibility -->
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.DashboardActivity" />
         </activity>
         <activity
             android:name=".activities.CreateAccountActivity"
@@ -171,7 +166,6 @@
             android:name=".activities.CreditActivity"
             android:label="@string/title_activity_credit"
             android:parentActivityName=".activities.DashboardActivity">
-            <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
