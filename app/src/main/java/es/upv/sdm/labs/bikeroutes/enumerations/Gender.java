@@ -2,7 +2,7 @@ package es.upv.sdm.labs.bikeroutes.enumerations;
 
 
 /**
- * Created by Anderson on 11/04/2016.
+ * Created by anderson on 11/04/2016.
  */
 public enum Gender {
 

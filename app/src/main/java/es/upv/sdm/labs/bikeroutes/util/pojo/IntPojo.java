@@ -1,7 +1,7 @@
 package es.upv.sdm.labs.bikeroutes.util.pojo;
 
 /**
- * Created by Anderson on 18/04/2016.
+ * Created by anderson on 18/04/2016.
  */
 public class IntPojo extends AbstractPOJO {
 

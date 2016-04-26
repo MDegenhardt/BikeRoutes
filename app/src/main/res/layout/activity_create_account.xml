@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,105 +7,118 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:scrollbars="none"
     tools:context=".activities.CreateAccountActivity">
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/name"
-        android:id="@+id/tvCreateName"
-        android:layout_marginTop="26dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        style="@style/tvSettings"/>
+        android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/introduce_login"
-        android:ems="10"
-        android:id="@+id/etCreateName"
-        android:layout_below="@+id/tvCreateName"
-        android:layout_centerHorizontal="true"
-        style="@style/etSettings"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/mail"
+            android:id="@+id/tvCreateMail"
+            android:layout_marginTop="26dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            style="@style/tvSettings"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Mail"
-        android:id="@+id/tvCreateMail"
-        android:layout_marginTop="26dp"
-        android:layout_below="@+id/etCreateName"
-        android:layout_centerHorizontal="true"
-        style="@style/tvSettings"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/introduce_mail"
+            android:ems="10"
+            android:id="@+id/etCreateMail"
+            android:layout_below="@+id/tvCreateName"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            style="@style/etSettings"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="Your e-mail"
-        android:ems="10"
-        android:id="@+id/etCreateMail"
-        android:layout_below="@+id/tvCreateMail"
-        android:layout_centerHorizontal="true"
-        style="@style/etSettings"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/name"
+            android:id="@+id/tvCreateName"
+            android:layout_marginTop="26dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            style="@style/tvSettings"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/password"
-        android:id="@+id/tvCreatePassword"
-        android:layout_below="@+id/etCreateMail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
-        style="@style/tvSettings"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/introduce_name"
+            android:ems="10"
+            android:id="@+id/etCreateName"
+            android:layout_below="@+id/tvCreateName"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            style="@style/etSettings"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="@string/new_password"
-        android:ems="10"
-        android:id="@+id/etCreatePassword"
-        android:layout_below="@+id/tvCreatePassword"
-        android:layout_centerHorizontal="true"
-        style="@style/etSettings"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/password"
+            android:id="@+id/tvCreatePassword"
+            android:layout_below="@+id/etCreateName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="29dp"
+            style="@style/tvSettings"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/tv_repeat_password"
-        android:id="@+id/tvRepeatPassword"
-        android:layout_below="@+id/etCreatePassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
-        style="@style/tvSettings"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/new_password"
+            android:ems="10"
+            android:id="@+id/etCreatePassword"
+            android:layout_below="@+id/tvCreatePassword"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            style="@style/etSettings"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="@string/repeat_password"
-        android:ems="10"
-        android:id="@+id/etRepeatPassword"
-        android:layout_below="@+id/tvRepeatPassword"
-        android:layout_centerHorizontal="true"
-        style="@style/etSettings"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/tv_repeat_password"
+            android:id="@+id/tvRepeatPassword"
+            android:layout_below="@+id/etCreatePassword"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="29dp"
+            style="@style/tvSettings"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create account"
-        android:id="@+id/button"
-        style="@style/button"
-        android:layout_below="@+id/etRepeatPassword"
-        android:layout_centerHorizontal="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/repeat_password"
+            android:ems="10"
+            android:id="@+id/etRepeatPassword"
+            android:layout_below="@+id/tvRepeatPassword"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            style="@style/etSettings"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/create_account"
+            android:id="@+id/button"
+            style="@style/button"
+            android:onClick="createAccount"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="63dp" />
 
-</RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

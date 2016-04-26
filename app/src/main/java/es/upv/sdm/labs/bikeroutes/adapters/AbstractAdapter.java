@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 
 /**
- * Created by Anderson on 11/04/2016.
+ * Created by anderson on 11/04/2016.
  */
 public abstract class AbstractAdapter<T> extends ArrayAdapter {
 
