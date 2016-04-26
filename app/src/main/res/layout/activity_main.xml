@@ -20,6 +20,12 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:id="@+id/linearLayout3">
 
+    <ProgressBar
+        android:id="@+id/pbLogin"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
