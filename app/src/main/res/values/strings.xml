@@ -166,5 +166,9 @@
     <string name="duration">Duration:</string>
     <string name="choose_an_address">Choose an address</string>
     <string name="tabEventInvitations">Invitations</string>
+    <string name="date">DATE: %s</string>
+    <string name="event_created_successfully">Event created successfully!</string>
+    <string name="error_creating_event">Error creating the event!</string>
+    <string name="time">TIME: %s</string>
 
 </resources>

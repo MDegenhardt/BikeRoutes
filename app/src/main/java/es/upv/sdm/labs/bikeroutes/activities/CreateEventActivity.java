@@ -2,6 +2,7 @@ package es.upv.sdm.labs.bikeroutes.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -64,6 +65,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     TextView tvDescription;
     CheckBox cbSecret;
 
+    Context context;
+
     Date date = new Date();
 
     SharedPreferences prefs;
@@ -89,6 +92,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         rgEventType = (RadioGroup) findViewById(R.id.rgEventType);
         tvDescription = (TextView) findViewById(R.id.etEventDescription);
         cbSecret = (CheckBox) findViewById(R.id.cbSecretEvent);
+
+        context = this;
 
 
         mType = new EventType();
@@ -257,7 +262,7 @@ This method is executed when the activity is created to populate the ActionBar w
 
         String dateString = DateHelper.dateToString(date);
 
-        btnEventDate.setText("DATE: " + dateString);
+        btnEventDate.setText(String.format(getString(R.string.date), dateString));
     }
 
     @Override
@@ -269,7 +274,7 @@ This method is executed when the activity is created to populate the ActionBar w
 
         String timeString = DateHelper.timeToString(date);
 
-        btnEventTime.setText("TIME: " + timeString);
+        btnEventTime.setText(String.format(getString(R.string.time), timeString));
     }
 
     public void createEventButtonPressed(View view){
@@ -297,10 +302,13 @@ This method is executed when the activity is created to populate the ActionBar w
                 if(ServerInfo.RESPONSE_CODE == ServerInfo.RESPONSE_OK){
                     //ok
                     Log.d("CreateEventActivity", "Event created!");
+                    Toast.makeText(context, getString(R.string.event_created_successfully), Toast.LENGTH_LONG).show();
+
 
                 } else{
                     //not ok
                     Log.d("CreateEventActivity", "Error creating event!");
+                    Toast.makeText(context, R.string.error_creating_event, Toast.LENGTH_LONG).show();
                 }
             }
         });
