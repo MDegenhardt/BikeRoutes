@@ -170,5 +170,7 @@
     <string name="event_created_successfully">Event created successfully!</string>
     <string name="error_creating_event">Error creating the event!</string>
     <string name="time">TIME: %s</string>
+    <string name="error_searching_event">Error searching event!</string>
+    <string name="event_searched">Event searched!</string>
 
 </resources>

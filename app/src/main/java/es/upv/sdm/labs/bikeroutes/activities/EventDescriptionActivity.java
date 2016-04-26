@@ -1,5 +1,6 @@
 package es.upv.sdm.labs.bikeroutes.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,29 +9,98 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.adapters.PersonAdapter;
+import es.upv.sdm.labs.bikeroutes.model.Event;
+import es.upv.sdm.labs.bikeroutes.model.EventType;
 import es.upv.sdm.labs.bikeroutes.model.User;
+import es.upv.sdm.labs.bikeroutes.services.EventService;
+import es.upv.sdm.labs.bikeroutes.services.ServerInfo;
+import es.upv.sdm.labs.bikeroutes.util.DateHelper;
+import es.upv.sdm.labs.bikeroutes.util.async.PostExecute;
 
 public class EventDescriptionActivity extends AppCompatActivity {
 
     ListView personsParticipatingListView;
+    TextView tvEventDate;
+    TextView tvEventTime;
+    ImageView ivEventType;
+    TextView tvEventStart;
+    TextView tvEventEnd;
+    TextView tvEventDescription;
+
+    Context context;
+    Intent intent;
+
+
+    Event event;
+    int eventID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_description);
 
+        context = this;
+        intent = getIntent();
+        //get from intent
+        eventID = intent.getIntExtra("eventID", 0 );
+
         personsParticipatingListView = (ListView) findViewById(R.id.lvPersonsInEvent);
-        TextView tvDescription = (TextView) findViewById(R.id.tvEventDescription);
-        tvDescription.setMovementMethod(new ScrollingMovementMethod());
+        tvEventDate = (TextView) findViewById(R.id.tvEventTime);
+        tvEventTime = (TextView) findViewById(R.id.tvEventDate);
+        ivEventType = (ImageView) findViewById(R.id.ivEventType);
+        tvEventStart = (TextView) findViewById(R.id.tvEventStart);
+        tvEventEnd = (TextView) findViewById(R.id.tvEventEnd);
+        tvEventDescription = (TextView) findViewById(R.id.tvEventDescription);
+        tvEventDescription.setMovementMethod(new ScrollingMovementMethod());
 
         populatePersonsList();
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        event = new Event();
+
+        new EventService().findById(eventID, event, new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                if(ServerInfo.RESPONSE_CODE == ServerInfo.RESPONSE_OK){
+                    //ok
+
+                    tvEventDate.setText(DateHelper.dateToString(event.getDate()));
+                    tvEventTime.setText(DateHelper.timeToString(event.getDate()));
+                    EventType.Type type = event.getType().getType();
+                    int img = (type==EventType.Type.HIKE) ? R.drawable.hike : (type==EventType.Type.RUN) ? R.drawable.running : R.drawable.bike;
+                    ivEventType.setImageResource(img);
+                    tvEventStart.setText(event.getDeparture().getAddress());
+                    tvEventEnd.setText(event.getArrival().getAddress());
+                    tvEventDescription.setText(event.getDescription());
+
+
+
+                    Log.d("EDescriptionActivity", "Event searched!");
+                    Toast.makeText(context, R.string.event_searched, Toast.LENGTH_LONG).show();
+
+
+                } else{
+                    //not ok
+                    Log.d("EDescriptionActivity", "Error searching event!");
+                    Toast.makeText(context, R.string.error_searching_event, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
 
     }
@@ -87,9 +157,8 @@ This method is executed when the activity is created to populate the ActionBar w
     public void eventDescMapButtonPressed(View view){
         Log.d("EvenDescriptionActivity", "Map Button Pressed!");
 
-        int eventID = 1;
         Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra("EventID", eventID );
+        intent.putExtra("eventID", eventID );
         startActivity(intent);
 
     }

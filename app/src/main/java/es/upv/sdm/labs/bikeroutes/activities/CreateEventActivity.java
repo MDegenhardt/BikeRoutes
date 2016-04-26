@@ -303,7 +303,10 @@ This method is executed when the activity is created to populate the ActionBar w
                     //ok
                     Log.d("CreateEventActivity", "Event created!");
                     Toast.makeText(context, getString(R.string.event_created_successfully), Toast.LENGTH_LONG).show();
-
+                    int eventID = event.getId();
+                    Intent intent = new Intent(context, EventDescriptionActivity.class);
+                    intent.putExtra("eventID", eventID );
+                    startActivity(intent);
 
                 } else{
                     //not ok
