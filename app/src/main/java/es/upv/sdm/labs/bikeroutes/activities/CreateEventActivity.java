@@ -233,6 +233,10 @@ This method is executed when the activity is created to populate the ActionBar w
         Log.d("CreateEventActivity", "Create Button pressed");
 
         String dateString = DateHelper.toFormatString(date);
+        prefs.getAll().clear();
+        editor.commit();
+
+        startActivity(new Intent(this, EventDescriptionActivity.class));
 
         Log.w("CreateEventActivity","Date = " + dateString);
 

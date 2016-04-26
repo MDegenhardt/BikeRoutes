@@ -77,12 +77,11 @@
     <string name="type_event_bike">Bike</string>
     <string name="type_event_run">Bike</string>
     <string name="type_event_walk">Bike</string>
-    <string name="introduce_login">Introduce chosen login</string>
+    <string name="introduce_login">Your name</string>
     <string name="password">Password</string>
-    <string name="new_password">New password</string>
+    <string name="new_password">Choose a password</string>
     <string name="repeat_password">Repeat your password</string>
     <string name="create_account">Create account</string>
-    <string name="login">Login</string>
     <string name="mail">Mail</string>
     <string name="name">Name</string>
     <string name="log_in">Log in</string>
@@ -122,4 +121,7 @@
     <string name="tv_repeat_password">Repeat password</string>
     <string name="my_account">My account</string>
     <string name="my_events">My events</string>
+    <string name="et_create_mail">Your e-mail</string>
+    <string name="tv_create_mail">Mail</string>
+    <string name="log_out">Log out</string>
 </resources>

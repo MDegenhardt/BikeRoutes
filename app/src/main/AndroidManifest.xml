@@ -128,11 +128,29 @@
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps"
             android:parentActivityName=".activities.DashboardActivity">
+
             <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
         </activity>
+        <activity
+            android:name=".activities.CreateAccountActivity"
+            android:label="Create an account"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.ResetPasswordActivity"
+            android:label="Reset your password"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity android:name=".activities.AccountSettingsActivity"></activity>
     </application>
 
 </manifest>

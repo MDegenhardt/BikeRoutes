@@ -8,8 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/colorWhite"
-    tools:context=".activities.CreateAccountActivity">
-
+    tools:context="es.upv.sdm.labs.bikeroutes.activities.AccountSettingsActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="@string/introduce_login"
+        android:hint="Change your name"
         android:ems="10"
         android:id="@+id/etCreateName"
         android:layout_below="@+id/tvCreateName"
@@ -36,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Mail"
+        android:text="E-mail"
         android:id="@+id/tvCreateMail"
         android:layout_marginTop="26dp"
         android:layout_below="@+id/etCreateName"
@@ -47,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:hint="Your e-mail"
+        android:hint="Change your e-mail"
         android:ems="10"
         android:id="@+id/etCreateMail"
         android:layout_below="@+id/tvCreateMail"
@@ -69,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="@string/new_password"
+        android:hint="Change your password"
         android:ems="10"
         android:id="@+id/etCreatePassword"
         android:layout_below="@+id/tvCreatePassword"
@@ -101,11 +100,19 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create account"
-        android:id="@+id/button"
+        android:text="Save"
+        android:id="@+id/btn_save_settings"
         style="@style/button"
         android:layout_below="@+id/etRepeatPassword"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log out"
+        android:id="@+id/btnLogout"
+        style="@style/noBorderButton"
+        android:layout_below="@+id/btn_save_settings"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
