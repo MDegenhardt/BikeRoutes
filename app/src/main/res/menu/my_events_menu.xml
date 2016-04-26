@@ -8,7 +8,10 @@
         android:title="@string/invite_friend"
         android:visible="false"
         app:showAsAction="always"/>
-
-
+    <item
+        android:id="@+id/menuLogOut"
+        android:title="@string/log_out"
+        android:visible="true"
+        app:showAsAction="never"/>
 
 </menu>

@@ -29,7 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
-                android:text="01.01.2016"
+                android:text=""
                 style="@style/event_dateTime"
 
                 />
@@ -39,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="12:34"
+                android:text=""
                 style="@style/event_dateTime"
                 />
 
@@ -48,7 +48,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Right Icon"
                 android:src="@drawable/bike"
                 android:layout_margin="5dp" />
 
@@ -67,7 +66,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Start"
+                android:text="@string/start"
                 style="@style/event_startEnd"
                 />
 
@@ -76,10 +75,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"
-                android:text="-"
+                android:text="@string/dash"
                 android:gravity="center"
-
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary" />
 
@@ -90,7 +88,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Finish"
+                android:text="@string/finish"
                 style="@style/event_startEnd"
                 />
 

@@ -108,6 +108,7 @@ This method is executed when the activity is created to populate the ActionBar w
                 intent = new Intent(this, UserDerscriptionActivity.class);
                 startActivity(intent);
                 break;
+
             case R.id.menuMyEvents:
                 startActivity(new Intent(this, MyEventsActivity.class));
                 break;
@@ -121,6 +122,12 @@ This method is executed when the activity is created to populate the ActionBar w
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
                 break;
+
+            case R.id.menuCredits:
+                intent = new Intent(this, CreditActivity.class);
+                startActivity(intent);
+                break;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

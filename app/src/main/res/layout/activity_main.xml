@@ -30,7 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/etMail"
-        android:text=""
         android:hint="@string/mail"
         android:layout_marginTop="28dp"
         android:textAlignment="center"/>
@@ -42,20 +41,17 @@
         android:ems="10"
         android:id="@+id/etPassword"
         android:hint="@string/password"
-        android:layout_below="@+id/editText6"
         android:textAlignment="center" />
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
             android:text="@string/log_in"
             android:id="@+id/btnLogin"
             android:layout_weight="1"
             style="@style/button"
             android:onClick="loginButtonClicked"
-            android:layout_below="@+id/linearLayout3"
-            android:layout_alignLeft="@+id/btnStartLocation"
-            android:layout_alignStart="@+id/btnStartLocation" />
+            />
 
     </LinearLayout>
 

@@ -14,7 +14,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="match_parent"
@@ -23,19 +23,15 @@
             android:text="@string/mail"
             android:id="@+id/tvCreateMail"
             android:layout_marginTop="26dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             style="@style/tvSettings"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="textEmailAddress"
             android:hint="@string/introduce_mail"
             android:ems="10"
             android:id="@+id/etCreateMail"
-            android:layout_below="@+id/tvCreateName"
-            android:layout_centerHorizontal="true"
             android:textAlignment="center"
             style="@style/etSettings"/>
 
@@ -46,8 +42,6 @@
             android:text="@string/name"
             android:id="@+id/tvCreateName"
             android:layout_marginTop="26dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             style="@style/tvSettings"/>
 
         <EditText
@@ -57,8 +51,6 @@
             android:hint="@string/introduce_name"
             android:ems="10"
             android:id="@+id/etCreateName"
-            android:layout_below="@+id/tvCreateName"
-            android:layout_centerHorizontal="true"
             android:textAlignment="center"
             style="@style/etSettings"/>
 
@@ -68,8 +60,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/password"
             android:id="@+id/tvCreatePassword"
-            android:layout_below="@+id/etCreateName"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="29dp"
             style="@style/tvSettings"/>
 
@@ -80,8 +70,6 @@
             android:hint="@string/new_password"
             android:ems="10"
             android:id="@+id/etCreatePassword"
-            android:layout_below="@+id/tvCreatePassword"
-            android:layout_centerHorizontal="true"
             android:textAlignment="center"
             style="@style/etSettings"/>
 
@@ -91,8 +79,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/tv_repeat_password"
             android:id="@+id/tvRepeatPassword"
-            android:layout_below="@+id/etCreatePassword"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="29dp"
             style="@style/tvSettings"/>
 
@@ -103,8 +89,6 @@
             android:hint="@string/repeat_password"
             android:ems="10"
             android:id="@+id/etRepeatPassword"
-            android:layout_below="@+id/tvRepeatPassword"
-            android:layout_centerHorizontal="true"
             android:textAlignment="center"
             style="@style/etSettings"/>
 
@@ -115,8 +99,6 @@
             android:id="@+id/button"
             style="@style/button"
             android:onClick="createAccount"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="63dp" />
 
     </LinearLayout>

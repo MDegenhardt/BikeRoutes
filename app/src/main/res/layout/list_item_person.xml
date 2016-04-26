@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="First"
+        android:text=""
         style="@style/event_startEnd"
         />
 
@@ -21,7 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:text="Person"
+        android:text=""
         style="@style/event_startEnd"
         />
 

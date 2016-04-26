@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/colorWhite"
     tools:context=".activities.CreateEventActivity">
 
 
@@ -54,7 +55,7 @@
         <CheckBox
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Secret Event"
+            android:text="@string/secret_event"
             android:id="@+id/cbSecretEvent"
             android:layout_weight="1"
             android:layout_gravity="center"
@@ -62,17 +63,6 @@
 
 
         </LinearLayout>
-
-
-
-<!--    <TextView
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:text="Specify:"
-    android:id="@+id/tvEventSpecify"
-    android:layout_weight="0.5"
-    android:textColor="@color/colorPrimaryDark2"
-    android:textSize="20dp" />-->
 
 
     <LinearLayout
@@ -199,48 +189,6 @@
 
     </LinearLayout>
 
-<!--    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        >
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/end"
-            style="@style/event_startEnd"
-            />
-
-
-        <TextView
-            android:id="@+id/tvEventEnd"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="@string/choose_end"
-            style="@style/event_startEnd"
-            android:onClick="selectLocationButtonPressed"
-            />
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:id="@+id/btnEndLocation"
-            android:src="@drawable/map_marker"
-            android:scaleType="centerInside"
-            android:background="@color/colorPrimaryLight1"
-            android:layout_margin="2dp"
-            android:onClick="selectLocationButtonPressed"
-            />
-
-
-
-    </LinearLayout>-->
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -248,21 +196,12 @@
         android:layout_weight="1"
         android:layout_margin="5dp"
         android:textColor="@color/colorBlack"
-        android:hint="Add an event description..." />
-
-<!--    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="Secret Event"
-        android:id="@+id/cbSecretEvent"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:textColor="@color/colorPrimaryDark2" />-->
+        android:hint="@string/add_an_event_description" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:text="Create Event"
+        android:text="@string/create_event"
         android:id="@+id/btnCreateEvent"
         android:layout_weight="1"
         android:onClick="createEventButtonPressed"
