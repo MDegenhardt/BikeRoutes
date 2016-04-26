@@ -105,7 +105,7 @@ This method is executed when the activity is created to populate the ActionBar w
                 break;
 
             case R.id.menuMyEvents:
-                intent = new Intent(this, EventDescriptionActivity.class);
+                intent = new Intent(this, MyEventsActivity.class);
                 startActivity(intent);
                 break;
 
