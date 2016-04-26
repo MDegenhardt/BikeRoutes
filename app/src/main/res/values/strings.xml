@@ -148,5 +148,22 @@
     <string name="markus_degenhardt">Markus Degenhardt</string>
     <string name="title_activity_credit">Credits</string>
     <string name="log_out">Log out</string>
+    <string name="credits">Credits</string>
+    <string name="etCreateNameHint">Change your name</string>
+    <string name="e_mail">E-mail</string>
+    <string name="change_your_e_mail">Change your e-mail</string>
+    <string name="change_your_password">Change your password</string>
+    <string name="save">Save</string>
+    <string name="search_for_a_friend">Search for a friend...</string>
+    <string name="search">Search</string>
+    <string name="et_event_description_hint">Add an event description...</string>
+    <string name="secret_event">Secret Event</string>
+    <string name="create_event">Create Event</string>
+    <string name="add_an_event_description">Add an event description...</string>
+    <string name="dash">-</string>
+    <string name="finish">Finish</string>
+    <string name="distance">Distance:</string>
+    <string name="duration">Duration:</string>
+    <string name="choose_an_address">Choose an address</string>
 
 </resources>

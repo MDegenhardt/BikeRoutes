@@ -50,22 +50,6 @@
                 android:drawableRight="@drawable/running_small" />
         </RadioGroup>
 
-<!--        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:weightSum="1">
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/choose_a_date"
-                android:id="@+id/btnSEventDate"
-                android:onClick="showDatePickerDialog"
-                style="@style/date_time_button" />
-        </LinearLayout>-->
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -112,23 +96,6 @@
     </LinearLayout>
 
 
-<!--        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/choose_a_time"
-                android:id="@+id/btnSEventTime"
-                android:onClick="showTimePickerDialog"
-                style="@style/date_time_button"
-                />
-
-        </LinearLayout>-->
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -160,7 +127,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:text="Choose an address"
+                    android:text="@string/choose_an_address"
                     style="@style/event_startEnd"
                     android:onClick="selectLocationButtonPressed"
 
@@ -175,13 +142,7 @@
                     android:scaleType="centerInside"
                     android:background="@color/colorPrimaryLight1"
                     android:layout_margin="2dp"
-                    android:onClick="selectLocationButtonPressed"
-
-                    />
-
-
-
-
+                    android:onClick="selectLocationButtonPressed" />
             </LinearLayout>
 
         </LinearLayout>

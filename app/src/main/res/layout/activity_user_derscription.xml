@@ -24,17 +24,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name"
+        android:text="@string/name"
         android:id="@+id/tvUserName"
-        android:padding="10dp"
-        android:layout_gravity="center_horizontal"
-        style="@style/tvSettings"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Age"
-        android:id="@+id/tvUserBirth"
         android:padding="10dp"
         android:layout_gravity="center_horizontal"
         style="@style/tvSettings"/>

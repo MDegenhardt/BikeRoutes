@@ -43,16 +43,6 @@
             android:drawableRight="@drawable/running_small"
             android:checked="false" />
     </RadioGroup>
-
-<!--    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="Specify:"
-        android:id="@+id/tvEventSpecify"
-        android:layout_weight="0.5"
-        android:textColor="@color/colorPrimaryDark2"
-        android:textSize="20dp" />-->
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -215,12 +205,12 @@
         android:layout_weight="1"
         android:layout_margin="5dp"
         android:textColor="@color/colorBlack"
-        android:hint="Add an event description..." />
+        android:hint="@string/et_event_description_hint" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:text="Secret Event"
+        android:text="@string/secret_event"
         android:id="@+id/cbSecretEvent"
         android:layout_weight="1"
         android:layout_gravity="center"
@@ -229,7 +219,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:text="Create Event"
+        android:text="@string/create_event"
         android:id="@+id/btnCreateEvent"
         android:layout_weight="1"
         android:onClick="createEventButtonPressed"

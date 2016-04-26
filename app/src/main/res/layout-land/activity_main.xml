@@ -24,7 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/etMail"
-            android:text=""
             android:hint="@string/mail"
             android:layout_marginTop="28dp"
             android:textAlignment="center"/>
@@ -37,7 +36,6 @@
             android:id="@+id/etPassword"
             android:hint="@string/password"
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/editText6"
             android:textAlignment="center" />
 
         <Button
@@ -48,23 +46,9 @@
             android:layout_weight="4"
             android:layout_marginTop="10dp"
             style="@style/button"
-            android:onClick="loginButtonClicked"
-            android:layout_marginRight="10dp"
-            android:layout_below="@+id/linearLayout3"
-            android:layout_alignLeft="@+id/btnStartLocation"
-            android:layout_alignStart="@+id/btnStartLocation" />
+            android:onClick="loginButtonClicked" />
 
-        <!--<ImageButton
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:id="@+id/btnFb"
-            android:src="@drawable/fb_icon"
-            android:scaleType="centerInside"
-            android:background="@color/colorWhite"
-            android:layout_gravity="center"
-            android:layout_below="@+id/linearLayout3"
-            android:layout_centerHorizontal="true" />-->
+
         <com.facebook.login.widget.LoginButton
             android:layout_marginTop="10dp"
             android:id="@+id/btnFb"
@@ -72,7 +56,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"
-            android:layout_below="@+id/linearLayout3"
             android:layout_centerHorizontal="true"/>
 
 
@@ -81,9 +64,7 @@
             android:layout_height="wrap_content"
             android:text="@string/create_account"
             android:id="@+id/btnCreateAccount"
-            android:layout_above="@+id/btnResetPassword"
             android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
             android:onClick="createAccount"
             style="@style/noBorderButton"/>
 
@@ -93,8 +74,6 @@
             android:text="@string/forgot_password"
             android:id="@+id/btnResetPassword"
             android:layout_marginTop="10dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:onClick="resetPassword"
             style="@style/noBorderButton"/>
 

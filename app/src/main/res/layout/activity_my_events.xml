@@ -38,7 +38,6 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-
                     <ListView
                         android:id="@+id/lvMyUpcomingEvents"
                         android:layout_width="match_parent"
@@ -56,12 +55,7 @@
                         android:id="@+id/lvMyRecentEvents"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-
-
                 </LinearLayout>
-
-
-
             </FrameLayout>
         </LinearLayout>
     </TabHost>

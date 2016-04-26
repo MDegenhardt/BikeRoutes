@@ -103,6 +103,17 @@ This method is executed when the activity is created to populate the ActionBar w
                 intent = new Intent(this, UserDerscriptionActivity.class);
                 startActivity(intent);
                 break;
+
+            case R.id.menuMyEvents:
+                intent = new Intent(this, EventDescriptionActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.menuCredits:
+                intent = new Intent(this, CreditActivity.class);
+                startActivity(intent);
+                break;
+
             case R.id.btn_create_route:
                 // User chose the "Create" item, show the app CreateEvent...
                 intent = new Intent(this, CreateEventActivity.class);
