@@ -55,8 +55,6 @@ public class DashboardActivity extends AppCompatActivity  {
 
         context = this;
 
-        //Log.d("DashboardActivity", "bla");
-
 
         // When an item in the list is clicked
         recentEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -176,14 +174,5 @@ This method is executed when the activity is created to populate the ActionBar w
         return super.onOptionsItemSelected(item);
     }
 
-// TODO: currently not working from Dashboard when you press the map button :/
-    public void dashDescMapButtonPressed(View view){
-        Log.d("EvenDescriptionActivity", "Map Button Pressed!");
-
-        Intent intent = new Intent(context, MapsActivity.class);
-        intent.putExtra("eventID", eventID );
-        startActivity(intent);
-
-    }
 
 }
