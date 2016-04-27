@@ -18,6 +18,7 @@ public class MyEventsActivity extends AppCompatActivity {
     TabHost tabHost;
     ListView upcomingEventsListView;
     ListView recentEventsListView;
+    ListView invitationsListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,19 +31,26 @@ public class MyEventsActivity extends AppCompatActivity {
         TabHost.TabSpec spec = tabHost.newTabSpec(("TAB1"));
         //Tab indicator specified as Label and Icon
         spec.setIndicator(getString(R.string.tabUpcomingEvents), getResources().getDrawable(R.mipmap.ic_launcher));
-        spec.setContent(R.id.linearLayout);
+        spec.setContent(R.id.layoutUpcomingEvents);
         tabHost.addTab(spec);
 
         spec = tabHost.newTabSpec(("TAB2"));
 
         //Tab indicator specified as Label and Icon
         spec.setIndicator(getString(R.string.tabRecentEvents), getResources().getDrawable(R.mipmap.ic_launcher));
-        spec.setContent(R.id.linearLayout2);
+        spec.setContent(R.id.layoutRecentEvents);
+        tabHost.addTab(spec);
+
+        //Tab indicator specified as Label and Icon
+        spec.setIndicator(getString(R.string.tabEventInvitations), getResources().getDrawable(R.mipmap.ic_launcher));
+        spec.setContent(R.id.layoutInvitations);
         tabHost.addTab(spec);
 
 
         recentEventsListView = (ListView) findViewById(R.id.lvMyRecentEvents);
         upcomingEventsListView = (ListView) findViewById(R.id.lvMyUpcomingEvents);
+        invitationsListView = (ListView) findViewById(R.id.lvMyInvitations);
+
 
         tabHost.setCurrentTab(0);
         populateEventsList();
@@ -88,7 +96,6 @@ This method is executed when the activity is created to populate the ActionBar w
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.my_events_menu, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 }

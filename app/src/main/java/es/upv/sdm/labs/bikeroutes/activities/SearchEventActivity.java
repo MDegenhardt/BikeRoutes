@@ -33,23 +33,28 @@ import java.util.Date;
 
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.adapters.EventAdapter2;
+import es.upv.sdm.labs.bikeroutes.dao.UserDAO;
+import es.upv.sdm.labs.bikeroutes.model.EventType;
+import es.upv.sdm.labs.bikeroutes.model.Location;
+import es.upv.sdm.labs.bikeroutes.services.EventService;
+import es.upv.sdm.labs.bikeroutes.services.ServerInfo;
 import es.upv.sdm.labs.bikeroutes.util.Constants;
 import es.upv.sdm.labs.bikeroutes.util.DateHelper;
-import es.upv.sdm.labs.bikeroutes.util.DatePickerFragment;
 import es.upv.sdm.labs.bikeroutes.util.SearchDatePickerFragment;
 import es.upv.sdm.labs.bikeroutes.util.SearchTimePickerFragment;
-import es.upv.sdm.labs.bikeroutes.util.TimePickerFragment;
 import es.upv.sdm.labs.bikeroutes.model.Event;
+import es.upv.sdm.labs.bikeroutes.util.async.PostExecute;
 
 public class SearchEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     ListView searchResultListView;
     Context context;
 
+
     TextView tvAddress;
     Button btnSEventDate;
     Button btnSEventTime;
-    RadioGroup eventType;
+    RadioGroup rgEventType;
     RadioButton rbChecked;
     EditText etKm;
 
@@ -57,8 +62,16 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     SharedPreferences.Editor editor;
 
     String searchLocationStr;
+    String dateString;
+    String timeString;
 
     Date searchDate = new Date();
+
+    private EventType mType;
+
+    ArrayList<Event> arrayOfEvents;
+
+    int eventID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,15 +87,23 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         tvAddress = (TextView) findViewById(R.id.tvEventAddress);
         btnSEventDate = (Button) findViewById(R.id.btnSEventDate);
         btnSEventTime = (Button) findViewById(R.id.btnSEventTime);
-        eventType = (RadioGroup) findViewById(R.id.rgSEventType);
+        rgEventType = (RadioGroup) findViewById(R.id.rgSEventType);
         rbChecked = (RadioButton) findViewById(R.id.rbSBike);
         etKm = (EditText) findViewById(R.id.etKm);
+
+        mType = new EventType();
 
         searchResultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("SearchEventActivity", "Item " + position + " clicked");
-                startActivity(new Intent(context,EventDescriptionActivity.class));
+
+
+                eventID = arrayOfEvents.get(position).getId();
+                Log.d("SearchEventActivity", "eventID 1: " + eventID);
+                Intent intent = new Intent(context, EventDescriptionActivity.class);
+                intent.putExtra("eventID", eventID );
+                startActivity(intent);
 
 
             }
@@ -91,7 +112,9 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     }
 
     protected void onPause() {
-        editor.putInt("eventType", eventType.getCheckedRadioButtonId());
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
+        editor.putInt("eventType", rgEventType.getCheckedRadioButtonId());
         editor.putString("date", btnSEventDate.getText().toString());
         editor.putString("time", btnSEventTime.getText().toString());
         editor.putString("km", etKm.getText().toString());
@@ -103,7 +126,13 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
 
     @Override
     protected void onResume() {
-        eventType.check(prefs.getInt("eventType", R.id.rbSBike));
+        int typeInt = prefs.getInt("eventType", R.id.rbSBike);
+        rgEventType.check(typeInt);
+
+        int t = rgEventType.getCheckedRadioButtonId();
+        mType.setType(t==R.id.rbSBike ? EventType.Type.BIKE : t==R.id.rbSRun ? EventType.Type.RUN : EventType.Type.HIKE);
+
+//        rgEventType.check(prefs.getInt("eventType", R.id.rbSBike));
         btnSEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
         btnSEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
         etKm.setText(prefs.getString("km", "1"));
@@ -114,7 +143,7 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
 
     private void populateEventsList() {
         //Construct data source
-        ArrayList<Event> arrayOfEvents = Event.getEvents();
+//        ArrayList<Event> arrayOfEvents = Event.getEvents();
         //Create the adapter to convert the array to views
         EventAdapter2 adapter = new EventAdapter2(this, arrayOfEvents);
         //attach the adapter to the listview
@@ -175,12 +204,12 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
 
     }
 
+    // TODO: onItemClickListener of Listview is not called when the button is pressed -> eventID wrong
     public void dashDescMapButtonPressed(View view){
-        Log.d("EvenDescriptionActivity", "Map Button Pressed!");
-
-        int eventID = 1;
-        Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra("EventID", eventID );
+        Log.d("SearchEventActivity", "Map Button Pressed!");
+        Log.d("SearchEventActivity", "eventID: " + eventID);
+        Intent intent = new Intent(context, MapsActivity.class);
+        intent.putExtra("eventID", eventID );
         startActivity(intent);
 
     }
@@ -195,9 +224,9 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
 
         Log.w("CreateEventActivity","SearchDate = " + searchDate.toString());
 
-        String dateString = DateHelper.dateToString(searchDate);
+        dateString = DateHelper.dateToMySQLFormat(searchDate);
 
-        btnSEventDate.setText("DATE: " + dateString);
+        btnSEventDate.setText(String.format(getString(R.string.date), dateString));
     }
 
     @Override
@@ -207,9 +236,9 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         searchDate.setHours(hourOfDay);
         searchDate.setMinutes(minute);
 
-        String timeString = DateHelper.timeToString(searchDate);
+        timeString = DateHelper.timeToMySQLFormat(searchDate);
 
-        btnSEventTime.setText("TIME: " + timeString);
+        btnSEventTime.setText(String.format(getString(R.string.time), timeString));
     }
 
 
@@ -218,11 +247,37 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
     public void searchButtonClicked(View view) {
         Log.d("SearchEventActivity", "Search Button pressed");
 
-        populateEventsList();
+        int distance = Integer.parseInt(etKm.getText().toString());
 
-        String dateString = DateHelper.toFormatString(searchDate);
 
-        Log.w("SearchEventActivity","Date = " + dateString);
+        arrayOfEvents = new ArrayList<>();
+
+        new EventService().searchAvailableEventsToUser(arrayOfEvents, prefs.getInt("user_id", 0), mType, dateString, timeString, distance, new Location(searchLocationStr, this), new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                if(ServerInfo.RESPONSE_CODE == ServerInfo.RESPONSE_OK){
+                    //ok
+
+                    populateEventsList();
+
+                    Log.d("SearchEventActivity", "Event searched!");
+                    Toast.makeText(context, R.string.event_searched, Toast.LENGTH_LONG).show();
+
+
+                } else{
+                    //not ok
+                    Log.d("SearchEventActivity", "Error searching event!");
+                    Toast.makeText(context, R.string.error_searching_event, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+
+//        String dateString = DateHelper.toFormatString(searchDate);
+
+//        Log.w("SearchEventActivity","Date = " + dateString);
+
 
     }
 

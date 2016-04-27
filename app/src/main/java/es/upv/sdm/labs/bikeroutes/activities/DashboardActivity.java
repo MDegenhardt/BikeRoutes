@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -27,11 +28,21 @@ import es.upv.sdm.labs.bikeroutes.adapters.EventAdapter2;
 import es.upv.sdm.labs.bikeroutes.dao.UserDAO;
 import es.upv.sdm.labs.bikeroutes.model.Event;
 import es.upv.sdm.labs.bikeroutes.model.User;
+import es.upv.sdm.labs.bikeroutes.services.EventService;
+import es.upv.sdm.labs.bikeroutes.services.ServerInfo;
+import es.upv.sdm.labs.bikeroutes.util.async.PostExecute;
 
 public class DashboardActivity extends AppCompatActivity  {
 
     ListView recentEventsListView;
     User user;
+
+    Context context;
+
+    final ArrayList<Event> arrayOfEvents = new ArrayList<>();
+
+    int eventID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,34 +53,61 @@ public class DashboardActivity extends AppCompatActivity  {
         this.user = dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id",0));
         dao.close();
 
+        context = this;
+
         //Log.d("DashboardActivity", "bla");
-        populateEventsList();
+
 
         // When an item in the list is clicked
         recentEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("DashboardActivity", "Item " + position + " clicked");
-                startActivity(new Intent(getApplicationContext(),EventDescriptionActivity.class));
 
+                eventID = arrayOfEvents.get(position).getId();
+                Intent intent = new Intent(context, EventDescriptionActivity.class);
+                intent.putExtra("eventID", eventID );
+                startActivity(intent);
 
             }
         });
+
+        populateEventsList();
 
 
     }
 
     private void populateEventsList(){
         //Construct data source
-        ArrayList<Event> arrayOfEvents = Event.getEvents();
+        // TODO: change to findNearbyEvents (need to get location therefore...)
+        new EventService().findAll(arrayOfEvents, new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                if(ServerInfo.RESPONSE_CODE == ServerInfo.RESPONSE_OK){
 
-        Log.d("DashboardActivity", arrayOfEvents.get(0).toString());
+                    Log.d("DashboardActivity", arrayOfEvents.get(0).toString());
 
-        //Create the adapter to convert the array to views
-        EventAdapter2 adapter = new EventAdapter2(this, arrayOfEvents);
-        //recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
-        //attach the adapter to the listview
-        recentEventsListView.setAdapter(adapter);
+                    //Create the adapter to convert the array to views
+                    EventAdapter2 adapter = new EventAdapter2(getApplicationContext(), arrayOfEvents);
+                    //recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
+                    //attach the adapter to the listview
+                    recentEventsListView.setAdapter(adapter);
+
+                    //ok
+                    Log.d("DashboardActivity", "Event searched!");
+                    Toast.makeText(context, R.string.event_searched, Toast.LENGTH_LONG).show();
+
+
+                } else{
+                    //not ok
+                    Log.d("DashboardActivity", "Error searching event!");
+                    Toast.makeText(context, R.string.error_searching_event, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+
     }
 
     public void dashboardButtonClicked(View view){
@@ -138,12 +176,12 @@ This method is executed when the activity is created to populate the ActionBar w
         return super.onOptionsItemSelected(item);
     }
 
+// TODO: currently not working from Dashboard when you press the map button :/
     public void dashDescMapButtonPressed(View view){
         Log.d("EvenDescriptionActivity", "Map Button Pressed!");
 
-        int eventID = 1;
-        Intent intent = new Intent(this, MapsActivity.class);
-        intent.putExtra("EventID", eventID );
+        Intent intent = new Intent(context, MapsActivity.class);
+        intent.putExtra("eventID", eventID );
         startActivity(intent);
 
     }

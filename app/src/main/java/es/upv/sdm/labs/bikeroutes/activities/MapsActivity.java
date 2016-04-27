@@ -46,9 +46,14 @@ import java.util.Locale;
 import javax.net.ssl.HttpsURLConnection;
 
 import es.upv.sdm.labs.bikeroutes.R;
+import es.upv.sdm.labs.bikeroutes.model.Event;
 import es.upv.sdm.labs.bikeroutes.model.EventType;
+import es.upv.sdm.labs.bikeroutes.services.EventService;
+import es.upv.sdm.labs.bikeroutes.services.ServerInfo;
+import es.upv.sdm.labs.bikeroutes.util.DateHelper;
+import es.upv.sdm.labs.bikeroutes.util.async.PostExecute;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity {
 
     private GoogleMap mMap;
     Polyline route = null;
@@ -63,28 +68,29 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     String distValueStr;
     String durValueStr;
 
+    Event event;
+    Context context;
+    int eventID;
 
-
-    //test data
-    LatLng pos1 = new LatLng(39.4666667, -0.3666667);
-    LatLng pos2 = new LatLng(39.1666667, -0.25);
-//    LatLng pos2 = new LatLng(39.4666667, -0.3666667);
+    double latP1;
+    double longP1;
+    double latP2;
+    double longP2;
 
     String pos1Title = "StartName";
     String pos1Desc  = "StartDescription";
     String pos2Title = "FinishName";
     String pos2Desc  = "FinishDescription";
-    EventType.Type type = EventType.Type.HIKE;
+    EventType.Type type = EventType.Type.HIKE; //TODO change
 //    int img = (type==EventType.HIKE) ? R.drawable.hike : (type==EventType.RUN) ? R.drawable.running : R.drawable.bike;
-
-
-    // LatLngBounds (LatLng southwest, LatLng northeast)
-//    LatLngBounds routeBounds = (pos1.latitude < pos2.latitude) ? new LatLngBounds(pos1, pos2) : new LatLngBounds(pos2,pos1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        context = this;
+
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -93,51 +99,86 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         intent = getIntent();
 
-        int evID;
-        evID = intent.getIntExtra("EventID", 0 );
-        Log.d("MapsActivity", "EvID: " + Integer.toString(evID));
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        eventID = intent.getIntExtra("eventID", 0 );
+        Log.d("MapsActivity", "EvID: " + Integer.toString(eventID));
 
-        if (isConnectionAvailable()) {
-            (new RouteAsyncTask()).execute(pos1, pos2);
-        }
+
+        event = new Event();
+
+        new EventService().findById(eventID, event, new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                if(ServerInfo.RESPONSE_CODE == ServerInfo.RESPONSE_OK){
+                    //ok
+
+                    latP1 = event.getDeparture().getLatitude();
+                    longP1 = event.getDeparture().getLongitude();
+
+                    Log.d("MapsActivity", "P1: " + latP1 + "," + longP1);
+
+                    latP2 = event.getArrival().getLatitude();
+                    longP2 = event.getArrival().getLongitude();
+
+                    Log.d("MapsActivity", "P2: " + latP2 + "," + longP2);
+
+                    //TODO add start/end point desription;
+                    // pos1Title = ...
+
+                    Log.d("MapsActivity", "Event searched!");
+                    Toast.makeText(context, R.string.event_searched, Toast.LENGTH_LONG).show();
+
+                    // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+                    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                            .findFragmentById(R.id.map);
+                    if (mapFragment != null) {
+                        mapFragment.getMapAsync(new OnMapReadyCallback() {
+                            @Override
+                            public void onMapReady(GoogleMap googleMap) {
+                                mMap = googleMap;
+                                uiSettings = mMap.getUiSettings();
+                                uiSettings.setCompassEnabled(true);
+                                uiSettings.setZoomControlsEnabled(true);
+
+
+
+                                // Set the camera to the greatest possible zoom level that includes the bounds
+                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latP1, longP1), 10));
+
+                                addMarker(latP1, longP1, pos1Title,
+                                        pos1Desc, BitmapDescriptorFactory.HUE_GREEN);
+
+                                addMarker(latP2, longP2, pos2Title,
+                                        pos2Desc, BitmapDescriptorFactory.HUE_BLUE);
+
+                                supportInvalidateOptionsMenu();
+
+
+                            }
+                        });
+                    } else {
+                        Toast.makeText(context, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    if (isConnectionAvailable()) {
+                        Log.d("MapsActivity", "P1: " + latP1 + "," + longP1);
+                        (new RouteAsyncTask()).execute(new LatLng(latP1, longP1), new LatLng(latP2, longP2));
+                    }
+
+
+                } else{
+                    //not ok
+                    Log.d("MapsActivity", "Error searching event!");
+                    Toast.makeText(context, R.string.error_searching_event, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
 
 
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        uiSettings = mMap.getUiSettings();
-        uiSettings.setCompassEnabled(true);
-        uiSettings.setZoomControlsEnabled(true);
-
-        // Set the camera to the greatest possible zoom level that includes the bounds
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(routeBounds, 0));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos1, 10));
-
-        addMarker(pos1.latitude, pos1.longitude, pos1Title,
-                pos1Desc, BitmapDescriptorFactory.HUE_GREEN);
-
-        addMarker(pos2.latitude, pos2.longitude, pos2Title,
-               pos2Desc, BitmapDescriptorFactory.HUE_BLUE);
-
-        supportInvalidateOptionsMenu();
-    }
 
     private void addMarker(double latitude, double longitude, String title, String snippet, float color) {
         MarkerOptions options = new MarkerOptions();
