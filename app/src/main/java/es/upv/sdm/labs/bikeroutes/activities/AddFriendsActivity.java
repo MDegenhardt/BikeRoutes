@@ -1,8 +1,10 @@
 package es.upv.sdm.labs.bikeroutes.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,12 +56,22 @@ public class AddFriendsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("AddFriendsActivity", "Item " + position + " clicked");
                 UserService us = new UserService();
-                User newFriend = (User) friendsSearchListView.getAdapter().getItem(position);
+                final User newFriend = (User) friendsSearchListView.getAdapter().getItem(position);
                 us.addFriend(user, newFriend);
                 if(ServerInfo.RESPONSE_CODE==UserService.ERROR_ALREADY_FRIENDS) {
                     Toast.makeText(AddFriendsActivity.this, getString(R.string.already_friend) + " " + newFriend.getName(), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(AddFriendsActivity.this, newFriend.getName()+" "+getString(R.string.added_as_friend), Toast.LENGTH_LONG).show();
+                    new AlertDialog.Builder(context)
+                            .setTitle(getString(R.string.add_friend))
+                            .setMessage(getString(R.string.do_you_really_want_to_add) + newFriend.getName() + getString(R.string.ad_your_friend))
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    Toast.makeText(AddFriendsActivity.this, newFriend.getName()+" "+getString(R.string.added_as_friend), Toast.LENGTH_LONG).show();
+
+                                }})
+                            .setNegativeButton(android.R.string.no, null).show();
                 }
             }
         });

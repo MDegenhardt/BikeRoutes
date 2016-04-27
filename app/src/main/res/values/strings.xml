@@ -188,4 +188,8 @@
     <string name="search_for_a_user">Search for a user</string>
     <string name="already_invited">is already invited</string>
     <string name="invited">invited</string>
+    <string name="add_friend">Add friend</string>
+    <string name="do_you_really_want_to_add">"Do you really want to add "</string>
+    <string name="ad_your_friend">" as your friend?"</string>
+    <string name="do_you_really_want_to_invite">Do you really want to invite</string>
 </resources>

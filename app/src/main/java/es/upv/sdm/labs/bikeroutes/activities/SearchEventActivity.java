@@ -239,6 +239,12 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         Log.d("SearchEventActivity", "Search Button pressed");
 
         int distance = Integer.parseInt(etKm.getText().toString());
+        if (distance > 2147483647) {
+            distance = 2147483647;
+        }
+        if (distance < 0) {
+            distance = 0;
+        }
 
 
         arrayOfEvents = new ArrayList<>();

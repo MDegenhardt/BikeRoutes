@@ -1,7 +1,9 @@
 package es.upv.sdm.labs.bikeroutes.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,11 +58,23 @@ public class InviteActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("InviteActivity", "Item " + position + " clicked");
                 EventService es = new EventService();
-                User userInvited = (User) inviteListView.getAdapter().getItem(position);
+                final User userInvited = (User) inviteListView.getAdapter().getItem(position);
                 es.invite(eventID, userInvited.getId());
                 if(ServerInfo.RESPONSE_CODE==UserService.ERROR_ALREADY_FRIENDS) {
                     Toast.makeText(InviteActivity.this, userInvited.getName() + " " + getString(R.string.already_invited), Toast.LENGTH_LONG).show();
                 } else {
+                    AlertDialog show = new AlertDialog.Builder(context)
+                            .setTitle(getString(R.string.add_friend))
+                            .setMessage(getString(R.string.do_you_really_want_to_invite) + " " + userInvited.getName() + "?")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    Toast.makeText(InviteActivity.this, userInvited.getName() + " " + getString(R.string.invited), Toast.LENGTH_LONG).show();
+
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, null).show();
                     Toast.makeText(InviteActivity.this, userInvited.getName()+" "+getString(R.string.invited), Toast.LENGTH_LONG).show();
                 }
             }
@@ -80,6 +94,7 @@ public class InviteActivity extends AppCompatActivity {
                     if(ServerInfo.RESPONSE_CODE==UserService.ERROR_INCORRECT_DATA){
                         Toast.makeText(InviteActivity.this, getString(R.string.error_incorrect_search_input), Toast.LENGTH_LONG).show();
                     } else {
+
                         /*
                         // set image button visible
                         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
