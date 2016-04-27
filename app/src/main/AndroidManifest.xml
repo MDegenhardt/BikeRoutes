@@ -35,21 +35,17 @@
             android:name=".activities.SearchEventActivity"
             android:label="@string/searchEventsActivityLabel"
             android:parentActivityName=".activities.DashboardActivity">
-
-            <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
         </activity>
         <activity
             android:name=".activities.DashboardActivity"
-            android:label="@string/dashBoardActivityLabel"></activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".activities.CreateAccountActivity"
             android:label="@string/createAccountActivityLabel"
             android:parentActivityName=".activities.MainActivity">
-
-            <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
@@ -58,8 +54,6 @@
             android:name=".activities.ResetPasswordActivity"
             android:label="@string/resetPasswordActivityLabel"
             android:parentActivityName=".activities.MainActivity">
-
-            <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
@@ -68,8 +62,6 @@
             android:name=".activities.CreateEventActivity"
             android:label="@string/createEventActivityLabel"
             android:parentActivityName=".activities.DashboardActivity">
-
-            <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
@@ -78,8 +70,6 @@
             android:name=".activities.EventDescriptionActivity"
             android:label="@string/eventDescriptionActivityLabel"
             android:parentActivityName=".activities.DashboardActivity">
-
-            <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
@@ -88,8 +78,6 @@
             android:name=".activities.MyEventsActivity"
             android:label="@string/myEventsActivityLabel"
             android:parentActivityName=".activities.DashboardActivity">
-
-            <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
@@ -150,8 +138,6 @@
             android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps"
             android:parentActivityName=".activities.DashboardActivity">
-
-            <!-- Enable up navigation for backwards compatibility -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
@@ -165,12 +151,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
         </activity>
-        <activity android:name=".activities.MySettingsActivity"
+        <activity
+            android:name=".activities.MySettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activities.DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />
+        </activity>
+        <activity
+            android:name=".activities.InviteActivity"
+            android:label="Invite to the event"
+            android:parentActivityName=".activities.EventDescriptionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.EventDescriptionActivity" />
         </activity>
     </application>
 
