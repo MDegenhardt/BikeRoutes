@@ -39,23 +39,6 @@ public class MySettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_settings);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.languages, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spLanguage = (Spinner) findViewById(R.id.spLanguages);
-        spLanguage.setAdapter(adapter);
-        Log.d("LOCALE", Locale.getDefault().getLanguage());
-        spLanguage.setSelection(PreferenceManager.getDefaultSharedPreferences(this).getInt("language", localeToInt(Locale.getDefault().getLanguage())));
-        spLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-                editor.putInt("language", position);
-                editor.apply();
-                changeLanguage(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
     }
 
     private int localeToInt(String locale){
@@ -80,7 +63,7 @@ public class MySettingsActivity extends AppCompatActivity {
     }
 
     private void changeLanguage(int code){
-        String l = "en_US";
+        /*String l = "en_US";
         switch (code){
             case 1: l = "es_ES";break;
             case 2: l = "pt_BR";break;
@@ -94,7 +77,7 @@ public class MySettingsActivity extends AppCompatActivity {
         config.locale = locale;
         getResources().updateConfiguration(config, null);
 
-        Log.d("LOCALE", Locale.getDefault().getLanguage());
+        Log.d("LOCALE", Locale.getDefault().getLanguage());*/
     }
 
     public void changePasswordButtonClicked(View view){
