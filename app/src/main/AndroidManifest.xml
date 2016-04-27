@@ -34,7 +34,8 @@
         <activity
             android:name=".activities.SearchEventActivity"
             android:label="@string/searchEventsActivityLabel"
-            android:parentActivityName=".activities.DashboardActivity">
+            android:parentActivityName=".activities.DashboardActivity"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.DashboardActivity" />

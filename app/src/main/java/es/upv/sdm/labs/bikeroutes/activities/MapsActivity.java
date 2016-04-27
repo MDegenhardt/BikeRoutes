@@ -81,7 +81,7 @@ public class MapsActivity extends AppCompatActivity {
     String pos1Desc  = "StartDescription";
     String pos2Title = "FinishName";
     String pos2Desc  = "FinishDescription";
-    EventType.Type type = EventType.Type.HIKE; //TODO change
+    EventType.Type type = EventType.Type.HIKE;
 //    int img = (type==EventType.HIKE) ? R.drawable.hike : (type==EventType.RUN) ? R.drawable.running : R.drawable.bike;
 
     @Override
@@ -112,6 +112,8 @@ public class MapsActivity extends AppCompatActivity {
                 if(ServerInfo.RESPONSE_CODE == ServerInfo.RESPONSE_OK){
                     //ok
 
+                    type = event.getType().getType();
+
                     latP1 = event.getDeparture().getLatitude();
                     longP1 = event.getDeparture().getLongitude();
 
@@ -121,9 +123,9 @@ public class MapsActivity extends AppCompatActivity {
                     longP2 = event.getArrival().getLongitude();
 
                     Log.d("MapsActivity", "P2: " + latP2 + "," + longP2);
-
-                    //TODO add start/end point desription;
-                    // pos1Title = ...
+                    
+                    pos1Title = event.getDeparture().getAddress();
+                    pos2Title = event.getArrival().getAddress();
 
                     Log.d("MapsActivity", "Event searched!");
                     Toast.makeText(context, R.string.event_searched, Toast.LENGTH_LONG).show();

@@ -163,6 +163,7 @@ public class EditAccountActivity extends AppCompatActivity  {
                     dao.update(user);
                     dao.close();
                     Toast.makeText(EditAccountActivity.this, R.string.update_account_confirmed, Toast.LENGTH_LONG).show();
+                    finish();
                 } else {
                     Toast.makeText(EditAccountActivity.this, getString(R.string.error_connection), Toast.LENGTH_SHORT).show();
                 }
