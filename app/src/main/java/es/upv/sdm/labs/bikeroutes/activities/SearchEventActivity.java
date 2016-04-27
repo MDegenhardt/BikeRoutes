@@ -136,7 +136,7 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         btnSEventDate.setText(prefs.getString("date", "Date: " + DateHelper.dateToString(Calendar.getInstance().getTime())));
         btnSEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
         etKm.setText(prefs.getString("km", "1"));
-        searchLocationStr = prefs.getString("location", "Choose a location");
+        searchLocationStr = prefs.getString("location", getString(R.string.choose_a_location));
         tvAddress.setText(searchLocationStr);
         super.onResume();
     }
@@ -174,7 +174,7 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
         } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
         } catch (GooglePlayServicesNotAvailableException e) {
-            Toast.makeText(this, "Google Play Services is not available.",
+            Toast.makeText(this, R.string.google_play_not_available,
                     Toast.LENGTH_LONG)
                     .show();
         }
@@ -204,15 +204,6 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
 
     }
 
-    // TODO: onItemClickListener of Listview is not called when the button is pressed -> eventID wrong
-    public void dashDescMapButtonPressed(View view){
-        Log.d("SearchEventActivity", "Map Button Pressed!");
-        Log.d("SearchEventActivity", "eventID: " + eventID);
-        Intent intent = new Intent(context, MapsActivity.class);
-        intent.putExtra("eventID", eventID );
-        startActivity(intent);
-
-    }
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

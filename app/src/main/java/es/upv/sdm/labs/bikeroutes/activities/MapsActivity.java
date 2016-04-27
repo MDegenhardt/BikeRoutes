@@ -157,7 +157,7 @@ public class MapsActivity extends AppCompatActivity {
                             }
                         });
                     } else {
-                        Toast.makeText(context, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.map_fragment_null, Toast.LENGTH_SHORT).show();
                     }
 
                     if (isConnectionAvailable()) {

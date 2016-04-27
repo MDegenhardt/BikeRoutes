@@ -98,7 +98,7 @@
 
     </LinearLayout>
 
-    <ImageButton
+    <ImageView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -107,8 +107,6 @@
         android:scaleType="centerCrop"
         android:background="@color/colorPrimaryLight1"
         android:layout_margin="12dp"
-        android:onClick="dashDescMapButtonPressed"
-        android:backgroundTint="@color/colorPrimaryLight2"
         android:baselineAlignBottom="false"
         android:padding="5dp" />
 </LinearLayout>
