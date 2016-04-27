@@ -182,6 +182,7 @@
     <string name="time">TIME: %s</string>
     <string name="error_searching_event">Error searching event!</string>
     <string name="event_searched">Event searched!</string>
+    <string name="already_friend">You are already friends with</string>
 
 
 </resources>
