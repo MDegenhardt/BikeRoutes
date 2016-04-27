@@ -89,6 +89,9 @@ public class UserDerscriptionActivity extends AppCompatActivity {
                 intent = new Intent(this, MyFriendsActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.menuMyEvents:
+                intent = new Intent(this, MyEventsActivity.class);
+                startActivity(intent);
             case (android.R.id.home):
                 break;
         }

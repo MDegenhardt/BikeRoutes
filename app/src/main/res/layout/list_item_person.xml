@@ -3,6 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    android:id="@+id/list_item_person"
     android:background="@color/colorPrimaryLight1"
     android:descendantFocusability="blocksDescendants"
     >
@@ -34,5 +35,29 @@
         android:scaleType="fitCenter"
         android:background="@color/colorPrimaryLight1"
         android:layout_margin="5dp"
+        android:visibility="gone"
+        android:padding="4dp" />
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/imgAdd"
+        android:src="@drawable/ic_add_white_24dp"
+        android:scaleType="fitCenter"
+        android:background="@color/colorPrimaryLight1"
+        android:layout_margin="5dp"
+        android:visibility="gone"
+        android:padding="4dp" />
+
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/imgInvite"
+        android:src="@drawable/ic_contact_mail_white_24dp"
+        android:scaleType="fitCenter"
+        android:background="@color/colorPrimaryLight1"
+        android:layout_margin="5dp"
+        android:visibility="gone"
         android:padding="4dp" />
 </LinearLayout>

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -81,6 +82,7 @@ public class AddFriendsActivity extends AppCompatActivity {
                         PersonAdapter adapter = new PersonAdapter(context, searchResults);
                         //attach the adapter to the listview
                         friendsSearchListView.setAdapter(adapter);
+                        //ib.setVisibility(View.GONE);
                     }
 
                     if(searchResults.isEmpty()) {
@@ -95,37 +97,4 @@ public class AddFriendsActivity extends AppCompatActivity {
             });
         }
     }
-
-    //public void setFriends(ArrayList<User> friends) {this.friends = friends;}
-
-
-
-
-    /*
-        ListView recentEventsListView;
-    Context context;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
-
-        context = this;
-
-        recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);
-
-        //Log.d("DashboardActivity", "bla");
-        populateEventsList();
-
-        // When an item in the list is clicked
-        recentEventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("DashboardActivity", "Item " + position + " clicked");
-                startActivity(new Intent(context,EventDescriptionActivity.class));
-
-
-            }
-        });
-     */
 }

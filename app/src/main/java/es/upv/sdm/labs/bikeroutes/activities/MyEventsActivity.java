@@ -87,15 +87,4 @@ public class MyEventsActivity extends AppCompatActivity {
         recentEventsListView.setAdapter(adapter1);
         upcomingEventsListView.setAdapter(adapter2);
     }
-
-
-    /*
-This method is executed when the activity is created to populate the ActionBar with actions
-*/
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.my_events_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 }

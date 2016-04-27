@@ -132,6 +132,9 @@ This method is executed when the activity is created to populate the ActionBar w
             case R.id.menuInvite:
                 // User chose the "Invite" item
                 Log.d("EvenDescriptionActivity", "Invite Pressed!");
+                intent = new Intent(context, InviteActivity.class);
+                intent.putExtra("eventID", eventID );
+                startActivity(intent);
                 return true;
 
             case R.id.menuShowRoute:
@@ -143,15 +146,13 @@ This method is executed when the activity is created to populate the ActionBar w
                 // User chose the "Participate" item
                 Log.d("EvenDescriptionActivity", "Participate Pressed!");
                 return true;
-
-
-
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
 
         }
+
     }
 
     public void eventDescMapButtonPressed(View view){

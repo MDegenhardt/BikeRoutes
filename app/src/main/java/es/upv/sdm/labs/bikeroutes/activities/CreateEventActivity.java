@@ -77,6 +77,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
     private EventType mType;
 
+    int eventID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,33 +153,6 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
     /*
 This method is executed when the activity is created to populate the ActionBar with actions
 */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.create_event_menu, menu);
-        menu.findItem(R.id.menuInviteFriend).setVisible(true);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-        @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.menuInviteFriend:
-                // User chose the "Invite Friend" item, show the app CreateEvent...
-                // do sth.
-                Log.d("CreateEventActivity", "Invite Friend Menu pressed");
-                return true;
-
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
 
     public void selectLocationButtonPressed(View view){
         Log.d("CreateEventActivity", "Location Button pressed");

@@ -29,11 +29,4 @@
         android:visible="true"
         app:showAsAction="ifRoom"/>
 
-
-    <item
-        android:id="@+id/menuLogOut"
-        android:title="@string/log_out"
-        android:visible="true"
-        app:showAsAction="never"/>
-
 </menu>
