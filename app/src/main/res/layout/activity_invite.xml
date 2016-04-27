@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search"
-            android:onClick="searchUsers"
+            android:onClick="btnSearchUsers"
             android:id="@+id/btnSearchFriends"
             style="@style/button"
             android:layout_alignBottom="@+id/etSearchUser"
