@@ -136,7 +136,7 @@ public class DashboardActivity extends AppCompatActivity implements
             public void postExecute(int option) {
                 if (ServerInfo.RESPONSE_CODE == ServerInfo.RESPONSE_OK) {
 
-                    Log.d("DashboardActivity", arrayOfEvents.get(0).toString());
+                    Log.d("DashboardActivity", arrayOfEvents.size()+"");
 
                     //Create the adapter to convert the array to views
                     EventAdapter2 adapter = new EventAdapter2(getApplicationContext(), arrayOfEvents);
@@ -166,7 +166,7 @@ public class DashboardActivity extends AppCompatActivity implements
             public void postExecute(int option) {
                 if (ServerInfo.RESPONSE_CODE == ServerInfo.RESPONSE_OK) {
 
-                    Log.d("DashboardActivity", arrayOfEvents.get(0).toString());
+                    Log.d("DashboardActivity", arrayOfEvents.size()+"");
 
                     //Create the adapter to convert the array to views
                     EventAdapter2 adapter = new EventAdapter2(getApplicationContext(), arrayOfEvents);
