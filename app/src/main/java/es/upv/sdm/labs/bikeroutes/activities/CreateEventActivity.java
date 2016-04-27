@@ -77,7 +77,8 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
 
     private EventType mType;
 
-    int eventID;
+    double startLat, startLong;
+    double endLat, endLong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,13 +113,20 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         editor.putString("end", endLocationStr);
         editor.putString("description", tvDescription.getText().toString());
         editor.putBoolean("secret", cbSecret.isChecked());
+        editor.putString("startLatStr", String.valueOf(startLat));
+        editor.putString("startLongStr", String.valueOf(startLong));
+        editor.putString("endLatStr", String.valueOf(endLat));
+        editor.putString("endLongStr", String.valueOf(startLong));
         editor.apply();
+
         super.onPause();
     }
+    
 
     @Override
     protected void onResume() {
-//        rgEventType.check(prefs.getInt("rgEventType", R.id.rbBike));
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
 
         int typeInt = prefs.getInt("eventType", R.id.rbBike);
         rgEventType.check(typeInt);
@@ -134,6 +142,12 @@ public class CreateEventActivity extends AppCompatActivity implements DatePicker
         btnEventTime.setText(prefs.getString("time", "Time: " + DateHelper.timeToString(Calendar.getInstance().getTime())));
         tvDescription.setText(prefs.getString("description", ""));
         cbSecret.setChecked(prefs.getBoolean("secret", false));
+
+        startLat = Double.parseDouble(prefs.getString("startLatStr", "0.0"));
+        startLong = Double.parseDouble(prefs.getString("startLongStr", "0.0"));
+        endLat = Double.parseDouble(prefs.getString("endLatStr", "0.0"));
+        endLong = Double.parseDouble(prefs.getString("endLongStr", "1.0"));
+
         super.onResume();
     }
 
@@ -183,7 +197,13 @@ This method is executed when the activity is created to populate the ActionBar w
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
 
+                startLat = place.getLatLng().latitude;
+                startLong = place.getLatLng().longitude;
 
+                editor.putString("startLatStr", String.valueOf(startLat));
+                editor.putString("startLongStr", String.valueOf(startLong));
+
+                Log.d("CreateEventActivity", "StartLL: " + startLat + ","  + startLong);
 //                startLocationStr = String.format("Place: %s", place.getName());
                 startLocationStr = place.getName().toString();
 
@@ -206,6 +226,13 @@ This method is executed when the activity is created to populate the ActionBar w
         else if (requestCode == Constants.PLACE_PICKER_END_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
+
+                endLat = place.getLatLng().latitude;
+                endLong = place.getLatLng().longitude;
+
+
+                editor.putString("endLatStr", String.valueOf(endLat));
+                editor.putString("endLongStr", String.valueOf(startLong));
 
 
                 endLocationStr = place.getName().toString();
@@ -258,8 +285,13 @@ This method is executed when the activity is created to populate the ActionBar w
         event = new Event();
 
         event.setType(mType);
-        event.setDeparture(new Location(startLocationStr,this));
-        event.setArrival(new Location(endLocationStr,this));
+//        event.setDeparture(new Location(startLocationStr,this));
+//        event.setArrival(new Location(endLocationStr,this));
+        Log.d("CreateEventActivity", "StartLL: " + startLat + ","  + startLong);
+        Log.d("CreateEventActivity", "EndLL: " + endLat + ":" + endLong);
+        event.setDeparture(Location.getLocationFromCoordinates(startLat, startLong, context));
+        event.setArrival(Location.getLocationFromCoordinates(endLat, endLong, context));
+
         event.setSecret(cbSecret.isChecked());
         event.setDate(date);
         event.setDescription(tvDescription.getText().toString());
