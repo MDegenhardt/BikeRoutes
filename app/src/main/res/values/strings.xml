@@ -182,9 +182,8 @@
     <string name="time">TIME: %s</string>
     <string name="error_searching_event">Error searching event!</string>
     <string name="event_searched">Event searched!</string>
+    <string name="already_friend">You are already friends with</string>
     <string name="google_play_not_available">Google Play Services is not available.</string>
     <string name="choose_a_location">Choose a location</string>
     <string name="map_fragment_null">Error - Map Fragment was null!</string>
-
-
 </resources>

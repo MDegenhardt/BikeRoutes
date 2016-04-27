@@ -55,7 +55,11 @@ public class AddFriendsActivity extends AppCompatActivity {
                 UserService us = new UserService();
                 User newFriend = (User) friendsSearchListView.getAdapter().getItem(position);
                 us.addFriend(user, newFriend);
-                Toast.makeText(AddFriendsActivity.this, newFriend.getName()+" "+getString(R.string.added_as_friend), Toast.LENGTH_LONG).show();
+                if(ServerInfo.RESPONSE_CODE==UserService.ERROR_ALREADY_FRIENDS) {
+                    Toast.makeText(AddFriendsActivity.this, getString(R.string.already_friend) + " " + newFriend.getName(), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(AddFriendsActivity.this, newFriend.getName()+" "+getString(R.string.added_as_friend), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
