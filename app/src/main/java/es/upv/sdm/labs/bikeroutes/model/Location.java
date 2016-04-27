@@ -134,4 +134,11 @@ public class Location {
         if(l==null) address = "";
         return new Location(latitude, longitude, address);
     }
+
+    public static Location getLocationFromAndroidLocation(android.location.Location aLoc, Context context){
+
+        Location l = new Location(aLoc.getLatitude(), aLoc.getLongitude(), context);
+        return l;
+
+    }
 }
