@@ -7,18 +7,15 @@
     android:background="@color/colorPrimaryLight1"
     android:descendantFocusability="blocksDescendants"
     >
-
-    <TextView
-        android:id="@+id/tvPersonFirstName"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text=""
-        style="@style/event_startEnd"
+    <ImageView
+        android:padding="1dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:id="@+id/ivUserPhoto"
         />
-
     <TextView
-        android:id="@+id/tvPersonLastName"
+        android:id="@+id/tvNameUser"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -27,37 +24,42 @@
         />
 
     <ImageButton
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/imgOrg"
+        android:id="@+id/ivOrganizer"
         android:src="@drawable/organise"
         android:scaleType="fitCenter"
         android:background="@color/colorPrimaryLight1"
         android:layout_margin="5dp"
-        android:visibility="gone"
         android:padding="4dp" />
     <ImageButton
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/imgAdd"
+        android:id="@+id/ivInviteFriend"
         android:src="@drawable/ic_add_white_24dp"
         android:scaleType="fitCenter"
         android:background="@color/colorPrimaryLight1"
         android:layout_margin="5dp"
-        android:visibility="gone"
         android:padding="4dp" />
 
     <ImageButton
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/imgInvite"
-        android:src="@drawable/ic_contact_mail_white_24dp"
+        android:id="@+id/ivAddFriend"
+        android:src="@android:drawable/ic_input_add"
         android:scaleType="fitCenter"
         android:background="@color/colorPrimaryLight1"
         android:layout_margin="5dp"
-        android:visibility="gone"
+
+        android:padding="4dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivDeleteFriend"
+        android:src="@android:drawable/ic_delete"
+        android:scaleType="fitCenter"
+        android:background="@color/colorPrimaryLight1"
+        android:layout_margin="5dp"
         android:padding="4dp" />
 </LinearLayout>

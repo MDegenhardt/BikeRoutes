@@ -50,31 +50,14 @@ public class AddFriendsActivity extends AppCompatActivity {
         pbAddFriends = (ProgressBar) findViewById(R.id.pbAddFriends);
         searchResults = new ArrayList<>();
 
-        // When an item in the list is clicked
-        friendsSearchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("AddFriendsActivity", "Item " + position + " clicked");
-                UserService us = new UserService();
-                final User newFriend = (User) friendsSearchListView.getAdapter().getItem(position);
-                us.addFriend(user, newFriend);
-                if(ServerInfo.RESPONSE_CODE==UserService.ERROR_ALREADY_FRIENDS) {
-                    Toast.makeText(AddFriendsActivity.this, getString(R.string.already_friend) + " " + newFriend.getName(), Toast.LENGTH_LONG).show();
-                } else {
-                    new AlertDialog.Builder(context)
-                            .setTitle(getString(R.string.add_friend))
-                            .setMessage(getString(R.string.do_you_really_want_to_add) + newFriend.getName() + getString(R.string.ad_your_friend))
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    Toast.makeText(AddFriendsActivity.this, newFriend.getName()+" "+getString(R.string.added_as_friend), Toast.LENGTH_LONG).show();
-
-                                }})
-                            .setNegativeButton(android.R.string.no, null).show();
-                }
-            }
-        });
+//        // When an item in the list is clicked
+//        friendsSearchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Log.d("AddFriendsActivity", "Item " + position + " clicked");
+//
+//            }
+//        });
     }
 
     public void searchFriends(View view) {
@@ -91,7 +74,7 @@ public class AddFriendsActivity extends AppCompatActivity {
                         Toast.makeText(AddFriendsActivity.this, getString(R.string.error_incorrect_search_input), Toast.LENGTH_LONG).show();
                     } else {
                         //Create the adapter to convert the array to views
-                        PersonAdapter adapter = new PersonAdapter(context, searchResults);
+                        PersonAdapter adapter = new PersonAdapter(context, searchResults, PersonAdapter.FIND_FRIENDS);
                         //attach the adapter to the listview
                         friendsSearchListView.setAdapter(adapter);
                         //ib.setVisibility(View.GONE);

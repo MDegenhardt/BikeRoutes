@@ -76,7 +76,7 @@ public class MyFriendsActivity extends AppCompatActivity {
                 if(user.getFriends().size() > 0) {
                     Log.d("MyFriendsActivity", user.getFriends().get(0).toString());
                     //Create the adapter to convert the array to views
-                    PersonAdapter adapter = new PersonAdapter(getApplication(), user.getFriends());
+                    PersonAdapter adapter = new PersonAdapter(getApplication(), user.getFriends(), PersonAdapter.LIST_FRIENDS);
                     //attach the adapter to the listview
                     friendsListView.setAdapter(adapter);
                 } else {
