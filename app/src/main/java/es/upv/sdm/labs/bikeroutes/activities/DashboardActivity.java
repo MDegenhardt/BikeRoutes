@@ -130,7 +130,7 @@ public class DashboardActivity extends AppCompatActivity implements
     private void populateEventsList() {
         //Construct data source
 
-
+        arrayOfEvents.clear();
         new EventService().findNearbyEvents(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id", 0), es.upv.sdm.labs.bikeroutes.model.Location.getLocationFromAndroidLocation(mLastLocation, context), arrayOfEvents, new PostExecute() {
             @Override
             public void postExecute(int option) {
@@ -161,6 +161,8 @@ public class DashboardActivity extends AppCompatActivity implements
 
     private void populateAllEventsList() {
         //Construct data source
+
+        arrayOfEvents.clear();
         new EventService().findAvailable(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id", 0),arrayOfEvents, new PostExecute() {
             @Override
             public void postExecute(int option) {
