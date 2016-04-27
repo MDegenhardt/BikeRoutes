@@ -146,7 +146,6 @@ public class DashboardActivity extends AppCompatActivity implements
 
                     //ok
                     Log.d("DashboardActivity", "Event searched location based!");
-                    Toast.makeText(context, R.string.event_searched, Toast.LENGTH_LONG).show();
 
 
                 } else {
@@ -158,12 +157,11 @@ public class DashboardActivity extends AppCompatActivity implements
         });
 
 
-
     }
 
     private void populateAllEventsList() {
         //Construct data source
-        new EventService().findAll(arrayOfEvents, new PostExecute() {
+        new EventService().findAvailable(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id", 0),arrayOfEvents, new PostExecute() {
             @Override
             public void postExecute(int option) {
                 if (ServerInfo.RESPONSE_CODE == ServerInfo.RESPONSE_OK) {
@@ -178,7 +176,6 @@ public class DashboardActivity extends AppCompatActivity implements
 
                     //ok
                     Log.d("DashboardActivity", "All Events searched!");
-                    Toast.makeText(context, R.string.event_searched, Toast.LENGTH_LONG).show();
 
 
                 } else {
@@ -188,7 +185,6 @@ public class DashboardActivity extends AppCompatActivity implements
                 }
             }
         });
-
 
 
     }
@@ -285,7 +281,8 @@ This method is executed when the activity is created to populate the ActionBar w
         if (mLastLocation != null) {
             populateEventsList();
         } else {
-            Toast.makeText(this, "No location detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_location_detected), Toast.LENGTH_LONG).show();
+            populateAllEventsList();
         }
     }
 
@@ -317,23 +314,19 @@ This method is executed when the activity is created to populate the ActionBar w
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
 
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
                     mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                     if (mLastLocation != null) {
                         //use location based search
                         populateEventsList();
                     } else {
-                        Toast.makeText(this, "No location detected", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, getString(R.string.no_location_detected), Toast.LENGTH_LONG).show();
+                        populateAllEventsList();
                     }
 
 
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-
-                    //use search All events
-                    populateAllEventsList();
 
                 }
                 return;

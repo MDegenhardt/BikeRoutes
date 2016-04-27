@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,6 +19,8 @@ import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.adapters.PersonAdapter;
 import es.upv.sdm.labs.bikeroutes.dao.UserDAO;
 import es.upv.sdm.labs.bikeroutes.model.User;
+import es.upv.sdm.labs.bikeroutes.services.UserService;
+import es.upv.sdm.labs.bikeroutes.util.async.PostExecute;
 
 public class MyFriendsActivity extends AppCompatActivity {
 
@@ -33,9 +37,20 @@ public class MyFriendsActivity extends AppCompatActivity {
         UserDAO dao = new UserDAO(this);
         user = dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id",0));
         friendsListView = (ListView) findViewById(R.id.lvMyFriends);
+        dao.close();
 
         //Log.d("DashboardActivity", "bla");
         populateFriendsList();
+
+        friendsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                User person = (User)friendsListView.getAdapter().getItem(position);
+                Intent intent = new Intent(getApplicationContext(), UserDerscriptionActivity.class);
+                intent.putExtra("id_person", person.getId());
+                startActivity(intent);
+            }
+        });
 
         // When an item in the list is clicked
         /*
@@ -53,18 +68,23 @@ public class MyFriendsActivity extends AppCompatActivity {
     }
 
     private void populateFriendsList() {
-        //Construct data source
-        ArrayList<User> arrayFriends = user.getFriends();
 
-        if(arrayFriends.size() > 0) {
-            Log.d("MyFriendsActivity", arrayFriends.get(0).toString());
-            //Create the adapter to convert the array to views
-            PersonAdapter adapter = new PersonAdapter(this, arrayFriends);
-            //attach the adapter to the listview
-            friendsListView.setAdapter(adapter);
-        } else {
-            Toast.makeText(MyFriendsActivity.this, "You have no friends", Toast.LENGTH_SHORT).show();
-        }
+
+        new UserService().findFriends(user, new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                if(user.getFriends().size() > 0) {
+                    Log.d("MyFriendsActivity", user.getFriends().get(0).toString());
+                    //Create the adapter to convert the array to views
+                    PersonAdapter adapter = new PersonAdapter(getApplication(), user.getFriends());
+                    //attach the adapter to the listview
+                    friendsListView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(MyFriendsActivity.this, "You have no friends", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     @Override

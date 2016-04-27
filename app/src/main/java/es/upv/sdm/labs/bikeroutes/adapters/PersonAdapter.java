@@ -36,10 +36,12 @@ public class PersonAdapter extends ArrayAdapter<User> {
         tvFirstName.setText(user.getName());
         //tvLastName.setText(user.lastName);
 
-        imgOrg.setImageBitmap(user.getImage());
+        if(user.getImage()!=null)imgOrg.setImageBitmap(user.getImage());
         //imgOrg.setImageResource(R.drawable.organise);
 
         // Return the completed view to render on screen
         return convertView;
     }
+
+
 }
