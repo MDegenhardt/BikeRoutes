@@ -172,6 +172,10 @@
     <string name="language">Language</string>
     <string name="language_label">Language:</string>
     <string name="tabEventInvitations">Invitations</string>
+    <string name="search_field_empty">Insert name or mail</string>
+    <string name="error_incorrect_search_input">No users found</string>
+    <string name="no_results_found">No users matched your search</string>
+    <string name="added_as_friend">added as friend</string>
     <string name="date">DATE: %s</string>
     <string name="event_created_successfully">Event created successfully!</string>
     <string name="error_creating_event">Error creating the event!</string>
