@@ -2,6 +2,7 @@ package es.upv.sdm.labs.bikeroutes.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,23 +12,46 @@ import es.upv.sdm.labs.bikeroutes.util.JsonParser;
 
 public class TesteActivity extends AppCompatActivity {
 
-    ImageView ivFoto;
-    TextView tvNome, tvEmail, tvGenero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teste);
+        Log.e("CICLO DE VIDA", "ONCREATE"+this.getClass().getName());
+    }
 
-        tvNome = (TextView) findViewById(R.id.tvNome);
-        tvEmail = (TextView) findViewById(R.id.tvEmail);
-        tvGenero = (TextView) findViewById(R.id.tvGenero);
-        ivFoto = (ImageView) findViewById(R.id.ivFoto);
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("CICLO DE VIDA", "ONSTOP"+this.getClass().getName());
+    }
 
-        User u = MainActivity.user;
-        tvNome.setText(u.getName());
-        tvEmail.setText(u.getMail());
-        tvGenero.setText(u.getGender().toString());
-        if(u.getImage()!=null)ivFoto.setImageBitmap(u.getImage());
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("CICLO DE VIDA", "ONSTART"+this.getClass().getName());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("CICLO DE VIDA", "ONRESUME"+this.getClass().getName());
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("CICLO DE VIDA", "ONRESTART"+this.getClass().getName());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("CICLO DE VIDA", "ONPAUSE"+this.getClass().getName());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("CICLO DE VIDA", "ONDESTROY"+this.getClass().getName());
     }
 }

@@ -150,12 +150,16 @@ This method is executed when the activity is created to populate the ActionBar w
             case R.id.menuMyEvents:
                 startActivity(new Intent(this, MyEventsActivity.class));
                 break;
+            case R.id.menuSettings:
+                startActivity(new Intent(this, MySettingsActivity.class));
+                break;
             case R.id.menuLogOut:
                 UserDAO dao = new UserDAO(this);
                 dao.remove(user.getId());
                 dao.close();
                 SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
                 editor.remove("user_id");
+                editor.remove("language");
                 editor.apply();
                 startActivity(new Intent(this, MainActivity.class));
                 finish();
