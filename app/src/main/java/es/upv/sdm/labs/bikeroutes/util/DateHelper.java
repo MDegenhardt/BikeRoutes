@@ -46,4 +46,15 @@ public class DateHelper {
         SimpleDateFormat s = new SimpleDateFormat("hh:mm");
         return s.format(date);
     }
+
+    public static String dateToMySQLFormat(Date date){
+        SimpleDateFormat s = new SimpleDateFormat("yyyy/MM/dd");
+        return s.format(date);
+    }
+
+
+    public static String timeToMySQLFormat(Date date){
+        SimpleDateFormat s = new SimpleDateFormat("HH:mm:ss");
+        return s.format(date);
+    }
 }

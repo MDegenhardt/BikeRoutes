@@ -43,7 +43,9 @@ public class UserPOJO extends AbstractPOJO {
 
     public class Users{
 
-        public Users(){}
+        public Users(){
+            this.image = "";
+        }
 
         public Users(User user){
             this.setId(user.getId());
@@ -127,7 +129,7 @@ public class UserPOJO extends AbstractPOJO {
             res.setPassword(this.getPassword());
             res.setDescription(this.getDescription());
             res.setGender(Gender.getGender(this.getGender()));
-            if(!this.getImage().isEmpty())res.setImage(ImgSerializer.deserialize(this.getImage()));
+            if(this.getImage()!=null && !this.getImage().isEmpty())res.setImage(ImgSerializer.deserialize(this.getImage()));
             return res;
         }
     }
