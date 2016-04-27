@@ -306,11 +306,13 @@ public class UserService extends AbstractService<User> {
                  break;
              case FIND_BLOCK_EVENTS_INVITED:
              case FIND_EVENTS_INVITED:
+                 objData.getInvited().clear();
                  objData.getInvited().addAll(JsonParser.toEvents(in));
                  ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
                  break;
              case FIND_BLOCK_EVENTS_HISTORIC:
              case FIND_EVENTS_HISTORIC:
+                 objData.getHistoric().clear();
                  objData.getHistoric().addAll(JsonParser.toEvents(in));
                  ServerInfo.RESPONSE_CODE = ServerInfo.RESPONSE_OK;
                  break;
