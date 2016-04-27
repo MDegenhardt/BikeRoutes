@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                            URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=400&height=300");
                             Log.i("PIC", profile_pic.toString());
                             user.setImage(BitmapFactory.decodeStream(profile_pic.openConnection().getInputStream()));
                         } catch (IOException e) {
