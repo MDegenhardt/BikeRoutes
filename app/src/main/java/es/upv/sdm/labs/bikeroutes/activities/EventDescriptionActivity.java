@@ -52,17 +52,23 @@ public class EventDescriptionActivity extends AppCompatActivity {
         intent = getIntent();
         //get from intent
         eventID = intent.getIntExtra("eventID", 0 );
+        event = new Event();
+        new EventService().findById(eventID, event, new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                personsParticipatingListView = (ListView) findViewById(R.id.lvPersonsInEvent);
+                tvEventDate = (TextView) findViewById(R.id.tvEventTime);
+                tvEventTime = (TextView) findViewById(R.id.tvEventDate);
+                ivEventType = (ImageView) findViewById(R.id.ivEventType);
+                tvEventStart = (TextView) findViewById(R.id.tvEventStart);
+                tvEventEnd = (TextView) findViewById(R.id.tvEventEnd);
+                tvEventDescription = (TextView) findViewById(R.id.tvEventDescription);
+                tvEventDescription.setMovementMethod(new ScrollingMovementMethod());
+                populatePersonsList();
+            }
+        });
 
-        personsParticipatingListView = (ListView) findViewById(R.id.lvPersonsInEvent);
-        tvEventDate = (TextView) findViewById(R.id.tvEventTime);
-        tvEventTime = (TextView) findViewById(R.id.tvEventDate);
-        ivEventType = (ImageView) findViewById(R.id.ivEventType);
-        tvEventStart = (TextView) findViewById(R.id.tvEventStart);
-        tvEventEnd = (TextView) findViewById(R.id.tvEventEnd);
-        tvEventDescription = (TextView) findViewById(R.id.tvEventDescription);
-        tvEventDescription.setMovementMethod(new ScrollingMovementMethod());
 
-        populatePersonsList();
 
 
     }
@@ -108,10 +114,17 @@ public class EventDescriptionActivity extends AppCompatActivity {
     private void populatePersonsList(){
         //Construct data source
         ArrayList<User> arrayOfPersons = User.getUsers();
-        //Create the adapter to convert the array to views
-        PersonAdapter adapter = new PersonAdapter(this, arrayOfPersons);
-        //attach the adapter to the listview
-        personsParticipatingListView.setAdapter(adapter);
+        new EventService().findConfirmedUsers(event, new PostExecute() {
+            @Override
+            public void postExecute(int option) {
+                event.getConfirmedUsers().add(0, event.getOrganizer());
+                //Create the adapter to convert the array to views
+                PersonAdapter adapter = new PersonAdapter(getApplicationContext(), event.getConfirmedUsers(), PersonAdapter.LIST_USERS_EVENT, event.getOrganizer().getId(), eventID);
+                //attach the adapter to the listview
+                personsParticipatingListView.setAdapter(adapter);
+            }
+        });
+
     }
 
     /*

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.adapters.PersonAdapter;
 import es.upv.sdm.labs.bikeroutes.interfaces.AsyncExecutable;
+import es.upv.sdm.labs.bikeroutes.model.Event;
 import es.upv.sdm.labs.bikeroutes.model.User;
 import es.upv.sdm.labs.bikeroutes.services.EventService;
 import es.upv.sdm.labs.bikeroutes.services.ServerInfo;
@@ -38,6 +39,7 @@ public class InviteActivity extends AppCompatActivity {
     ArrayList<User> searchResults;
     ImageButton ib;
     ViewGroup viewGroup;
+    Event event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,9 @@ public class InviteActivity extends AppCompatActivity {
         pbInvite = (ProgressBar) findViewById(R.id.pbInvite);
         searchResults = new ArrayList<>();
         viewGroup = (ViewGroup) findViewById(R.id.list_item_person);
+
+        event = new Event();
+        new EventService().findById(eventID, event);
 
         // When an item in the list is clicked
         inviteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -96,10 +101,10 @@ public class InviteActivity extends AppCompatActivity {
                         // set image button visible
                         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                         View view = inflater.inflate(R.layout.list_item_person, viewGroup);
-                        ib = (ImageButton) view.findViewById(R.id.imgInvite);
+                        ib = (ImageButton) view.findViewById(R.id.ivInviteFriend);
                         ib.setVisibility(View.VISIBLE);
                         //Create the adapter to convert the array to views
-                        PersonAdapter adapter = new PersonAdapter(context, searchResults);
+                        PersonAdapter adapter = new PersonAdapter(context, searchResults, PersonAdapter.INVITE_FRIENDS, event.getOrganizer().getId(), eventID);
                         //attach the adapter to the listview
                         inviteListView.setAdapter(adapter);
                         //ib.setVisibility(View.GONE);

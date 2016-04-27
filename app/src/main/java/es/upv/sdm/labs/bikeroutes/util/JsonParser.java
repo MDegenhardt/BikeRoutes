@@ -50,7 +50,7 @@ public class JsonParser {
 
     public static ArrayList<User> toUsers(InputStream in){
         InputStreamReader isr = new InputStreamReader(in);
-        UserPOJO u =  new GsonBuilder().create().fromJson(isr, UserPOJO.class);
+            UserPOJO u =  new GsonBuilder().create().fromJson(isr, UserPOJO.class);
         return u.toUsers();
     }
 

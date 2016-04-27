@@ -175,6 +175,7 @@
     <string name="error_incorrect_search_input">No users found</string>
     <string name="no_results_found">No users matched your search</string>
     <string name="added_as_friend">added as friend</string>
+    <string name="removed_of_friends">removed of your friends</string>
     <string name="date">DATE: %s</string>
     <string name="event_created_successfully">Event created successfully!</string>
     <string name="error_creating_event">Error creating the event!</string>
@@ -190,8 +191,14 @@
     <string name="invited">invited</string>
     <string name="no_location_detected">No location detected</string>
     <string name="add_friend">Add friend</string>
+    <string name="remove_friend">Remove friend</string>
     <string name="do_you_really_want_to_add">"Do you really want to add "</string>
+    <string name="do_you_really_want_to_remove">"Do you really want to remove "</string>
     <string name="ad_your_friend">" as your friend?"</string>
+    <string name="of_your_friends">" of your friends?"</string>
     <string name="do_you_really_want_to_invite">Do you really want to invite</string>
     <string name="invite">Invite</string>
+    <string name="no">NO</string>
+    <string name="yes">YES</string>
+    <string name="invited_friend">Invited friend</string>
 </resources>

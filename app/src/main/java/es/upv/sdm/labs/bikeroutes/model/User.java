@@ -144,6 +144,10 @@ public class User implements Enviable{
         return this.image!=null;
     }
 
+    public boolean isFriend(User user){
+        return this.friends.contains(user);
+    }
+
     @Override
     public boolean equals(Object o) {
         return this.id == ((User)o).getId();
