@@ -198,7 +198,12 @@
     <string name="of_your_friends">" of your friends?"</string>
     <string name="do_you_really_want_to_invite">Do you really want to invite</string>
     <string name="invite">Invite</string>
+
     <string name="no">NO</string>
     <string name="yes">YES</string>
     <string name="invited_friend">Invited friend</string>
+
+    <string name="already_participating">You are already participating</string>
+    <string name="participated">You participated in the event</string>
+    <string name="creating_event">Creating event</string>
 </resources>
