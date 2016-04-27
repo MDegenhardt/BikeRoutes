@@ -2,11 +2,14 @@ package es.upv.sdm.labs.bikeroutes.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -28,6 +31,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.Signature;
 import java.util.Arrays;
 
 import es.upv.sdm.labs.bikeroutes.R;
@@ -182,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=400&height=300");
+                            URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=400&height=400");
                             Log.i("PIC", profile_pic.toString());
                             user.setImage(BitmapFactory.decodeStream(profile_pic.openConnection().getInputStream()));
                         } catch (IOException e) {
