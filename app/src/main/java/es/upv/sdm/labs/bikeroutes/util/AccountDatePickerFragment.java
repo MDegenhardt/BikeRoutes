@@ -28,7 +28,8 @@ public class AccountDatePickerFragment extends DialogFragment
         int day = c.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), (EditAccountActivity) getActivity(), year, month, day);
+        //return new DatePickerDialog(getActivity(), (EditAccountActivity) getActivity(), year, month, day);
+        return null;
     }
 
     @Override

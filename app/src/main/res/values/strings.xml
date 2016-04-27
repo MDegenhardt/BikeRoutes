@@ -85,7 +85,9 @@
     <string name="introduce_mail">Introduce chosen mail</string>
     <string name="introduce_mail_reset_password">Introduce your mail</string>
     <string name="password">Password</string>
-    <string name="new_password">Choose a password</string>
+    <string name="new_password">New password</string>
+    <string name="choose_new_password">Choose a new password</string>
+    <string name="choose_new_mail">Choose a new mail</string>
     <string name="repeat_password">Repeat your password</string>
     <string name="reset_password">Reset password</string>
     <string name="create_account">Create account</string>
@@ -101,7 +103,8 @@
     <string name="add_friends">Add friends</string>
     <string name="my_friends">My friends</string>
     <string name="forgot_password">Forgot your password?</string>
-
+    <string name="password_update">Password changed successfully</string>
+    <string name="mail_update">Mail changed successfully</string>
 
     <string name="no_geocoder_available">No geocoder available</string>
 
@@ -165,6 +168,9 @@
     <string name="distance">Distance:</string>
     <string name="duration">Duration:</string>
     <string name="choose_an_address">Choose an address</string>
+    <string name="update_account_confirmed">Successful changes!</string>
+    <string name="language">Language</string>
+    <string name="language_label">Language:</string>
     <string name="tabEventInvitations">Invitations</string>
     <string name="date">DATE: %s</string>
     <string name="event_created_successfully">Event created successfully!</string>
@@ -172,5 +178,6 @@
     <string name="time">TIME: %s</string>
     <string name="error_searching_event">Error searching event!</string>
     <string name="event_searched">Event searched!</string>
+
 
 </resources>

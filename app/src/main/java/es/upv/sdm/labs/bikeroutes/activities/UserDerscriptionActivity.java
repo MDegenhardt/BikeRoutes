@@ -1,10 +1,13 @@
 package es.upv.sdm.labs.bikeroutes.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +21,8 @@ import es.upv.sdm.labs.bikeroutes.model.User;
 
 public class UserDerscriptionActivity extends AppCompatActivity {
 
+    private static final int ACTIVITY_RESULT_UPDATE_ACCOUNT = 0;
+
     ImageView ivUser, ivGender;
     TextView tvName, tvDescription;
     User user;
@@ -30,12 +35,21 @@ public class UserDerscriptionActivity extends AppCompatActivity {
         ivGender = (ImageView) findViewById(R.id.ivGender);
         tvName = (TextView) findViewById(R.id.tvUserName);
         tvDescription = (TextView) findViewById(R.id.tvUserDescription);
+        updateComponents();
+
+    }
+
+    private void updateComponents(){
         UserDAO dao = new UserDAO(this);
         user = dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id",0));
-
+        dao.close();
         if(user.hasImage()){
-            Bitmap b = user.getImage();
+            DisplayMetrics metrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(metrics);
+            int x = metrics.widthPixels;
+            if(this.getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE) x/=2;
             ivUser.setVisibility(View.VISIBLE);
+            Bitmap b = Bitmap.createScaledBitmap(user.getImage(), x, x* user.getImage().getHeight()/user.getImage().getWidth(), true);
             ivUser.setMinimumHeight(b.getHeight());
             ivUser.setMinimumWidth(b.getWidth());
             ivUser.setImageBitmap(b);
@@ -50,8 +64,6 @@ public class UserDerscriptionActivity extends AppCompatActivity {
         }
         tvName.setText(user.getName());
         tvDescription.setText(user.getDescription());
-
-        dao.close();
     }
 
     @Override
@@ -67,7 +79,7 @@ public class UserDerscriptionActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menuEdit:
                 intent = new Intent(this, EditAccountActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, ACTIVITY_RESULT_UPDATE_ACCOUNT);
                 break;
             case R.id.menuAddFriends:
                 intent = new Intent(this, AddFriendsActivity.class);
@@ -76,14 +88,24 @@ public class UserDerscriptionActivity extends AppCompatActivity {
             case R.id.menuMyFriends:
                 intent = new Intent(this, MyFriendsActivity.class);
                 startActivity(intent);
-                startActivityForResult(intent,48);
-                break;
-            case R.id.menuAddPhoto:
-                // adding photo
                 break;
             case (android.R.id.home):
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == ACTIVITY_RESULT_UPDATE_ACCOUNT){
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.remove("name");
+            editor.remove("sex");
+            editor.remove("description");
+            editor.apply();
+            updateComponents();
+        }
     }
 }
