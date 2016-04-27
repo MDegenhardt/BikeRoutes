@@ -96,7 +96,7 @@
     <string name="etUserDescription">Add more information about yourself…</string>
     <string name="tvUserDescription">Description</string>
     <string name="tvUserBirth">Day of Birth</string>
-    <string name="UserDescriptionActivityLabel">My account</string>
+    <string name="UserDescriptionActivityLabel">Account</string>
     <string name="edit_account">Edit account</string>
     <string name="add_photo">Add photo</string>
     <string name="add_friends">Add friends</string>
@@ -188,6 +188,7 @@
     <string name="search_for_a_user">Search for a user</string>
     <string name="already_invited">is already invited</string>
     <string name="invited">invited</string>
+    <string name="no_location_detected">No location detected</string>
     <string name="add_friend">Add friend</string>
     <string name="do_you_really_want_to_add">"Do you really want to add "</string>
     <string name="ad_your_friend">" as your friend?"</string>

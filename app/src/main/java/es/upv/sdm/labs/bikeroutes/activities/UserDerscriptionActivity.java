@@ -18,6 +18,8 @@ import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.dao.UserDAO;
 import es.upv.sdm.labs.bikeroutes.enumerations.Gender;
 import es.upv.sdm.labs.bikeroutes.model.User;
+import es.upv.sdm.labs.bikeroutes.services.UserService;
+import es.upv.sdm.labs.bikeroutes.util.async.PostExecute;
 
 public class UserDerscriptionActivity extends AppCompatActivity {
 
@@ -26,6 +28,7 @@ public class UserDerscriptionActivity extends AppCompatActivity {
     ImageView ivUser, ivGender;
     TextView tvName, tvDescription;
     User user;
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +38,32 @@ public class UserDerscriptionActivity extends AppCompatActivity {
         ivGender = (ImageView) findViewById(R.id.ivGender);
         tvName = (TextView) findViewById(R.id.tvUserName);
         tvDescription = (TextView) findViewById(R.id.tvUserDescription);
-        updateComponents();
+        extras = getIntent().getExtras();
+        getChoosenAccount();
+
 
     }
 
+    private void getChoosenAccount(){
+        int id = 0;
+        if(extras!=null) id = extras.getInt("id_person", 0);
+        if(id==0) {
+            UserDAO dao = new UserDAO(this);
+            user = dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id", 0));
+            dao.close();
+            updateComponents();
+        } else {
+            user = new User();
+            new UserService().findById(id, user, new PostExecute() {
+                @Override
+                public void postExecute(int option) {
+                    updateComponents();
+                }
+            });
+        }
+    }
+
     private void updateComponents(){
-        UserDAO dao = new UserDAO(this);
-        user = dao.findById(PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id",0));
-        dao.close();
         if(user.hasImage()){
             DisplayMetrics metrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -68,9 +89,10 @@ public class UserDerscriptionActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.user_description_menu, menu);
-        menu.findItem(R.id.menuEdit).setVisible(true);
+        if(extras==null || extras.getInt("id_person",0)==0) {
+            getMenuInflater().inflate(R.menu.user_description_menu, menu);
+            menu.findItem(R.id.menuEdit).setVisible(true);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -92,10 +114,10 @@ public class UserDerscriptionActivity extends AppCompatActivity {
             case R.id.menuMyEvents:
                 intent = new Intent(this, MyEventsActivity.class);
                 startActivity(intent);
-            case (android.R.id.home):
-                break;
+            default:
+                finish();
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
 
@@ -108,7 +130,7 @@ public class UserDerscriptionActivity extends AppCompatActivity {
             editor.remove("sex");
             editor.remove("description");
             editor.apply();
-            updateComponents();
+            getChoosenAccount();
         }
     }
 }

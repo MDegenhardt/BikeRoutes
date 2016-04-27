@@ -157,6 +157,14 @@ public class EventService extends AbstractService<Event> {
                 new String[]{String.valueOf(event.getId()), String.valueOf(0), String.valueOf(position),String.valueOf(length)}, exec);
     }
 
+    public void findAvailable(int userId, ArrayList<Event> events, AsyncExecutable exec){
+        searchAvailableEventsToUser(events, userId, null, null, null, 0, null, exec);
+    }
+
+    public void findAvailable(int userId, ArrayList<Event> events){
+        findAvailable(userId, events, null);
+    }
+
     public void findConfirmedUsers(Event event){
         findConfirmedUsers(event, null);
     }
