@@ -17,8 +17,10 @@
     <string name="pref_description_social_recommendations" translatable="false">Recommendations for people to contact
         based on your message history
     </string>
-
+    
     <string name="pref_title_display_name" translatable="false">Display name</string>
+
+
     <string name="pref_default_display_name" translatable="false">John Smith</string>
 
     <string name="pref_title_add_friends_to_messages" translatable="false">Add friends to messages</string>
@@ -162,7 +164,7 @@
     <string name="secret_event">Secret Event</string>
     <string name="create_event">Create Event</string>
     <string name="add_an_event_description">Add an event description...</string>
-    <string name="dash">-</string>
+    <string name="dash" translatable="false">-</string>
     <string name="finish">Finish</string>
     <string name="distance">Distance:</string>
     <string name="duration">Duration:</string>
