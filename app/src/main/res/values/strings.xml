@@ -192,4 +192,5 @@
     <string name="do_you_really_want_to_add">"Do you really want to add "</string>
     <string name="ad_your_friend">" as your friend?"</string>
     <string name="do_you_really_want_to_invite">Do you really want to invite</string>
+    <string name="invite">Invite</string>
 </resources>
