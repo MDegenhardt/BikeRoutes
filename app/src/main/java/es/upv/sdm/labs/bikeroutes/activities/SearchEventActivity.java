@@ -258,8 +258,6 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
                     populateEventsList();
 
                     Log.d("SearchEventActivity", "Event searched!");
-                    Toast.makeText(context, R.string.event_searched, Toast.LENGTH_LONG).show();
-
 
                 } else{
                     //not ok

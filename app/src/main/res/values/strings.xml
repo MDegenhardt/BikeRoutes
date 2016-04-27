@@ -194,4 +194,7 @@
     <string name="ad_your_friend">" as your friend?"</string>
     <string name="do_you_really_want_to_invite">Do you really want to invite</string>
     <string name="invite">Invite</string>
+    <string name="already_participating">You are already participating</string>
+    <string name="participated">You participated in the event</string>
+    <string name="creating_event">Creating event</string>
 </resources>

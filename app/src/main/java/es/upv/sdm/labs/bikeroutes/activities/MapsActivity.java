@@ -168,10 +168,6 @@ public class MapsActivity extends AppCompatActivity {
                     }
 
 
-                } else{
-                    //not ok
-                    Log.d("MapsActivity", "Error searching event!");
-                    Toast.makeText(context, R.string.error_searching_event, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -212,6 +208,8 @@ public class MapsActivity extends AppCompatActivity {
             case R.id.mSatelliteMap:
                 mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
                 break;
+            default:
+                finish();
         }
         return true;
     }

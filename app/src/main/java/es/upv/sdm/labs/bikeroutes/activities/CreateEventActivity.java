@@ -192,8 +192,6 @@ This method is executed when the activity is created to populate the ActionBar w
 //                toastMsg = String.format("Address: %s", place.getAddress());
                 Toast.makeText(this, startLocationStr, Toast.LENGTH_LONG).show();
 
-
-
                 tvStart.setText(startLocationStr);
                 editor.putString("start", startLocationStr);
                 editor.apply();
@@ -254,7 +252,7 @@ This method is executed when the activity is created to populate the ActionBar w
 
     public void createEventButtonPressed(View view){
         Log.d("CreateEventActivity", "Create Button pressed");
-
+        Toast.makeText(context, R.string.creating_event, Toast.LENGTH_LONG).show();
         event = new Event();
 
         event.setType(mType);

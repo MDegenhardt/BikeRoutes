@@ -165,9 +165,6 @@ public class DashboardActivity extends AppCompatActivity implements
             @Override
             public void postExecute(int option) {
                 if (ServerInfo.RESPONSE_CODE == ServerInfo.RESPONSE_OK) {
-
-                    Log.d("DashboardActivity", arrayOfEvents.get(0).toString());
-
                     //Create the adapter to convert the array to views
                     EventAdapter2 adapter = new EventAdapter2(getApplicationContext(), arrayOfEvents);
                     //recentEventsListView = (ListView) findViewById(R.id.lvRecentEvents);

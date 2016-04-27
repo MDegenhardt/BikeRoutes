@@ -2,6 +2,7 @@ package es.upv.sdm.labs.bikeroutes.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,11 +20,14 @@ import java.util.ArrayList;
 
 import es.upv.sdm.labs.bikeroutes.R;
 import es.upv.sdm.labs.bikeroutes.adapters.PersonAdapter;
+import es.upv.sdm.labs.bikeroutes.dao.UserDAO;
+import es.upv.sdm.labs.bikeroutes.interfaces.AsyncExecutable;
 import es.upv.sdm.labs.bikeroutes.model.Event;
 import es.upv.sdm.labs.bikeroutes.model.EventType;
 import es.upv.sdm.labs.bikeroutes.model.User;
 import es.upv.sdm.labs.bikeroutes.services.EventService;
 import es.upv.sdm.labs.bikeroutes.services.ServerInfo;
+import es.upv.sdm.labs.bikeroutes.services.UserService;
 import es.upv.sdm.labs.bikeroutes.util.DateHelper;
 import es.upv.sdm.labs.bikeroutes.util.async.PostExecute;
 
@@ -39,9 +44,12 @@ public class EventDescriptionActivity extends AppCompatActivity {
     Context context;
     Intent intent;
 
-
     Event event;
     int eventID;
+    User user;
+    int userID;
+
+    ProgressBar pbEventDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +60,10 @@ public class EventDescriptionActivity extends AppCompatActivity {
         intent = getIntent();
         //get from intent
         eventID = intent.getIntExtra("eventID", 0 );
+        event = new Event();
+        userID = PreferenceManager.getDefaultSharedPreferences(this).getInt("user_id", 0);
+        UserDAO dao = new UserDAO(context);
+        user = dao.findById(userID);
 
         personsParticipatingListView = (ListView) findViewById(R.id.lvPersonsInEvent);
         tvEventDate = (TextView) findViewById(R.id.tvEventTime);
@@ -61,6 +73,7 @@ public class EventDescriptionActivity extends AppCompatActivity {
         tvEventEnd = (TextView) findViewById(R.id.tvEventEnd);
         tvEventDescription = (TextView) findViewById(R.id.tvEventDescription);
         tvEventDescription.setMovementMethod(new ScrollingMovementMethod());
+        pbEventDescription = (ProgressBar) findViewById(R.id.pbEventDescription);
 
         populatePersonsList();
 
@@ -88,12 +101,6 @@ public class EventDescriptionActivity extends AppCompatActivity {
                     tvEventEnd.setText(event.getArrival().getAddress());
                     tvEventDescription.setText(event.getDescription());
 
-
-
-                    Log.d("EDescriptionActivity", "Event searched!");
-                    Toast.makeText(context, R.string.event_searched, Toast.LENGTH_LONG).show();
-
-
                 } else{
                     //not ok
                     Log.d("EDescriptionActivity", "Error searching event!");
@@ -101,17 +108,42 @@ public class EventDescriptionActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private void populatePersonsList(){
-        //Construct data source
-        ArrayList<User> arrayOfPersons = User.getUsers();
-        //Create the adapter to convert the array to views
-        PersonAdapter adapter = new PersonAdapter(this, arrayOfPersons);
-        //attach the adapter to the listview
-        personsParticipatingListView.setAdapter(adapter);
+        EventService service = new EventService();
+        service.findConfirmedUsers(event, new AsyncExecutable() {
+            @Override
+            public void postExecute(int option) {
+                pbEventDescription.setVisibility(View.GONE);
+                User organizer = event.getOrganizer();
+                //Construct data source
+                ArrayList<User> participants = new ArrayList<>();
+                ArrayList<User> arrayOfUsers = event.getConfirmedUsers();
+                // add organizer first to list
+                participants.add(organizer);
+                arrayOfUsers.remove(organizer);
+                Log.d("EventDescriptionActivit", organizer.getName());
+                // if user is attending add user second
+                if (event.getConfirmedUsers().contains(user) && user.equals(organizer)) {
+                    participants.add(1, user);
+                    arrayOfUsers.remove(user);
+                }
+                // add rest of participants
+                if (arrayOfUsers.size() > 0) {
+                    participants.addAll(arrayOfUsers);
+                }
+                //Create the adapter to convert the array to views
+                PersonAdapter adapter = new PersonAdapter(context, participants);
+                //attach the adapter to the listview
+                personsParticipatingListView.setAdapter(adapter);
+            }
+
+            @Override
+            public void preExecute(int option) {
+                pbEventDescription.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     /*
@@ -119,6 +151,18 @@ This method is executed when the activity is created to populate the ActionBar w
 */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        if (event.getConfirmedUsers().contains(user)) {
+            MenuItem participate = menu.findItem(R.id.menuParticipate);
+            if (participate != null) {
+                participate.setVisible(false);
+            }
+        }
+        if (event.isSecret() && !user.equals(event.getOrganizer())) {
+            MenuItem invite = menu.findItem(R.id.menuInvite);
+            if (invite != null) {
+                invite.setVisible(false);
+            }
+        }
 
         getMenuInflater().inflate(R.menu.event_desc_menu, menu);
 
@@ -145,7 +189,22 @@ This method is executed when the activity is created to populate the ActionBar w
             case R.id.menuParticipate:
                 // User chose the "Participate" item
                 Log.d("EvenDescriptionActivity", "Participate Pressed!");
+                EventService service = new EventService();
+                service.confirmAttendance(eventID, userID, new AsyncExecutable() {
+                    @Override
+                    public void postExecute(int option) {
+                        Toast.makeText(context, R.string.participated, Toast.LENGTH_SHORT).show();
+                        findViewById(R.id.menuParticipate).setVisibility(View.INVISIBLE);
+                        populatePersonsList();
+                    }
+
+                    @Override
+                    public void preExecute(int option) {
+
+                    }
+                });
                 return true;
+
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
